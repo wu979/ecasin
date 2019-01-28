@@ -28,7 +28,7 @@ import javax.sql.DataSource;
  */
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan(
-            basePackages = {"com.csd.web", "com.csd.system"},
+            basePackages = {"com.csd.web", "com.csd.system","com.csd.busines"},
             excludeFilters = {
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class),
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class),

@@ -13,6 +13,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2019/1/28 15:33.
  */
 @Configuration
+@EnableWebMvc
 @ComponentScan(basePackages = {"com.csd.web.controller"})
 public class WebConfig implements WebMvcConfigurer {
 
