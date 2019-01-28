@@ -1,0 +1,3 @@
+com\csd\system\user\service\UserService.class
+com\csd\system\user\dao\UserMapper.class
+com\csd\system\user\po\User.class

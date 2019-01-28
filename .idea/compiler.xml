@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ecasin-busines" />
+        <module name="ecasin-log" />
+        <module name="ecasin-system" />
+        <module name="ecasin-utils" />
+        <module name="ecasin-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ecasin" target="1.8" />
+      <module name="ecasin-busines" target="1.8" />
+      <module name="ecasin-business" target="1.8" />
+      <module name="ecasin-log" target="1.8" />
+      <module name="ecasin-system" target="1.8" />
+      <module name="ecasin-utils" target="1.8" />
+      <module name="ecasin-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ecasin" options="-parameters" />
+      <module name="ecasin-busines" options="-parameters" />
+      <module name="ecasin-business" options="-parameters" />
+      <module name="ecasin-log" options="-parameters" />
+      <module name="ecasin-system" options="-parameters" />
+      <module name="ecasin-utils" options="-parameters" />
+      <module name="ecasin-web" options="-parameters" />
+    </option>
+  </component>
+</project>

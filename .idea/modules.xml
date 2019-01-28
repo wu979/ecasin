@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ecasin.iml" filepath="$PROJECT_DIR$/ecasin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecasin-busines/ecasin-busines.iml" filepath="$PROJECT_DIR$/ecasin-busines/ecasin-busines.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecasin-log/ecasin-log.iml" filepath="$PROJECT_DIR$/ecasin-log/ecasin-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecasin-system/ecasin-system.iml" filepath="$PROJECT_DIR$/ecasin-system/ecasin-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecasin-utils/ecasin-utils.iml" filepath="$PROJECT_DIR$/ecasin-utils/ecasin-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecasin-web/ecasin-web.iml" filepath="$PROJECT_DIR$/ecasin-web/ecasin-web.iml" />
+    </modules>
+  </component>
+</project>

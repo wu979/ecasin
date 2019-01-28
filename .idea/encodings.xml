@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-busines" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-business" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecasin-web" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

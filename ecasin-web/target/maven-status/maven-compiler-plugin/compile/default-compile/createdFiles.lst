@@ -1,0 +1,4 @@
+com\csd\web\EcasinWebApplication.class
+com\csd\web\MyBatisMapperConfig.class
+com\csd\web\WebConfig.class
+com\csd\web\MybatisConfig.class
