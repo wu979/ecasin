@@ -16,12 +16,12 @@
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8" userId="root" password="Erp#2017" />
         <!-- po -->
-        <javaModelGenerator targetPackage="com.csd.log.systemLog.po" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" />
+        <javaModelGenerator targetPackage="com.csd.system.code.po" targetProject="D:/workspace/ecasin/ecasin-system/src/main/java/" />
         <!-- xml -->
-        <sqlMapGenerator targetPackage="com.csd.log.systemLog.dao.mapper" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" ></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="com.csd.system.code.dao.mapper" targetProject="D:/workspace/ecasin/ecasin-system/src/main/java/" ></sqlMapGenerator>
         <!-- interface -->
-        <javaClientGenerator targetPackage="com.csd.log.systemLog.dao" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" type="XMLMAPPER" />
-        <table schema="general" tableName="w_system_log" domainObjectName="SystemLog"
+        <javaClientGenerator targetPackage="com.csd.system.code.dao" targetProject="D:/workspace/ecasin/ecasin-system/src/main/java/" type="XMLMAPPER" />
+        <table schema="general" tableName="w_check_code" domainObjectName="CheckCode"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false"	selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>

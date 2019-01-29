@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.system.roleMenu.dao.RoleMenuMapper">
+  <resultMap id="BaseResultMap" type="com.csd.system.roleMenu.po.RoleMenu">
+    <result column="relation_menu_id" jdbcType="VARCHAR" property="relationMenuId" />
+    <result column="relation_role_id" jdbcType="VARCHAR" property="relationRoleId" />
+    <result column="relation_is_valid" jdbcType="VARCHAR" property="relationIsValid" />
+  </resultMap>
+  <insert id="insert" parameterType="com.csd.system.roleMenu.po.RoleMenu">
+    insert into w_role_menu (relation_menu_id, relation_role_id, relation_is_valid
+      )
+    values (#{relationMenuId,jdbcType=VARCHAR}, #{relationRoleId,jdbcType=VARCHAR}, #{relationIsValid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.system.roleMenu.po.RoleMenu">
+    insert into w_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relationMenuId != null">
+        relation_menu_id,
+      </if>
+      <if test="relationRoleId != null">
+        relation_role_id,
+      </if>
+      <if test="relationIsValid != null">
+        relation_is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relationMenuId != null">
+        #{relationMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationRoleId != null">
+        #{relationRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationIsValid != null">
+        #{relationIsValid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

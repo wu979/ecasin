@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.csd</groupId>
-    <artifactId>ecasin-system</artifactId>
+    <artifactId>ecasin-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ecasin-system</name>
+    <name>ecasin-common</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -28,23 +28,17 @@
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-common</artifactId>
+            <artifactId>ecasin-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!-- spring boot  -->
         <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-log</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!-- spring-boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
-        <!-- 分页 -->
-        <dependency>
-            <groupId>com.github.miemiedev</groupId>
-            <artifactId>mybatis-paginator</artifactId>
         </dependency>
     </dependencies>
 
@@ -64,4 +58,5 @@
             </resource>
         </resources>
     </build>
+
 </project>

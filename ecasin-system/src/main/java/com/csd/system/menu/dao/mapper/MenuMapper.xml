@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.system.menu.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.csd.system.menu.po.Menu">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_org_id" jdbcType="VARCHAR" property="menuOrgId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_pid" jdbcType="VARCHAR" property="menuPid" />
+    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
+    <result column="menu_has_child" jdbcType="INTEGER" property="menuHasChild" />
+    <result column="menu_level" jdbcType="INTEGER" property="menuLevel" />
+    <result column="menu_create_user_id" jdbcType="VARCHAR" property="menuCreateUserId" />
+    <result column="menu_create_time" jdbcType="TIMESTAMP" property="menuCreateTime" />
+    <result column="menu_update_time" jdbcType="TIMESTAMP" property="menuUpdateTime" />
+    <result column="menu_update_user_id" jdbcType="VARCHAR" property="menuUpdateUserId" />
+    <result column="menu_is_valid" jdbcType="VARCHAR" property="menuIsValid" />
+  </resultMap>
+  <resultMap id="MenuRoleRelMap" type="map">
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_org_id, menu_name, menu_code, menu_url, menu_pid, menu_order, menu_has_child, 
+    menu_level, menu_create_user_id,
+    DATE_FORMAT(menu_create_time,'%Y-%m-%d %T') menu_create_time,
+    DATE_FORMAT(menu_update_time,'%Y-%m-%d %T') menu_update_time,
+    menu_update_user_id,
+    menu_is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.system.menu.po.Menu">
+    insert into w_menu (menu_id, menu_org_id, menu_name, 
+      menu_code, menu_url, menu_pid, 
+      menu_order, menu_has_child, menu_level, 
+      menu_create_user_id, menu_create_time, menu_update_time, 
+      menu_update_user_id, menu_is_valid)
+    values (#{menuId,jdbcType=VARCHAR}, #{menuOrgId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuCode,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuPid,jdbcType=VARCHAR}, 
+      #{menuOrder,jdbcType=INTEGER}, #{menuHasChild,jdbcType=INTEGER}, #{menuLevel,jdbcType=INTEGER}, 
+      #{menuCreateUserId,jdbcType=VARCHAR}, #{menuCreateTime,jdbcType=TIMESTAMP}, #{menuUpdateTime,jdbcType=TIMESTAMP}, 
+      #{menuUpdateUserId,jdbcType=VARCHAR}, #{menuIsValid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.system.menu.po.Menu">
+    insert into w_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuOrgId != null">
+        menu_org_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuCode != null">
+        menu_code,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuPid != null">
+        menu_pid,
+      </if>
+      <if test="menuOrder != null">
+        menu_order,
+      </if>
+      <if test="menuHasChild != null">
+        menu_has_child,
+      </if>
+      <if test="menuLevel != null">
+        menu_level,
+      </if>
+      <if test="menuCreateUserId != null">
+        menu_create_user_id,
+      </if>
+      <if test="menuCreateTime != null">
+        menu_create_time,
+      </if>
+      <if test="menuUpdateTime != null">
+        menu_update_time,
+      </if>
+      <if test="menuUpdateUserId != null">
+        menu_update_user_id,
+      </if>
+      <if test="menuIsValid != null">
+        menu_is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrgId != null">
+        #{menuOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null">
+        #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrder != null">
+        #{menuOrder,jdbcType=INTEGER},
+      </if>
+      <if test="menuHasChild != null">
+        #{menuHasChild,jdbcType=INTEGER},
+      </if>
+      <if test="menuLevel != null">
+        #{menuLevel,jdbcType=INTEGER},
+      </if>
+      <if test="menuCreateUserId != null">
+        #{menuCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCreateTime != null">
+        #{menuCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuUpdateTime != null">
+        #{menuUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuUpdateUserId != null">
+        #{menuUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIsValid != null">
+        #{menuIsValid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.system.menu.po.Menu">
+    update w_menu
+    <set>
+      <if test="menuOrgId != null">
+        menu_org_id = #{menuOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        menu_code = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null">
+        menu_pid = #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrder != null">
+        menu_order = #{menuOrder,jdbcType=INTEGER},
+      </if>
+      <if test="menuHasChild != null">
+        menu_has_child = #{menuHasChild,jdbcType=INTEGER},
+      </if>
+      <if test="menuLevel != null">
+        menu_level = #{menuLevel,jdbcType=INTEGER},
+      </if>
+      <if test="menuCreateUserId != null">
+        menu_create_user_id = #{menuCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCreateTime != null">
+        menu_create_time = #{menuCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuUpdateTime != null">
+        menu_update_time = #{menuUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuUpdateUserId != null">
+        menu_update_user_id = #{menuUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIsValid != null">
+        menu_is_valid = #{menuIsValid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.system.menu.po.Menu">
+    update w_menu
+    set menu_org_id = #{menuOrgId,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_code = #{menuCode,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_pid = #{menuPid,jdbcType=VARCHAR},
+      menu_order = #{menuOrder,jdbcType=INTEGER},
+      menu_has_child = #{menuHasChild,jdbcType=INTEGER},
+      menu_level = #{menuLevel,jdbcType=INTEGER},
+      menu_create_user_id = #{menuCreateUserId,jdbcType=VARCHAR},
+      menu_create_time = #{menuCreateTime,jdbcType=TIMESTAMP},
+      menu_update_time = #{menuUpdateTime,jdbcType=TIMESTAMP},
+      menu_update_user_id = #{menuUpdateUserId,jdbcType=VARCHAR},
+      menu_is_valid = #{menuIsValid,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <select id="findParentNameById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      B.*
+    from
+      w_menu A
+    left join w_menu B on A.menu_pid = B.menu_id
+    where
+      A.menu_id = #{recordId,jdbcType=VARCHAR}
+  </select>
+  <select id="findParentListByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_pid = #{parentId,jdbcType=VARCHAR}
+    and
+      menu_is_valid = '1'
+  </select>
+  <select id="getMenuListByRoleList" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu A
+    left join w_role_menu B on  A.menu_id = B.relation_menu_id
+    where
+      A.menu_is_valid = '1'
+    and
+      B.relation_is_valid = '1'
+    and
+      B.relation_role_id in
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+  <select id="getAllMenuAndRole" resultMap="MenuRoleRelMap">
+    select
+      menu.menu_url,role.role_code
+    from
+      w_menu menu,w_role role,w_role_menu rm
+    where
+      menu.menu_is_valid = '1'
+    and
+      role.role_is_valid = '1'
+    and
+      menu.menu_id = rm.relation_menu_id
+    and
+      role.role_id = rm.relation_role_id
+  </select>
+  <select id="getAllMenu" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_is_valid = '1'
+    order by
+      menu_has_child desc,menu_level,menu_order desc
+  </select>
+  <select id="getMenuByUserId" resultMap="BaseResultMap">
+     select
+       DISTINCT A.*
+     from
+       w_menu as A
+     left join (
+        select
+          DISTINCT rm.relation_menu_id
+        from
+          w_role_menu as rm
+        left join w_user_role as mr on rm.relation_role_id = mr.relation_role_id
+        left join w_pt_job as pj on pj.pt_user_id = #{userId,jdbcType=VARCHAR}
+        where
+          mr.relation_job_id = pj.pt_job_id
+        and
+          mr.relation_is_valid = '1'
+        and
+          rm.relation_is_valid = '1'
+        and
+		  pj.pt_is_valid = '1'
+     )B on B.relation_menu_id = A.menu_id
+	  where
+	    A.menu_is_valid = '1'
+	  and
+	    A.menu_level = '1'
+	  and
+	    B.relation_menu_id is not null
+	  order by
+	    A.menu_order asc
+  </select>
+  <select id="getMenuParentByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+       DISTINCT A.*
+     from
+       w_menu as A
+     left join (
+        select
+          DISTINCT rm.relation_menu_id
+        from
+          w_role_menu as rm
+        left join w_user_role as mr on rm.relation_role_id = mr.relation_role_id
+        left join w_pt_job as pj on pj.pt_user_id = #{userId,jdbcType=VARCHAR}
+        where
+          mr.relation_job_id = pj.pt_job_id
+        and
+          mr.relation_is_valid = '1'
+        and
+          rm.relation_is_valid = '1'
+        and
+		  pj.pt_is_valid = '1'
+     )B on B.relation_menu_id = A.menu_id
+	  where
+	    A.menu_is_valid = '1'
+	  and
+	    A.menu_level = '1'
+	  and
+	    B.relation_menu_id is not null
+	  order by
+	    A.menu_order asc
+  </select>
+  <select id="getMenuSunByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select
+       DISTINCT A.*
+     from
+       w_menu as A
+     left join (
+        select
+          DISTINCT rm.relation_menu_id
+        from
+          w_role_menu as rm
+        left join w_user_role as mr on rm.relation_role_id = mr.relation_role_id
+        left join w_pt_job as pj on pj.pt_user_id = #{userId,jdbcType=VARCHAR}
+        where
+          mr.relation_job_id = pj.pt_job_id
+        and
+          mr.relation_is_valid = '1'
+        and
+          rm.relation_is_valid = '1'
+        and
+		  pj.pt_is_valid = '1'
+     )B on B.relation_menu_id = A.menu_id
+	  where
+	    A.menu_is_valid = '1'
+	  and
+	    B.relation_menu_id is not null
+	  and
+	    A.menu_pid is not null
+	  order by
+	    A.menu_level asc ,A.menu_order asc
+  </select>
+  <select id="getAllMenuByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_pid = #{parentId,jdbcType=VARCHAR}
+    and
+      menu_is_valid = '1'
+    order by
+      menu_order asc
+  </select>
+  <select id="findParentMenuByAdmin" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_is_valid = '1'
+    and
+      menu_level = '1'
+    order by
+      menu_order asc
+  </select>
+  <select id="findSunMenuByAdmin" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_is_valid = '1'
+    and
+      menu_pid is not null
+    order by
+      menu_level asc ,menu_order asc
+  </select>
+  <select id="findMenuByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+  <select id="findMenuByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_menu
+    where
+      menu_name = #{menuName,jdbcType=VARCHAR}
+    and
+      menu_is_valid = '1'
+  </select>
+  <update id="updateParentById" parameterType="java.util.Map">
+    update w_menu set menu_has_child = #{hasChild} , menu_update_time = #{time} , menu_update_user_id = #{userId} where menu_id = #{recordId}
+  </update>
+</mapper>

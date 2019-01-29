@@ -19,6 +19,7 @@
 
     <modules>
         <module>ecasin-busines</module>
+        <module>ecasin-common</module>
         <module>ecasin-exception</module>
         <module>ecasin-generator</module>
         <module>ecasin-log</module>

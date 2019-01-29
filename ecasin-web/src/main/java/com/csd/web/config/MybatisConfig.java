@@ -32,7 +32,9 @@ import javax.sql.DataSource;
                               "com.csd.web",
                               "com.csd.system",
                               "com.csd.busines",
-                              "com.csd.log"
+                              "com.csd.log",
+                              "com.csd.common",
+                              "com.csd.security",
                              },
             excludeFilters = {
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class),

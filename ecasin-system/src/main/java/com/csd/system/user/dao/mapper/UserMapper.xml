@@ -305,4 +305,29 @@
       user_update_user_name = #{userUpdateUserName,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_user
+    where
+      user_phone = #{userPhone,jdbcType=VARCHAR}
+    and
+      user_is_valid = '1'
+  </select>
+  <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>,B.pt_job_id as ptJobId
+    from
+      w_user A
+    left join w_pt_job B on A.user_id = B.pt_user_id
+    where
+      A.user_phone = #{userPhone,jdbcType=VARCHAR}
+    and
+      A.user_is_valid = '1'
+    and
+      B.pt_job_type = '1'
+    and
+      B.pt_is_valid = '1'
+  </select>
 </mapper>

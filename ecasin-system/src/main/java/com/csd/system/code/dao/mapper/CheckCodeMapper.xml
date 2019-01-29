@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.system.code.dao.CheckCodeMapper">
+  <resultMap id="BaseResultMap" type="com.csd.system.code.po.CheckCode">
+    <id column="code_id" jdbcType="VARCHAR" property="codeId" />
+    <result column="code_phone" jdbcType="VARCHAR" property="codePhone" />
+    <result column="code_number" jdbcType="INTEGER" property="codeNumber" />
+    <result column="code_type" jdbcType="VARCHAR" property="codeType" />
+    <result column="code_time" jdbcType="TIMESTAMP" property="codeTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code_id, code_phone, code_number, code_type,
+    DATE_FORMAT(code_time,'%Y-%m-%d %T') code_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_check_code
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_check_code
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.system.code.po.CheckCode">
+    insert into w_check_code (code_id, code_phone, code_number, 
+      code_type, code_time)
+    values (#{codeId,jdbcType=VARCHAR}, #{codePhone,jdbcType=VARCHAR}, #{codeNumber,jdbcType=INTEGER}, 
+      #{codeType,jdbcType=VARCHAR}, #{codeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.system.code.po.CheckCode">
+    insert into w_check_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="codeId != null">
+        code_id,
+      </if>
+      <if test="codePhone != null">
+        code_phone,
+      </if>
+      <if test="codeNumber != null">
+        code_number,
+      </if>
+      <if test="codeType != null">
+        code_type,
+      </if>
+      <if test="codeTime != null">
+        code_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="codeId != null">
+        #{codeId,jdbcType=VARCHAR},
+      </if>
+      <if test="codePhone != null">
+        #{codePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="codeNumber != null">
+        #{codeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="codeType != null">
+        #{codeType,jdbcType=VARCHAR},
+      </if>
+      <if test="codeTime != null">
+        #{codeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.system.code.po.CheckCode">
+    update w_check_code
+    <set>
+      <if test="codePhone != null">
+        code_phone = #{codePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="codeNumber != null">
+        code_number = #{codeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="codeType != null">
+        code_type = #{codeType,jdbcType=VARCHAR},
+      </if>
+      <if test="codeTime != null">
+        code_time = #{codeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.system.code.po.CheckCode">
+    update w_check_code
+    set code_phone = #{codePhone,jdbcType=VARCHAR},
+      code_number = #{codeNumber,jdbcType=INTEGER},
+      code_type = #{codeType,jdbcType=VARCHAR},
+      code_time = #{codeTime,jdbcType=TIMESTAMP}
+    where code_id = #{codeId,jdbcType=VARCHAR}
+  </update>
+  <select id="getCodeByPhone" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_check_code
+    where
+      code_phone = #{phone,jdbcType=VARCHAR}
+    and
+      code_time = (
+          select
+            MAX(code_time)
+          from
+            w_check_code
+          where
+            code_phone = #{phone,jdbcType=VARCHAR}
+          and
+            code_type = #{type,jdbcType=VARCHAR}
+      )
+  </select>
+</mapper>

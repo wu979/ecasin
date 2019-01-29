@@ -20,22 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-system</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
             <artifactId>ecasin-busines</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-log</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-utils</artifactId>
+            <artifactId>ecasin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -48,6 +38,27 @@
             <artifactId>ecasin-generator</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-log</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-system</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- spring boot  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

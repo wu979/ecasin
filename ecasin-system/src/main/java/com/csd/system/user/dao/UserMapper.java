@@ -20,4 +20,10 @@ public interface UserMapper {
 
     
     int updateByPrimaryKey(User record);
+
+
+    User selectByPhone(String userPhone);
+
+
+    User findByUserName(String userPhone);
 }

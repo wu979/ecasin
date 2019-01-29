@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.system.role.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.csd.system.role.po.Role">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_org_id" jdbcType="VARCHAR" property="roleOrgId" />
+    <result column="role_type" jdbcType="VARCHAR" property="roleType" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="role_create_user_id" jdbcType="VARCHAR" property="roleCreateUserId" />
+    <result column="role_create_time" jdbcType="TIMESTAMP" property="roleCreateTime" />
+    <result column="role_update_time" jdbcType="TIMESTAMP" property="roleUpdateTime" />
+    <result column="role_update_user_id" jdbcType="VARCHAR" property="roleUpdateUserId" />
+    <result column="role_is_valid" jdbcType="VARCHAR" property="roleIsValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_org_id, role_type, role_name, role_code, role_create_user_id,
+    DATE_FORMAT(role_create_time,'%Y-%m-%d %T') role_create_time,
+    DATE_FORMAT(role_update_time,'%Y-%m-%d %T') role_update_time,
+    role_update_user_id, role_is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.system.role.po.Role">
+    insert into w_role (role_id, role_org_id, role_type, 
+      role_name, role_code, role_create_user_id, 
+      role_create_time, role_update_time, role_update_user_id, 
+      role_is_valid)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleOrgId,jdbcType=VARCHAR}, #{roleType,jdbcType=VARCHAR}, 
+      #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{roleCreateUserId,jdbcType=VARCHAR}, 
+      #{roleCreateTime,jdbcType=TIMESTAMP}, #{roleUpdateTime,jdbcType=TIMESTAMP}, #{roleUpdateUserId,jdbcType=VARCHAR}, 
+      #{roleIsValid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.system.role.po.Role">
+    insert into w_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleOrgId != null">
+        role_org_id,
+      </if>
+      <if test="roleType != null">
+        role_type,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="roleCreateUserId != null">
+        role_create_user_id,
+      </if>
+      <if test="roleCreateTime != null">
+        role_create_time,
+      </if>
+      <if test="roleUpdateTime != null">
+        role_update_time,
+      </if>
+      <if test="roleUpdateUserId != null">
+        role_update_user_id,
+      </if>
+      <if test="roleIsValid != null">
+        role_is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOrgId != null">
+        #{roleOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateUserId != null">
+        #{roleCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateTime != null">
+        #{roleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleUpdateTime != null">
+        #{roleUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleUpdateUserId != null">
+        #{roleUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIsValid != null">
+        #{roleIsValid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.system.role.po.Role">
+    update w_role
+    <set>
+      <if test="roleOrgId != null">
+        role_org_id = #{roleOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateUserId != null">
+        role_create_user_id = #{roleCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateTime != null">
+        role_create_time = #{roleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleUpdateTime != null">
+        role_update_time = #{roleUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleUpdateUserId != null">
+        role_update_user_id = #{roleUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIsValid != null">
+        role_is_valid = #{roleIsValid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.system.role.po.Role">
+    update w_role
+    set role_org_id = #{roleOrgId,jdbcType=VARCHAR},
+      role_type = #{roleType,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      role_create_user_id = #{roleCreateUserId,jdbcType=VARCHAR},
+      role_create_time = #{roleCreateTime,jdbcType=TIMESTAMP},
+      role_update_time = #{roleUpdateTime,jdbcType=TIMESTAMP},
+      role_update_user_id = #{roleUpdateUserId,jdbcType=VARCHAR},
+      role_is_valid = #{roleIsValid,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <select id="getRoleListByJobId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_role A
+    left join w_user_role B on A.role_id = B.relation_role_id
+    where
+      A.role_is_valid = '1'
+    and
+      B.relation_job_id = #{jobId,jdbcType=VARCHAR}
+    and
+      B.relation_is_valid = '1'
+  </select>
+  <select id="findByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_role
+    where
+      role_is_valid = '1'
+    <if test="orgId != null and orgId != ''">
+      and role_org_id = #{orgId}
+    </if>
+  </select>
+</mapper>
