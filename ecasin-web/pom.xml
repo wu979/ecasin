@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-generator</artifactId>
+            <artifactId>ecasin-exception</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

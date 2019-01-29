@@ -18,12 +18,13 @@
     </parent>
 
     <modules>
-        <module>ecasin-utils</module>
-        <module>ecasin-system</module>
-        <module>ecasin-web</module>
-        <module>ecasin-log</module>
         <module>ecasin-busines</module>
+        <module>ecasin-exception</module>
         <module>ecasin-generator</module>
+        <module>ecasin-log</module>
+        <module>ecasin-system</module>
+        <module>ecasin-utils</module>
+        <module>ecasin-web</module>
     </modules>
 
     <properties>
