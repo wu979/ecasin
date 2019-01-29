@@ -21,7 +21,7 @@
         <sqlMapGenerator targetPackage="com.csd.log.systemLog.dao.mapper" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" ></sqlMapGenerator>
         <!-- interface -->
         <javaClientGenerator targetPackage="com.csd.log.systemLog.dao" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" type="XMLMAPPER" />
-        <table schema="general" tableName="w_system" domainObjectName="SystemLog"
+        <table schema="general" tableName="w_system_log" domainObjectName="SystemLog"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false"	selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>

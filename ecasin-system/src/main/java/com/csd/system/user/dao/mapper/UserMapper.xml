@@ -29,7 +29,9 @@
   <sql id="Base_Column_List">
     user_id, user_org_id, user_dep_id, user_name, user_phone, user_password, user_sex, 
     user_address, user_is_valid, user_is_active, user_number, user_native_place, user_id_number, 
-    user_state, user_type, user_notice, user_head_url, user_create_time, user_update_time, 
+    user_state, user_type, user_notice, user_head_url,
+    DATE_FORMAT(user_create_time,'%Y-%m-%d %T') user_create_time,
+    DATE_FORMAT(user_update_time,'%Y-%m-%d %T') user_update_time,
     user_create_user_id, user_create_user_name, user_update_user_id, user_update_user_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

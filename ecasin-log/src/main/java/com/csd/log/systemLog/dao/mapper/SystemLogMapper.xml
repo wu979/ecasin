@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.log.systemLog.dao.SystemLogMapper">
+  <resultMap id="BaseResultMap" type="com.csd.log.systemLog.po.SystemLog">
+    <id column="log_id" jdbcType="VARCHAR" property="logId" />
+    <result column="log_table" jdbcType="VARCHAR" property="logTable" />
+    <result column="log_business" jdbcType="VARCHAR" property="logBusiness" />
+    <result column="log_type" jdbcType="VARCHAR" property="logType" />
+    <result column="log_create_user_id" jdbcType="VARCHAR" property="logCreateUserId" />
+    <result column="log_create_user_name" jdbcType="VARCHAR" property="logCreateUserName" />
+    <result column="log_create_time" jdbcType="TIMESTAMP" property="logCreateTime" />
+    <result column="log_method_type" jdbcType="VARCHAR" property="logMethodType" />
+    <result column="log_ip" jdbcType="VARCHAR" property="logIp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.csd.log.systemLog.po.SystemLog">
+    <result column="log_params" jdbcType="LONGVARCHAR" property="logParams" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, log_table, log_business, log_type, log_create_user_id, log_create_user_name, 
+    DATE_FORMAT(log_create_time,'%Y-%m-%d %T') log_create_time,
+    log_method_type, log_ip
+  </sql>
+  <sql id="Blob_Column_List">
+    log_params
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from w_system_log
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_system_log
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.log.systemLog.po.SystemLog">
+    insert into w_system_log (log_id, log_table, log_business, 
+      log_type, log_create_user_id, log_create_user_name, 
+      log_create_time, log_method_type, log_ip, 
+      log_params)
+    values (#{logId,jdbcType=VARCHAR}, #{logTable,jdbcType=VARCHAR}, #{logBusiness,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR}, #{logCreateUserId,jdbcType=VARCHAR}, #{logCreateUserName,jdbcType=VARCHAR}, 
+      #{logCreateTime,jdbcType=TIMESTAMP}, #{logMethodType,jdbcType=VARCHAR}, #{logIp,jdbcType=VARCHAR}, 
+      #{logParams,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.log.systemLog.po.SystemLog">
+    insert into w_system_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="logTable != null">
+        log_table,
+      </if>
+      <if test="logBusiness != null">
+        log_business,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="logCreateUserId != null">
+        log_create_user_id,
+      </if>
+      <if test="logCreateUserName != null">
+        log_create_user_name,
+      </if>
+      <if test="logCreateTime != null">
+        log_create_time,
+      </if>
+      <if test="logMethodType != null">
+        log_method_type,
+      </if>
+      <if test="logIp != null">
+        log_ip,
+      </if>
+      <if test="logParams != null">
+        log_params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="logTable != null">
+        #{logTable,jdbcType=VARCHAR},
+      </if>
+      <if test="logBusiness != null">
+        #{logBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateUserId != null">
+        #{logCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateUserName != null">
+        #{logCreateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateTime != null">
+        #{logCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logMethodType != null">
+        #{logMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logParams != null">
+        #{logParams,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.log.systemLog.po.SystemLog">
+    update w_system_log
+    <set>
+      <if test="logTable != null">
+        log_table = #{logTable,jdbcType=VARCHAR},
+      </if>
+      <if test="logBusiness != null">
+        log_business = #{logBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateUserId != null">
+        log_create_user_id = #{logCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateUserName != null">
+        log_create_user_name = #{logCreateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="logCreateTime != null">
+        log_create_time = #{logCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logMethodType != null">
+        log_method_type = #{logMethodType,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logParams != null">
+        log_params = #{logParams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.csd.log.systemLog.po.SystemLog">
+    update w_system_log
+    set log_table = #{logTable,jdbcType=VARCHAR},
+      log_business = #{logBusiness,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      log_create_user_id = #{logCreateUserId,jdbcType=VARCHAR},
+      log_create_user_name = #{logCreateUserName,jdbcType=VARCHAR},
+      log_create_time = #{logCreateTime,jdbcType=TIMESTAMP},
+      log_method_type = #{logMethodType,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_params = #{logParams,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.log.systemLog.po.SystemLog">
+    update w_system_log
+    set log_table = #{logTable,jdbcType=VARCHAR},
+      log_business = #{logBusiness,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      log_create_user_id = #{logCreateUserId,jdbcType=VARCHAR},
+      log_create_user_name = #{logCreateUserName,jdbcType=VARCHAR},
+      log_create_time = #{logCreateTime,jdbcType=TIMESTAMP},
+      log_method_type = #{logMethodType,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -62,6 +62,8 @@
         <velocity.version>1.7</velocity.version>
 
         <slf4j.version>1.7.21</slf4j.version>
+
+        <net.sf.dozer.version>5.5.1</net.sf.dozer.version>
     </properties>
 
     <dependencyManagement>
@@ -187,6 +189,12 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <!-- 对象copy -->
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${net.sf.dozer.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

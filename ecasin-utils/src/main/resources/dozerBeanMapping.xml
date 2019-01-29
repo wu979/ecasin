@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <mapping>
+        <class-a>com.boot.basics.menu.po.Menu</class-a>
+        <class-b>com.boot.basics.menu.po.Tree</class-b>
+        <field>
+            <a>menuId</a>
+            <b>id</b>
+        </field>
+
+        <field>
+            <a>menuName</a>
+            <b>title</b>
+        </field>
+
+        <field>
+            <a>menuCode</a>
+            <b>code</b>
+        </field>
+
+        <field>
+            <a>menuUrl</a>
+            <b>url</b>
+        </field>
+
+        <field>
+            <a>menuPid</a>
+            <b>parentId</b>
+        </field>
+
+        <field>
+            <a>menuOrder</a>
+            <b>order</b>
+        </field>
+
+        <field>
+            <a>menuHasChild</a>
+            <b>isLast</b>
+        </field>
+
+        <field>
+            <a>menuLevel</a>
+            <b>level</b>
+        </field>
+    </mapping>
+</mappings>

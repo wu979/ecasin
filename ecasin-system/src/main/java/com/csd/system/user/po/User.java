@@ -1,7 +1,5 @@
 package com.csd.system.user.po;
 
-import java.util.Date;
-
 public class User {
     /**用户主键*/
     private String userId;
@@ -55,10 +53,10 @@ public class User {
     private String userHeadUrl;
 
     /**创建时间*/
-    private Date userCreateTime;
+    private String userCreateTime;
 
     /**修改时间*/
-    private Date userUpdateTime;
+    private String userUpdateTime;
 
     /**创建人ID*/
     private String userCreateUserId;
@@ -243,22 +241,22 @@ public class User {
     }
 
     
-    public Date getUserCreateTime() {
+    public String getUserCreateTime() {
         return userCreateTime;
     }
 
     
-    public void setUserCreateTime(Date userCreateTime) {
+    public void setUserCreateTime(String userCreateTime) {
         this.userCreateTime = userCreateTime;
     }
 
     
-    public Date getUserUpdateTime() {
+    public String getUserUpdateTime() {
         return userUpdateTime;
     }
 
     
-    public void setUserUpdateTime(Date userUpdateTime) {
+    public void setUserUpdateTime(String userUpdateTime) {
         this.userUpdateTime = userUpdateTime;
     }
 
