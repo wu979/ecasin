@@ -16,12 +16,12 @@
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8" userId="root" password="Erp#2017" />
         <!-- po -->
-        <javaModelGenerator targetPackage="com.csd.business.user.po" targetProject="src/main/java/" />
+        <javaModelGenerator targetPackage="com.csd.log.systemLog.po" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" />
         <!-- xml -->
-        <sqlMapGenerator targetPackage="com.csd.business.user.dao.mapper" targetProject="src/main/java/" ></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="com.csd.log.systemLog.dao.mapper" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" ></sqlMapGenerator>
         <!-- interface -->
-        <javaClientGenerator targetPackage="com.csd.business.user.dao" targetProject="src/main/java/" type="XMLMAPPER" />
-        <table schema="general" tableName="w_user" domainObjectName="User"
+        <javaClientGenerator targetPackage="com.csd.log.systemLog.dao" targetProject="D:/workspace/ecasin/ecasin-log/src/main/java/" type="XMLMAPPER" />
+        <table schema="general" tableName="w_system" domainObjectName="SystemLog"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false"	selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="false"/>

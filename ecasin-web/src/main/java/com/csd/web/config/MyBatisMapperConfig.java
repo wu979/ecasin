@@ -1,4 +1,4 @@
-package com.csd.web;
+package com.csd.web.config;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

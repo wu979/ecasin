@@ -1,4 +1,4 @@
-package com.csd.web;
+package com.csd.generator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EcasinWebApplicationTests {
+public class EcasinGeneratorApplicationTests {
 
     @Test
     public void contextLoads() {

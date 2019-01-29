@@ -1,4 +1,4 @@
-package com.csd.web;
+package com.csd.web.config;
 
 import com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
@@ -28,7 +28,12 @@ import javax.sql.DataSource;
  */
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan(
-            basePackages = {"com.csd.web", "com.csd.system","com.csd.busines"},
+            basePackages =   {
+                              "com.csd.web",
+                              "com.csd.system",
+                              "com.csd.busines",
+                              "com.csd.log"
+                             },
             excludeFilters = {
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class),
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class),

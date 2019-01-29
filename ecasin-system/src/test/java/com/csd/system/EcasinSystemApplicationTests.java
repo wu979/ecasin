@@ -1,4 +1,4 @@
-package com.csd.business;
+package com.csd.system;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
