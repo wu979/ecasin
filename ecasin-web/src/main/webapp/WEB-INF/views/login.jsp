@@ -17,6 +17,7 @@
 
     <input id="inputClick" value="点击" type="button">
 
+    <span id="messageSpan" style="display: none"></span>
 <script src="${ctx}/static/jquery.2.1.1.min.js"></script>
 <script src="${ctx}/static/login.js"></script>
 </body>

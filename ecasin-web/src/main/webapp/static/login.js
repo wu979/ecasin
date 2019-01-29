@@ -16,7 +16,15 @@ $('#inputClick').on('click',function () {
         type:'post',
         dataType:'json',
         success:function (data) {
-            console.log(data.userPhone);
+            if(data.status == 0){
+                console.log(data);
+            }else {
+                console.log("抛出了异常:");
+                $("#messageSpan").html(data.message);
+                $("#messageSpan").css('display','block');
+
+                console.log(data);
+            }
         }
 
     })
