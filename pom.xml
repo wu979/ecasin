@@ -22,6 +22,7 @@
         <module>ecasin-exception</module>
         <module>ecasin-generator</module>
         <module>ecasin-log</module>
+        <module>ecasin-security</module>
         <module>ecasin-system</module>
         <module>ecasin-utils</module>
         <module>ecasin-web</module>
@@ -57,6 +58,7 @@
         <commons-net.version>3.6</commons-net.version>
 
         <spring.content.varsion>4.1.3.RELEASE</spring.content.varsion>
+        <spring.security.version>4.0.3.RELEASE</spring.security.version>
 
         <mybatis.plus.version>2.1.6</mybatis.plus.version>
         <velocity.version>1.7</velocity.version>
@@ -79,6 +81,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.content.varsion}</version>
+            </dependency>
+            <!-- security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
             </dependency>
             <!-- mybatis -->
             <dependency>
