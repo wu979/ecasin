@@ -23,6 +23,7 @@
         <module>ecasin-web</module>
         <module>ecasin-log</module>
         <module>ecasin-busines</module>
+        <!--<module>ecasin-generator</module>-->
     </modules>
 
     <properties>
