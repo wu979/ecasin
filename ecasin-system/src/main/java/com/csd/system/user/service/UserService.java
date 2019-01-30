@@ -50,41 +50,45 @@ public class UserService {
     private CheckCodeService checkCodeService;
 
 
-    public void login(Model model, String error){
+    public String login(String error){
+        String result = null;
         if (!StringUtil.isEmpty(error)) {
             if (error.equals(ConstantUtil.ERROR_ONE)) {
-                model.addAttribute("loginError", true);
+                result = "账号或密码错误";
             }
             if (error.equals(ConstantUtil.ERROR_TWO)) {
-                model.addAttribute("loginOut", true);
+                result = "已登出";
             }
             if (error.equals(ConstantUtil.ERROR_THREE)) {
-                model.addAttribute("sessionIsValid", true);
+                result = "登录已超时";
             }
             if (error.equals(ConstantUtil.ERROR_FOUR)) {
-                model.addAttribute("codeNull", true);
+                result = "验证码不能为空";
             }
             if (error.equals(ConstantUtil.ERROR_FIVE)) {
-                model.addAttribute("codeIsExist", true);
+                result = "验证码不存在";
             }
             if (error.equals(ConstantUtil.ERROR_SIX)) {
-                model.addAttribute("codeIsValid", true);
+                result = "验证码已过期";
             }
             if (error.equals(ConstantUtil.ERROR_SEVEN)) {
-                model.addAttribute("codeError", true);
+                result = "验证码不正确";
             }
         }
+        return result;
     }
 
-    public void notEnoughAuth(Model model,String error){
+    public String notEnoughAuth(Model model,String error){
+        String result = null;
         if (!StringUtil.isEmpty(error)) {
             if (error.equals(ConstantUtil.ERROR_ONE)) {
-                model.addAttribute("maximumSession", true);
+                result = "账号已在其他设备登录,请重新登录";
             }
             if (error.equals(ConstantUtil.ERROR_TWO)) {
-                model.addAttribute("sessionExpired", true);
+                result = "账户过期或暂无权限,请重新登录或联系管理员";
             }
         }
+        return result;
     }
 
     public User selectByPhone(String userPhone){

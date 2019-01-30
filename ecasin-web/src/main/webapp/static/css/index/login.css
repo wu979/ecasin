@@ -1,0 +1,492 @@
+/*S 简单样式重置*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, .login-warp {
+    height: 100%;
+    width: 100%;
+    background-color: #ebebeb;
+}
+
+.login-warp * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*E 简单样式重置*/
+
+.login-bgc {
+    width: 100%;
+    height: 50%;
+    background-color: #008ead;
+}
+
+.login-box {
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding-bottom: 15px;
+    /* 水平垂直居中 */
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /* 阴影*/
+    -webkit-box-shadow: 0 0 2px 0 #ddd;
+    -moz-box-shadow: 0 0 2px 0 #ddd;
+    box-shadow: 0 0 2px 0 #ddd;
+}
+
+.input-group {
+    margin: 30px;
+}
+
+.input-group[data-type=text] {
+    margin-bottom: 15px !important;
+}
+
+.input-group[data-type=password] {
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+}
+
+.input-group[data-type=code] {
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+}
+
+.input-group[data-type=text],
+.input-group[data-type=password],
+.input-group[data-type=code] {
+    position: relative;
+}
+
+.input-group[data-type=text]::after,
+.input-group[data-type=password]::after,
+.input-group[data-security=password]::after,
+.input-group[data-type=code]::after{
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.input-group[data-type=text]::after {
+    background-image: url("../../images/phone.png");
+}
+
+.input-group[data-type=password]::after {
+    background-image: url("../../images/pass.png");
+}
+
+.input-group[data-security=password]::after {
+    background-image: url("../../images/security.png");
+}
+
+.input-group[data-type=code]::after{
+    background-image: url("../../images/security.png");
+}
+
+
+
+.input-group input {
+    height: 38px;
+    line-height: 38px;
+    background-color: #fff;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    width: 100%;
+    padding-left: 40px;
+    outline: none;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    -ms-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+
+.input-group input:hover,
+.input-group input:focus {
+    border-color: #1E9FFF !important
+}
+
+.hr {
+    height: 1px;
+    margin: 10px 0;
+    border: 0;
+    clear: both;
+    background-color: #ddd;
+}
+
+.login-cartoon {
+    width: 97px;
+    height: 92px;
+    background-image: url("../../images/tou.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: -87px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.login-cartoon::before,
+.login-cartoon::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+}
+
+/*S 左右手初始状态 */
+.login-cartoon::before {
+    background-image: url("../../images/hand.png");
+    bottom: 0;
+    left: -35px;
+}
+
+.login-cartoon::after {
+    background-image: url("../../images/hand.png");
+    bottom: 0;
+    right: -35px;
+}
+
+/*E 左右手初始状态 */
+
+/*上左手*/
+#password-select:checked + .login-box .login-cartoon::before {
+    -webkit-animation: lefeAnimation .3s forwards ease-in; /* Safari 和 Chrome */
+    -o-animation: lefeAnimation .3s forwards ease-in; /* Opera */
+    -moz-animation: lefeAnimation .3s forwards ease-in; /* Firefox */
+    animation: lefeAnimation .3s forwards ease-in;
+}
+
+/* 上右手*/
+#password-select:checked + .login-box .login-cartoon::after {
+    -webkit-animation: rightAnimation .3s forwards ease-in; /* Safari 和 Chrome */
+    -o-animation: rightAnimation .3s forwards ease-in; /* Opera */
+    -moz-animation: rightAnimation .3s forwards ease-in; /* Firefox */
+    animation: rightAnimation .3s forwards ease-in;
+}
+
+/*S 操作按钮区域*/
+.login-button:before,
+.login-button::before,
+.login-button:after,
+.login-button::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.login-button{
+    padding: 8px 30px 0;
+}
+.login-button button,.login-button a,.login-button input,.code-botton{
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 2px 3px;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    -ms-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.login-button dt{
+    float: left;
+}
+.login-button dd{
+    float: right;
+}
+.login-button dd:last-child{
+    margin-right: 15px;
+}
+.login-button .sign-up,
+.login-button .forget,
+.code-botton{
+    color: rgb(204, 204, 204);
+}
+
+.login-button .sign-up:hover,
+.login-button .forget:hover{
+    color: rgb(176, 176, 176);
+}
+
+.sign-in,
+.code-botton{
+    border-color: rgb(26, 117, 152);
+    border-image: none;
+    background-color: rgb(26, 117, 152) !important;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 10px !important;
+}
+.sign-in:hover,
+.code-botton:hover{
+    color:rgb(26, 117, 152);
+    border-color: rgb(26, 117, 152);
+    background-color: #fff !important;
+}
+
+/*E 操作按钮区域*/
+
+#password-select {
+    display: none;
+}
+
+/*S 左手动画 */
+@keyframes lefeAnimation {
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 6px;
+        left: -18px;
+    }
+    to {
+        background-image: url("../../images/left_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        left: 8px;
+    }
+}
+
+@-moz-keyframes lefeAnimation /* Firefox */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 6px;
+        left: -18px;
+    }
+    to {
+        background-image: url("../../images/left_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        left: 8px;
+    }
+}
+
+@-webkit-keyframes lefeAnimation /* Safari 和 Chrome */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 6px;
+        left: -18px;
+    }
+    to {
+        background-image: url("../../images/left_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        left: 8px;
+    }
+}
+
+@-o-keyframes lefeAnimation /* Opera */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 6px;
+        left: -18px;
+    }
+    to {
+        background-image: url("../../images/left_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        left: 8px;
+    }
+}
+
+/*E 左手动画 */
+
+/*S 右手动画*/
+@keyframes rightAnimation {
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 0;
+        right: -35px;
+    }
+    to {
+        background-image: url("../../images/right_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        right: 8px;
+    }
+}
+
+@-moz-keyframes rightAnimation /* Firefox */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 0;
+        right: -35px;
+    }
+    to {
+        background-image: url("../../images/right_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        right: 8px;
+    }
+}
+
+@-webkit-keyframes rightAnimation /* Safari 和 Chrome */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 0;
+        right: -35px;
+    }
+    to {
+        background-image: url("../../images/right_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        right: 8px;
+    }
+}
+
+@-o-keyframes rightAnimation /* Opera */
+{
+    from {
+        background-image: url("../../images/hand.png");
+        bottom: 0;
+        right: -35px;
+    }
+    to {
+        background-image: url("../../images/right_hand.png");
+        width: 38px;
+        height: 40px;
+        bottom: 6px;
+        right: 8px;
+    }
+}
+
+/*E 右手动画*/
+/** 注册,修改密码 页面 */
+.get-code {
+    height: 38px;
+    margin-bottom: 15px;
+}
+.get-code input,
+.get-code .code-botton{
+    float: left;
+}
+
+.get-code input{
+    width: 65%;
+
+}
+.get-code .code-botton{
+    width: 35%;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 !important;
+}
+
+#isActive{
+    width: 50px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 !important;
+    text-align: center;
+}
+.xiaobiao,#QuDengLu,.forget,.sign-up{
+    cursor: pointer;
+}
+#successDivOne{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    padding-bottom: 15px;
+    /* 水平垂直居中 */
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#successImg{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    padding-bottom: 15px;
+    /* 水平垂直居中 */
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#messageSpan{
+    position: fixed;
+    top: 34% !important;
+    left: 50% !important;
+    padding-bottom: 70px;
+    /* 水平垂直居中 */
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.errorSpan{
+    /*position: absolute;*/
+    /*left: 30px;*/
+    color: red;
+    font-size: 5px;
+    padding-left: 32px;
+}
+
+.code-image{
+    position: absolute;
+    right:0px;
+    bottom:1px;
+    cursor:pointer;
+}
+
+.login-box {
+     padding-bottom: unset;
+     background-color: transparent;
+     border: none;
+     -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+     box-shadow: none;
+ }
+.animaiton-div {
+    background-color: #fff;
+    padding: 1px 0 10px;
+}

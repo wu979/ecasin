@@ -1,0 +1,24 @@
+/* layer 弹窗样式 */
+body{
+    background-color: #fff !important;
+}
+
+.modal-body .form-group{
+    padding: 25px;
+}
+body .layui-layer .layui-layer-title {
+    background:#20B2AA;
+    color:#333;
+    border: none;
+}
+body .layui-layer .layui-layer-btn{
+    border:1px solid #fff
+}
+body .layui-layer .layui-layer-btn a{
+    background:#fff;
+    color: #333;
+    border:1px solid #20B2AA
+}
+body .layui-layer .layui-layer-btn .layui-layer-btn1{
+    background:#fff;
+}

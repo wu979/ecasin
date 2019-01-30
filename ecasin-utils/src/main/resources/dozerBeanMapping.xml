@@ -5,8 +5,8 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
     <mapping>
-        <class-a>com.boot.basics.menu.po.Menu</class-a>
-        <class-b>com.boot.basics.menu.po.Tree</class-b>
+        <class-a>com.csd.system.menu.po.Menu</class-a>
+        <class-b>com.csd.system.menu.po.Tree</class-b>
         <field>
             <a>menuId</a>
             <b>id</b>

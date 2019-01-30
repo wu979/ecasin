@@ -42,8 +42,9 @@ public class LoginController {
      */
     @RequestMapping(value = {"/login","/"} , method = RequestMethod.GET)
     public String login(Model model, @RequestParam(value = "error" , required = false) String error) {
-        userService.login(model,error);
-        return "/login";
+        String result = userService.login(error);
+        model.addAttribute("loginError",result);
+        return "index/login";
     }
 
 
@@ -55,8 +56,9 @@ public class LoginController {
      */
     @RequestMapping(value = "/notAuth" , method = RequestMethod.GET)
     public String notEnoughAuth(Model model,@RequestParam(value = "error" , required = false) String error){
-        userService.notEnoughAuth(model,error);
-        return "/error/403";
+        String result = userService.notEnoughAuth(model,error);
+        model.addAttribute("notAuth",result);
+        return "error/403";
     }
 
 
@@ -69,7 +71,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute("user",LoginUser.getLoginUser());
         model.addAttribute("userName",LoginUser.getLoginUserName());
-        return "/homepage/index";
+        return "home/index";
     }
 
 
@@ -80,7 +82,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/sign" , method = RequestMethod.GET)
     public String sign(Model model){
-        return "/sign";
+        return "index/sign";
     }
 
 
@@ -91,7 +93,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/forget" , method = RequestMethod.GET)
     public String forget(Model model){
-        return "/forget";
+        return "index/forget";
     }
 
 
@@ -102,7 +104,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/success" , method = RequestMethod.GET)
     public String success(Model model){
-        return "/success";
+        return "index/success";
     }
 
 

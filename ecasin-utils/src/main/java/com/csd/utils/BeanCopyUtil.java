@@ -16,7 +16,7 @@ import java.util.List;
 public class BeanCopyUtil {
 
 
-    private static final String DOZER_CONFIG = "beanMapper/dozerBeanMapping.xml";
+    private static final String DOZER_CONFIG = "dozerBeanMapping.xml";
 
     private static DozerBeanMapper mapper;
 

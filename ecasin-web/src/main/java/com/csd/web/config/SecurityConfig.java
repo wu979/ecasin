@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
         http.sessionManagement().maximumSessions(1).expiredUrl("/notAuth?error=1").sessionRegistry(sessionRegistry);
 
-        http.rememberMe();
+        //http.rememberMe();
     }
 
 
