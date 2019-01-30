@@ -18,28 +18,23 @@
     <dependencies>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-utils</artifactId>
+            <artifactId>ecasin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-exception</artifactId>
+            <artifactId>ecasin-log</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!-- 分页 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-paginator</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>

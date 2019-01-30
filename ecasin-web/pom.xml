@@ -170,9 +170,10 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*</include>
+                    <include>**/*.xml</include>
                     <include>**/*.properties</include>
-                    <include>**/*/*.*</include>
+                    <include>**/*.yml</include>
+                    <!--<include>**/*/*.*</include>-->
                 </includes>
             </resource>
             <resource>
