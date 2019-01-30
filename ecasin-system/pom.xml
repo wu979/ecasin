@@ -18,16 +18,6 @@
     <dependencies>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-exception</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
             <artifactId>ecasin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
