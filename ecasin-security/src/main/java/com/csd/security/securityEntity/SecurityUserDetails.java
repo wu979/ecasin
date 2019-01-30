@@ -1,6 +1,5 @@
 package com.csd.security.securityEntity;
 
-import com.csd.system.user.po.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;

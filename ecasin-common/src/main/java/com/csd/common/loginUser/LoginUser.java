@@ -1,7 +1,7 @@
 package com.csd.common.loginUser;
 
 import com.csd.security.securityEntity.SecurityUserDetails;
-import com.csd.system.user.po.User;
+import com.csd.security.securityEntity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

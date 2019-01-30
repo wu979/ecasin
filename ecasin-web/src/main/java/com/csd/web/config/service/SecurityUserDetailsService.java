@@ -1,10 +1,11 @@
-package com.csd.security.securityService;
+package com.csd.web.config.service;
 
 import com.csd.security.securityEntity.SecurityUserDetails;
 import com.csd.system.menu.po.Menu;
 import com.csd.system.role.po.Role;
 import com.csd.system.user.po.User;
 import com.csd.system.user.service.UserService;
+import com.csd.utils.BeanCopyUtil;
 import org.assertj.core.util.Sets;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,7 +22,7 @@ import java.util.Set;
  * @desc:
  * @author: wsw
  * @email: 18683789594@163.com
- * @date: 2019/1/29 16:28.
+ * @date: 2019/1/30 13:24.
  */
 @Component
 public class SecurityUserDetailsService implements UserDetailsService {
@@ -64,7 +65,8 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
         SecurityUserDetails securityUserDetails = new SecurityUserDetails
                 (user.getUserPhone(),user.getUserPassword(),true,true,true,true,authSet);
-        securityUserDetails.setUser(user);
+        com.csd.security.securityEntity.User userEntity = BeanCopyUtil.copy(user, com.csd.security.securityEntity.User.class);
+        securityUserDetails.setUser(userEntity);
         securityUserDetails.setUserRoleCodeList(userRoleCodeList);
         return securityUserDetails;
     }

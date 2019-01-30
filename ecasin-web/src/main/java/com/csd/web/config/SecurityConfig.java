@@ -1,11 +1,11 @@
-package com.csd.security;
+package com.csd.web.config;
 
 import com.csd.security.securityInterceptor.SecurityAccessDeniedHandler;
 import com.csd.security.securityInterceptor.SecurityAuthenticationEntryPoint;
 import com.csd.security.securityInterceptor.SecurityPasswordEncoder;
 import com.csd.security.securityInterceptor.SecurityValidateCodeFilter;
-import com.csd.security.securityService.SecurityUserDetailsService;
 import com.csd.system.user.service.UserService;
+import com.csd.web.config.service.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +24,11 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  * @desc:
  * @author: wsw
  * @email: 18683789594@163.com
- * @date: 2019/1/29 17:25.
+ * @date: 2019/1/30 13:23.
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Autowired
     @Qualifier("userService")
@@ -140,4 +141,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         SessionRegistry sessionRegistry = new SessionRegistryImpl();
         return sessionRegistry;
     }
+
 }

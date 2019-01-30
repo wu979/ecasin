@@ -25,7 +25,12 @@
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-depend</artifactId>
+            <artifactId>ecasin-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-log</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -33,7 +38,11 @@
             <artifactId>ecasin-generator</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.csd</groupId>
+            <artifactId>ecasin-system</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- spring boot  -->
         <dependency>
