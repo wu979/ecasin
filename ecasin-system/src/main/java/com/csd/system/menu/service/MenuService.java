@@ -117,6 +117,7 @@ public class MenuService  extends DeleteService<Menu> {
      *
      * @return
      */
+    @SystemServiceLog(descrption = "查询菜单")
     public List findByPage() {
 
         List<Menu> resultList = new ArrayList<>();
@@ -169,7 +170,7 @@ public class MenuService  extends DeleteService<Menu> {
 
 
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
-    @SystemServiceLog(descrption = "新增菜单--业务层")
+    @SystemServiceLog(descrption = "新增菜单")
     public void save(Menu menu) throws ApplicationException {
         Menu menuByName = menuMapper.findMenuByName(menu.getMenuName());
         if(!StringUtil.isObjectEmpty(menuByName)){
@@ -203,7 +204,7 @@ public class MenuService  extends DeleteService<Menu> {
     }
 
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
-    @SystemServiceLog(descrption = "修改菜单--业务层")
+    @SystemServiceLog(descrption = "修改菜单")
     public void update(Menu menu) throws ApplicationException {
         Menu menuByName = menuMapper.findMenuByName(menu.getMenuName());
         if(!StringUtil.isObjectEmpty(menuByName)){
@@ -218,7 +219,7 @@ public class MenuService  extends DeleteService<Menu> {
 
 
     @Override
-    @SystemServiceLog(descrption = "删除菜单--业务层")
+    @SystemServiceLog(descrption = "删除菜单")
     public Integer deleteEntity(Menu menu) {
         int result;
         result = menuMapper.deleteByPrimaryKey(menu.getMenuId());

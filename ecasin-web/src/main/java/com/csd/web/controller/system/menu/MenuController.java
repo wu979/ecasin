@@ -37,7 +37,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/index" , method = RequestMethod.GET)
     public String index(){
-        return "/basics/menu/menu";
+        return "system/menu/menu";
     }
 
 
@@ -47,7 +47,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/savePage" , method = RequestMethod.GET)
     public String savePage(){
-        return "/basics/menu/menu_save";
+        return "system/menu/menu_save";
     }
 
 
@@ -57,7 +57,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/updatePage" , method = RequestMethod.GET)
     public String updatePage(){
-        return "/basics/menu/menu_update";
+        return "system/menu/menu_update";
     }
 
 
@@ -79,6 +79,7 @@ public class MenuController {
      */
     @RequestMapping(value =  "/findByPage" ,method = RequestMethod.POST)
     @ResponseBody
+    @SystemControllerLog(descrption = "查询菜单" , actionType = "4")
     public List<Menu> findByPage(){
         return menuService.findByPage();
     }
@@ -91,7 +92,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/save" , method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(descrption = "新增菜单--控制层" , actionType = "1")
+    @SystemControllerLog(descrption = "新增菜单" , actionType = "1")
     public Result save(@Valid Menu menu, BindingResult bindingResult)  throws ApplicationException {
         if(bindingResult.hasErrors()){
             throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
@@ -109,7 +110,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/update" , method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(descrption = "修改菜单--控制层" , actionType = "2")
+    @SystemControllerLog(descrption = "修改菜单" , actionType = "2")
     public Result update(@Valid Menu menu, BindingResult bindingResult)  throws ApplicationException {
         if(bindingResult.hasErrors()){
             throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
@@ -127,7 +128,7 @@ public class MenuController {
      */
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(descrption = "删除菜单--控制层" , actionType = "3")
+    @SystemControllerLog(descrption = "删除菜单" , actionType = "3")
     public Result delete(String[] ids) throws Exception {
         String rsult = menuService.commonDeleteEntity(ids);
         return ResultUtil.success(rsult);

@@ -167,6 +167,8 @@
     </dependencies>
 
     <build>
+
+        <finalName>ecasin</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -224,7 +226,7 @@
                 <version>2.1</version>
                 <configuration>
                     <port>8080</port>
-                    <path>/ecasino</path>
+                    <path>/ecasin</path>
                     <uriEncoding>UTF-8</uriEncoding>
                     <server>tomcat7</server>
                 </configuration>

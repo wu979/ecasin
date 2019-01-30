@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@ include file="/WEB-INF/common/commonCss.jsp"%>
     <!-- 头部 -->
     <div class="page-content" style="overflow: hidden;">
         <div class="modal-body">
@@ -61,7 +64,6 @@
     <div>
         <%@ include file="/WEB-INF/common/commonJs.jsp"%>
         <script src="${ctx}/static/js/system/menu/menu.js"></script>
-        <script src="${ctx}/static/js/index/date.js"></script>
     </div>
 
 
