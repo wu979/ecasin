@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/userLogin")
                 .failureUrl("/login?error=1")
-                .defaultSuccessUrl("/user/home")
+                .defaultSuccessUrl("/home")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();
@@ -66,11 +66,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
         http.authorizeRequests()
                 .antMatchers("/static/**").permitAll()
-                .antMatchers("/user/notAuth","/login","/user/sign","/user/sendSms").permitAll()
-                .antMatchers("/user/success","/user/register","/user/forget","/").permitAll()
-                .antMatchers("/user/createImageCode").permitAll()
+                .antMatchers("/notAuth","/login","/sign","/sendSms").permitAll()
+                .antMatchers("/success","/register","/forget","/").permitAll()
+                .antMatchers("/createImageCode","/user/getUser").permitAll()
                 .anyRequest().authenticated();
-        http.sessionManagement().invalidSessionUrl("/login?error=3").maximumSessions(1).expiredUrl("/user/notAuth?error=1").sessionRegistry(sessionRegistry);
+        http.sessionManagement().maximumSessions(1).expiredUrl("/notAuth?error=1").sessionRegistry(sessionRegistry);
 
         http.rememberMe();
     }
@@ -84,9 +84,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/js/**","/css/**","/assets/**","/ico/**","/images/**","/login/**");
-        web.ignoring().antMatchers("/user/notAuth","/login","/user/sign","/user/sendSms");
-        web.ignoring().antMatchers("/user/success","/user/register","/user/forget","/");
-        web.ignoring().antMatchers("/user/createImageCode");
+        web.ignoring().antMatchers("/notAuth","/login","/sign","/sendSms");
+        web.ignoring().antMatchers("/success","/register","/forget","/");
+        web.ignoring().antMatchers("/createImageCode","/user/getUser");
     }
 
     /**

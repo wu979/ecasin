@@ -27,7 +27,7 @@ public class SecurityAccessDeniedHandler implements AccessDeniedHandler {
             request.setAttribute(WebAttributes.ACCESS_DENIED_403,
                     accessDeniedException);
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/user/notAuth?error=3");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/notAuth?error=3");
             dispatcher.forward(request, response);
         }
     }

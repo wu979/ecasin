@@ -23,7 +23,7 @@ public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoin
         if (isAjaxRequest(request)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Ajax Request Denied (Session Expired)");
         }else{
-            response.sendRedirect(request.getContextPath()+"/user/notAuth?error=2");
+            response.sendRedirect(request.getContextPath()+"/notAuth?error=2");
         }
     }
 

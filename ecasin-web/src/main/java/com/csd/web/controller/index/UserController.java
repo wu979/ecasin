@@ -1,4 +1,4 @@
-package com.csd.web.controller;
+package com.csd.web.controller.index;
 
 import com.csd.exception.application.ApplicationException;
 import com.csd.exception.result.Result;

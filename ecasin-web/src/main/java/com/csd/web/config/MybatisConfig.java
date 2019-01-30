@@ -30,11 +30,11 @@ import javax.sql.DataSource;
 @ComponentScan(
             basePackages =   {
                               "com.csd.web",
-                              "com.csd.system",
+
                               "com.csd.busines",
-                              "com.csd.log",
-                              "com.csd.common",
-                              "com.csd.security",
+
+
+                              "com.csd.depend",
                              },
             excludeFilters = {
                               @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class),

@@ -25,12 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-exception</artifactId>
+            <artifactId>ecasin-depend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -38,26 +33,7 @@
             <artifactId>ecasin-generator</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-log</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-security</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-system</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
 
         <!-- spring boot  -->
         <dependency>
@@ -185,9 +161,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>**/*</include>
                     <include>**/*.properties</include>
-                    <include>**/*.yml</include>
+                    <include>**/*/*.*</include>
                 </includes>
             </resource>
             <resource>
