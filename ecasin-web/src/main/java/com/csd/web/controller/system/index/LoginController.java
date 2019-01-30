@@ -1,4 +1,4 @@
-package com.csd.web.controller.index;
+package com.csd.web.controller.system.index;
 
 import com.csd.common.loginUser.LoginUser;
 import com.csd.exception.application.ApplicationException;

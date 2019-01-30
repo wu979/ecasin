@@ -172,8 +172,17 @@
       w_role
     where
       role_is_valid = '1'
-    <if test="orgId != null and orgId != ''">
-      and role_org_id = #{orgId}
+    and
+      role_org_id = #{orgId}
+    <if test="startTime != null and startTime !=''">
+      and role_create_time &gt;= str_to_date(#{startTime},'%Y-%m-%d %T')
     </if>
+    <if test="endTime != null and endTime !=''">
+      and role_create_time &lt;= DATE_ADD(str_to_date(#{endTime},'%Y-%m-%d %T'),INTERVAL 1 DAY)
+    </if>
+    <if test="busName != null and busName != ''">
+      and role_name like CONCAT(CONCAT(#{busName}),'%')
+    </if>
+    order by role_create_time desc
   </select>
 </mapper>

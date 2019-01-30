@@ -1,9 +1,19 @@
 package com.csd.system.role.service;
 
+import com.csd.common.loginUser.LoginUser;
+import com.csd.common.page.PageVo;
+import com.csd.common.service.MapParaService;
+import com.csd.security.securityEntity.User;
 import com.csd.system.role.dao.RoleMapper;
+import com.csd.system.role.po.Role;
+import com.csd.system.role.request.RoleRequest;
+import com.csd.utils.StringUtil;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @desc:
@@ -17,23 +27,19 @@ public class RoleService {
     @Resource
     private RoleMapper roleMapper;
 
-    //public PageVo<Role> findByPage(PageVo<Role> page, RoleRequest request){
-    //    PageBounds pageBounds = page.pageToPageBounds(page);
-    //    Map<String,Object> map = new HashMap<>();
-    //    if(!StringUtils.isEmpty(request.getStartTime())){
-    //        map.put("startTime",request.getStartTime());
-    //    }
-    //    if(!StringUtils.isEmpty(request.getStartTime())){
-    //        map.put("endTime",request.getEndTime());
-    //    }
-    //    if(!StringUtils.isEmpty(request.getStartTime())){
-    //        map.put("name",request.getName());
-    //    }
-    //    if(!StringUtils.isEmpty(LoginUser.getLoginUser().getUserOrgId())){
-    //        map.put("orgId", LoginUser.getLoginUser().getUserOrgId());
-    //    }
-    //    PageList<Role> rolePage = roleMapper.findByPage(map, pageBounds);
-    //    page.listToPage(page,rolePage);
-    //    return page;
-    //}
+    public PageVo<Role> findByPage(PageVo<Role> page, RoleRequest request){
+        User user = LoginUser.getLoginUser();
+        PageBounds pageBounds = page.pageToPageBounds(page);
+        Map<String, Object> parameter = MapParaService.getParameter(request);
+        if(!StringUtil.isEmpty(request.getOrgId())){
+            parameter.put("orgId", request.getOrgId());
+        }else {
+            parameter.put("orgId",user.getUserOrgId());
+        }
+        PageList<Role> rolePage = roleMapper.findByPage(parameter, pageBounds);
+        page.listToPage(page,rolePage);
+        return page;
+    }
+
+
 }
