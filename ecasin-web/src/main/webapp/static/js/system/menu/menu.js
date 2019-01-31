@@ -1,5 +1,7 @@
 var rowData;
-$(function () {
+
+loadPage();
+function loadPage(){
     jQuery("#jqTable").jqGrid({
         treeGrid:true,
         treeGridModel:"adjacency",
@@ -105,7 +107,7 @@ $(function () {
             }, 0);
         }
     })
-})
+}
 
 
 $('.save').on('click',function () {

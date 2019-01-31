@@ -65,12 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout").permitAll()
                 .logoutSuccessUrl("/login?error=2")
                 .invalidateHttpSession(true);
-        http.authorizeRequests()
-                .antMatchers("/static/**").permitAll()
-                .antMatchers("/notAuth","/login","/sign","/sendSms").permitAll()
-                .antMatchers("/success","/register","/forget","/").permitAll()
-                .antMatchers("/createImageCode","/user/getUser").permitAll()
-                .anyRequest().authenticated();
+        http.authorizeRequests().anyRequest().authenticated();
         http.sessionManagement().maximumSessions(1).expiredUrl("/notAuth?error=1").sessionRegistry(sessionRegistry);
 
         //http.rememberMe();
@@ -84,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/js/**","/css/**","/assets/**","/ico/**","/images/**","/login/**");
+        web.ignoring().antMatchers("/static/js/**","/static/css/**","/static/assets/**","/static/ico/**","/static/images/**","/static/login/**");
         web.ignoring().antMatchers("/notAuth","/login","/sign","/sendSms");
         web.ignoring().antMatchers("/success","/register","/forget","/");
         web.ignoring().antMatchers("/createImageCode","/user/getUser");
