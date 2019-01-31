@@ -7,10 +7,13 @@ import com.alibaba.fastjson.util.IOUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.CacheControl;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,7 +33,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.csd.web.controller"})
+@ComponentScan(basePackages = {"com.csd.web.controller"},includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class),
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class)}, useDefaultFilters = false)
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
