@@ -1,11 +1,13 @@
 package com.csd.log.aspect;
 
+import com.csd.common.loginUser.LoginUser;
 import com.csd.exception.handler.ApplicationExceptionHandler;
 import com.csd.log.annotation.SystemControllerLog;
 import com.csd.log.annotation.SystemServiceLog;
 import com.csd.log.systemLog.po.SystemLog;
 import com.csd.log.util.LogUtil;
 import com.csd.utils.ConstantUtil;
+import com.csd.utils.DateUtil;
 import com.csd.utils.UUIDUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -91,9 +93,9 @@ public class SystemLogAspect {
             systemLog.setLogType((String)map.get("actionType"));
             systemLog.setLogIp(ip);
             systemLog.setLogId(UUIDUtil.getUUID());
-            systemLog.setLogCreateUserId("1");
-            systemLog.setLogCreateUserName("wu");
-            systemLog.setLogCreateTime("2019-1-29 15:31:00");
+            systemLog.setLogCreateUserId(LoginUser.getLoginUserId());
+            systemLog.setLogCreateUserName(LoginUser.getLoginUserName());
+            systemLog.setLogCreateTime(DateUtil.getTime());
             systemLog.setLogTable(joinPoint.getSignature().getName());
 
             LogUtil.writeMainLog(systemLog);
@@ -139,9 +141,9 @@ public class SystemLogAspect {
             systemLog.setLogBusiness((String)map.get("description"));
             systemLog.setLogIp(ip);
             systemLog.setLogId(UUIDUtil.getUUID());
-            systemLog.setLogCreateUserId("1");
-            systemLog.setLogCreateUserName("wu");
-            systemLog.setLogCreateTime("2019-1-29 15:31:00");
+            systemLog.setLogCreateUserId(LoginUser.getLoginUserId());
+            systemLog.setLogCreateUserName(LoginUser.getLoginUserName());
+            systemLog.setLogCreateTime(DateUtil.getTime());
             systemLog.setLogTable(joinPoint.getSignature().getName());
 
             LogUtil.writeMainLog(systemLog);
