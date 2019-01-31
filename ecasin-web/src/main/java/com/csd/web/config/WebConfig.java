@@ -51,6 +51,18 @@ public class WebConfig implements WebMvcConfigurer {
         converters.add(fastJsonConverter());
     }
 
+
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(2);
+        return viewResolver;
+    }
+
+
     @Bean
     FastJsonHttpMessageConverter fastJsonConverter() {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
@@ -79,15 +91,5 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        viewResolver.setOrder(2);
-        return viewResolver;
-    }
 
 }
