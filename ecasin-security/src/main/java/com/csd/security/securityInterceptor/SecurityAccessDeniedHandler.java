@@ -1,10 +1,9 @@
 package com.csd.security.securityInterceptor;
 
+import com.csd.security.securityEntity.User;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +22,9 @@ public class SecurityAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
-        if (!response.isCommitted()) {
-            request.setAttribute(WebAttributes.ACCESS_DENIED_403,
-                    accessDeniedException);
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/notAuth?error=3");
-            dispatcher.forward(request, response);
+        User user = (User)request.getSession().getAttribute("user");
+        if(null == user) {
+            response.sendRedirect(request.getContextPath() + "/notAuth?error=3");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.csd.security.securityInterceptor;
 
+import com.csd.utils.HTTPUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -20,16 +21,12 @@ public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoin
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        if (isAjaxRequest(request)) {
+        if (HTTPUtil.isAjaxRequest(request)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Ajax Request Denied (Session Expired)");
         }else{
             response.sendRedirect(request.getContextPath()+"/notAuth?error=2");
         }
     }
 
-    public static boolean isAjaxRequest(HttpServletRequest request) {
-        String ajaxFlag = request.getHeader("X-Requested-With");
-        return ajaxFlag != null && "XMLHttpRequest".equals(ajaxFlag);
-    }
 
 }
