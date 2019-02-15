@@ -28,6 +28,9 @@ public class Job {
     /**是否生效*/
     private String jobIsValid;
 
+    /**职位类型(0超级管理,1平台管理,2普通职位)*/
+    private String jobType;
+
     
     public String getJobId() {
         return jobId;
@@ -116,5 +119,15 @@ public class Job {
     
     public void setJobIsValid(String jobIsValid) {
         this.jobIsValid = jobIsValid;
+    }
+
+
+    public String getJobType() {
+        return jobType;
+    }
+
+
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 }

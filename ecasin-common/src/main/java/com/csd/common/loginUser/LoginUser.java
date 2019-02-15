@@ -34,15 +34,15 @@ public class LoginUser {
     }
 
     public static User getLoginUser() {
-        User loginUser = null;
+        User user = null;
         SecurityContext sc = SecurityContextHolder.getContext();
         if (sc != null && null != sc.getAuthentication()) {
             if (sc.getAuthentication().getPrincipal() instanceof SecurityUserDetails) {
                 SecurityUserDetails egovUserDetails = (SecurityUserDetails) sc.getAuthentication().getPrincipal();
-                loginUser = egovUserDetails.getUser();
+                user = egovUserDetails.getUser();
             }
         }
-        return loginUser;
+        return user;
     }
 
     public static String getLoginUserId() {

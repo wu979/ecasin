@@ -2,6 +2,9 @@ package com.csd.system.role.po;
 
 import com.csd.common.po.BaseEntity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
+
 public class Role extends BaseEntity {
     /**角色ID*/
     private String roleId;
@@ -10,12 +13,15 @@ public class Role extends BaseEntity {
     private String roleOrgId;
 
     /**层级（1超级管理员,2平台管理员,3普通角色）*/
+    @Null(message = "角色类型错误,请重试")
     private String roleType;
 
     /**角色名称*/
+    @NotBlank(message = "角色名称必须填写")
     private String roleName;
 
     /**角色标识码*/
+    @Null(message = "角色标识码错误,请重试")
     private String roleCode;
 
     /**创建人ID*/

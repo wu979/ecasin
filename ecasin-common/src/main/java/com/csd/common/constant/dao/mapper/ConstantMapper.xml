@@ -251,4 +251,26 @@
     order by
       contants_has_child desc,contants_level,contants_order asc
   </select>
+  <select id="findByConstant" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_constant
+    where
+      constant_type = #{constantType}
+    and
+      constant_value = #{constantValue}
+    and
+      constant_is_valid = '1'
+  </select>
+  <select id="findValueById" parameterType="java.lang.String" resultType="java.lang.String">
+    select
+      constant_value
+    from
+      w_constant
+    where
+      constant_id = #{constantId,jdbcType=VARCHAR}
+    and
+      constant_is_valid = '1'
+  </select>
 </mapper>

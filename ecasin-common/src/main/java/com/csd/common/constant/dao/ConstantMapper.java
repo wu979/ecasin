@@ -26,4 +26,10 @@ public interface ConstantMapper {
 
 
     List<Constant> findByList(Map<String,Object> map);
+
+
+    Constant findByConstant(Map<String,Object> map);
+
+
+    String findValueById(String constantId);
 }

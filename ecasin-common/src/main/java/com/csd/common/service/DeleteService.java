@@ -21,14 +21,14 @@ public abstract class DeleteService<T> {
      * @param t
      * @return
      */
-    public abstract Integer deleteEntity(T t);
+    public abstract Integer deleteEntity(T t) throws Exception;
 
     /**
      * 根据ID查询实体类
      * @param recordId
      * @return
      */
-    public abstract T selectByPrimaryKey(String recordId);
+    public abstract T selectByPrimaryKey(String recordId) throws Exception;
 
 
     /**
@@ -57,7 +57,7 @@ public abstract class DeleteService<T> {
      * @param recordId
      * @throws Exception
      */
-    public String singleDeleteEntity(String recordId) throws ApplicationException {
+    public String singleDeleteEntity(String recordId) throws Exception {
         String result;
         T t = selectByPrimaryKey(recordId);
         int count = deleteEntity(t);

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.busines.company.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.csd.busines.company.po.Company">
+    <id column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="company_org_id" jdbcType="VARCHAR" property="companyOrgId" />
+    <result column="company_parent_id" jdbcType="VARCHAR" property="companyParentId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_has_child" jdbcType="VARCHAR" property="companyHasChild" />
+    <result column="company_level" jdbcType="INTEGER" property="companyLevel" />
+    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+    <result column="company_is_valid" jdbcType="VARCHAR" property="companyIsValid" />
+    <result column="company_cretate_userid" jdbcType="VARCHAR" property="companyCretateUserid" />
+    <result column="company_create_username" jdbcType="VARCHAR" property="companyCreateUsername" />
+    <result column="company_ceeate_time" jdbcType="TIMESTAMP" property="companyCeeateTime" />
+    <result column="company_last_update_userid" jdbcType="VARCHAR" property="companyLastUpdateUserid" />
+    <result column="company_last_update_username" jdbcType="VARCHAR" property="companyLastUpdateUsername" />
+    <result column="company_last_update_time" jdbcType="TIMESTAMP" property="companyLastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, company_org_id, company_parent_id, company_name, company_has_child, company_level, 
+    company_type, company_is_valid, company_cretate_userid, company_create_username,
+    DATE_FORMAT(company_ceeate_time,'%Y-%m-%d %T') company_ceeate_time,
+    company_last_update_userid, company_last_update_username,
+    DATE_FORMAT(company_last_update_time,'%Y-%m-%d %T') company_last_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.busines.company.po.Company">
+    insert into w_company (company_id, company_org_id, company_parent_id, 
+      company_name, company_has_child, company_level, 
+      company_type, company_is_valid, company_cretate_userid, 
+      company_create_username, company_ceeate_time, 
+      company_last_update_userid, company_last_update_username, 
+      company_last_update_time)
+    values (#{companyId,jdbcType=VARCHAR}, #{companyOrgId,jdbcType=VARCHAR}, #{companyParentId,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyHasChild,jdbcType=VARCHAR}, #{companyLevel,jdbcType=INTEGER}, 
+      #{companyType,jdbcType=VARCHAR}, #{companyIsValid,jdbcType=VARCHAR}, #{companyCretateUserid,jdbcType=VARCHAR}, 
+      #{companyCreateUsername,jdbcType=VARCHAR}, #{companyCeeateTime,jdbcType=TIMESTAMP}, 
+      #{companyLastUpdateUserid,jdbcType=VARCHAR}, #{companyLastUpdateUsername,jdbcType=VARCHAR}, 
+      #{companyLastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.busines.company.po.Company">
+    insert into w_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyOrgId != null">
+        company_org_id,
+      </if>
+      <if test="companyParentId != null">
+        company_parent_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyHasChild != null">
+        company_has_child,
+      </if>
+      <if test="companyLevel != null">
+        company_level,
+      </if>
+      <if test="companyType != null">
+        company_type,
+      </if>
+      <if test="companyIsValid != null">
+        company_is_valid,
+      </if>
+      <if test="companyCretateUserid != null">
+        company_cretate_userid,
+      </if>
+      <if test="companyCreateUsername != null">
+        company_create_username,
+      </if>
+      <if test="companyCeeateTime != null">
+        company_ceeate_time,
+      </if>
+      <if test="companyLastUpdateUserid != null">
+        company_last_update_userid,
+      </if>
+      <if test="companyLastUpdateUsername != null">
+        company_last_update_username,
+      </if>
+      <if test="companyLastUpdateTime != null">
+        company_last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyOrgId != null">
+        #{companyOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentId != null">
+        #{companyParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyHasChild != null">
+        #{companyHasChild,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLevel != null">
+        #{companyLevel,jdbcType=INTEGER},
+      </if>
+      <if test="companyType != null">
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIsValid != null">
+        #{companyIsValid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCretateUserid != null">
+        #{companyCretateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCreateUsername != null">
+        #{companyCreateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCeeateTime != null">
+        #{companyCeeateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyLastUpdateUserid != null">
+        #{companyLastUpdateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLastUpdateUsername != null">
+        #{companyLastUpdateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLastUpdateTime != null">
+        #{companyLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.busines.company.po.Company">
+    update w_company
+    <set>
+      <if test="companyOrgId != null">
+        company_org_id = #{companyOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentId != null">
+        company_parent_id = #{companyParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyHasChild != null">
+        company_has_child = #{companyHasChild,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLevel != null">
+        company_level = #{companyLevel,jdbcType=INTEGER},
+      </if>
+      <if test="companyType != null">
+        company_type = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIsValid != null">
+        company_is_valid = #{companyIsValid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCretateUserid != null">
+        company_cretate_userid = #{companyCretateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCreateUsername != null">
+        company_create_username = #{companyCreateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCeeateTime != null">
+        company_ceeate_time = #{companyCeeateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyLastUpdateUserid != null">
+        company_last_update_userid = #{companyLastUpdateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLastUpdateUsername != null">
+        company_last_update_username = #{companyLastUpdateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLastUpdateTime != null">
+        company_last_update_time = #{companyLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.busines.company.po.Company">
+    update w_company
+    set company_org_id = #{companyOrgId,jdbcType=VARCHAR},
+      company_parent_id = #{companyParentId,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_has_child = #{companyHasChild,jdbcType=VARCHAR},
+      company_level = #{companyLevel,jdbcType=INTEGER},
+      company_type = #{companyType,jdbcType=VARCHAR},
+      company_is_valid = #{companyIsValid,jdbcType=VARCHAR},
+      company_cretate_userid = #{companyCretateUserid,jdbcType=VARCHAR},
+      company_create_username = #{companyCreateUsername,jdbcType=VARCHAR},
+      company_ceeate_time = #{companyCeeateTime,jdbcType=TIMESTAMP},
+      company_last_update_userid = #{companyLastUpdateUserid,jdbcType=VARCHAR},
+      company_last_update_username = #{companyLastUpdateUsername,jdbcType=VARCHAR},
+      company_last_update_time = #{companyLastUpdateTime,jdbcType=TIMESTAMP}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <select id="findListByOrgId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_company
+    where
+      company_is_valid = '1'
+    and
+      company_id LIKE CONCAT(CONCAT(#{companyId,jdbcType=VARCHAR}),'%')
+    order by
+      company_has_child,company_level desc
+  </select>
+</mapper>

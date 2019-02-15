@@ -11,12 +11,13 @@
     <result column="job_update_time" jdbcType="TIMESTAMP" property="jobUpdateTime" />
     <result column="job_update_user_id" jdbcType="VARCHAR" property="jobUpdateUserId" />
     <result column="job_is_valid" jdbcType="VARCHAR" property="jobIsValid" />
+    <result column="job_type" jdbcType="VARCHAR" property="jobType" />
   </resultMap>
   <sql id="Base_Column_List">
     job_id, job_org_id, job_dep_id, job_name, job_create_user_id,
     DATE_FORMAT(job_create_time,'%Y-%m-%d %T') job_create_time,
     DATE_FORMAT(job_update_time,'%Y-%m-%d %T') job_update_time,
-    job_update_user_id, job_is_valid
+    job_update_user_id, job_is_valid, job_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -31,11 +32,13 @@
   <insert id="insert" parameterType="com.csd.busines.job.po.Job">
     insert into w_job (job_id, job_org_id, job_dep_id, 
       job_name, job_create_user_id, job_create_time, 
-      job_update_time, job_update_user_id, job_is_valid
+      job_update_time, job_update_user_id, job_is_valid,
+      job_type
       )
     values (#{jobId,jdbcType=VARCHAR}, #{jobOrgId,jdbcType=VARCHAR}, #{jobDepId,jdbcType=VARCHAR}, 
       #{jobName,jdbcType=VARCHAR}, #{jobCreateUserId,jdbcType=VARCHAR}, #{jobCreateTime,jdbcType=TIMESTAMP}, 
-      #{jobUpdateTime,jdbcType=TIMESTAMP}, #{jobUpdateUserId,jdbcType=VARCHAR}, #{jobIsValid,jdbcType=VARCHAR}
+      #{jobUpdateTime,jdbcType=TIMESTAMP}, #{jobUpdateUserId,jdbcType=VARCHAR}, #{jobIsValid,jdbcType=VARCHAR},
+      #{jobType,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.csd.busines.job.po.Job">
@@ -68,6 +71,9 @@
       <if test="jobIsValid != null">
         job_is_valid,
       </if>
+      <if test="jobType != null">
+        job_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="jobId != null">
@@ -96,6 +102,9 @@
       </if>
       <if test="jobIsValid != null">
         #{jobIsValid,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        #{jobType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -126,6 +135,9 @@
       <if test="jobIsValid != null">
         job_is_valid = #{jobIsValid,jdbcType=VARCHAR},
       </if>
+      <if test="jobType != null">
+        job_type = #{jobType,jdbcType=VARCHAR},
+      </if>
     </set>
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
@@ -138,7 +150,8 @@
       job_create_time = #{jobCreateTime,jdbcType=TIMESTAMP},
       job_update_time = #{jobUpdateTime,jdbcType=TIMESTAMP},
       job_update_user_id = #{jobUpdateUserId,jdbcType=VARCHAR},
-      job_is_valid = #{jobIsValid,jdbcType=VARCHAR}
+      job_is_valid = #{jobIsValid,jdbcType=VARCHAR},
+      job_type = #{jobType,jdbcType=VARCHAR}
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
 </mapper>

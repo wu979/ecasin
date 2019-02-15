@@ -25,6 +25,7 @@ public enum BaseStatus {
     PHONE_WAIT_CONFIRM(1008,"正在等待激活确认,请稍后在试"),
     MENU_NAME_EXIST(1008,"菜案名称已存在,请重新输入"),
     MENU_DELETE_HASCHILD(1009,"如需操作该菜单,请先删除子菜单"),
+    ROLE_ADMIN_NOT_DELETE(1010,"超级管理员不能进行操作")
     ;
 
     private int code;
