@@ -120,27 +120,6 @@
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight{
     background-color: #20B2AA;
 }
-/* checkbox */
-/*.ui-jqgrid-htable .cbox,*/
-/*.ui-jqgrid-bdiv .cbox {*/
-    /*width: 18px;*/
-    /*height: 18px;*/
-/*}*/
-/*.ui-jqgrid-htable .cbox:hover,*/
-/*.ui-jqgrid-htable .cbox:focus{*/
-    /*color: #fff;*/
-/*}*/
-/*.ui-jqgrid-htable input[type="checkbox"]{*/
-    /*color: #fff !important;*/
-/*}*/
-/*input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {*/
-    /*outline: thin dotted #1E9FFF !important;*/
-    /*outline: 5px auto -webkit-focus-ring-color;*/
-    /*outline-offset: -2px;*/
-/*}*/
-
-
-
 
 /* 菜单设置页面 树形样式设置 */
 .tree-wrap-ltr{

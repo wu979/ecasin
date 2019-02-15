@@ -1,5 +1,4 @@
 var rowData;
-
 loadPage();
 function loadPage(){
     jQuery("#jqTable").jqGrid({
@@ -20,7 +19,10 @@ function loadPage(){
         mtype:"POST",
         height:"100%",
         caption:"菜单列表",
-        colNames:["id","菜单名称","菜单顺序","菜单编码","菜单URL","上级菜单","是否有子级","层级","操作"],
+        colNames:
+            [
+                "id", "菜单名称", "菜单顺序", "菜单编码", "菜单URL", "上级菜单", "是否有子级", "层级", "操作"
+            ],
         colModel : [
             {name:"menuId",index:"menuId",width:1,key:true,hidden:true,sortable: false},
             {name:"menuName",index:"menuName",width:12,hidden:false,sortable: false},
@@ -122,7 +124,7 @@ $('.delete').on('click',function () {
 function save(rowData) {
     if(rowData != '' && rowData != null){
         layer.open({
-            id: 'menu-save',
+            id: 'save-click',
             type:2,
             content:ctx + '/menu/savePage',
             area: ['23%','53%'],
@@ -167,7 +169,7 @@ function update(rowData) {
             layer.msg("该条数据不能进行操作");
         }else {
             layer.open({
-                id: 'menu-update',
+                id: 'update-click',
                 type:2,
                 content:ctx + '/menu/updatePage',
                 area: ['23%','53%'],

@@ -167,22 +167,25 @@
   </select>
   <select id="findByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-      <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List"/>,
+      B.contants_name AS contantsName
     from
-      w_role
+      w_role A
+    left join w_constant B on A.role_type = B.constant_id
     where
-      role_is_valid = '1'
-    and
-      role_org_id = #{orgId}
+      A.role_is_valid = '1'
+    <if test="orgId != null and orgId != ''">
+      and A.role_org_id = #{orgId}
+    </if>
     <if test="startTime != null and startTime !=''">
-      and role_create_time &gt;= str_to_date(#{startTime},'%Y-%m-%d %T')
+      and A.role_create_time &gt;= str_to_date(#{startTime},'%Y-%m-%d %T')
     </if>
     <if test="endTime != null and endTime !=''">
-      and role_create_time &lt;= DATE_ADD(str_to_date(#{endTime},'%Y-%m-%d %T'),INTERVAL 1 DAY)
+      and A.role_create_time &lt;= DATE_ADD(str_to_date(#{endTime},'%Y-%m-%d %T'),INTERVAL 1 DAY)
     </if>
     <if test="busName != null and busName != ''">
-      and role_name like CONCAT(CONCAT(#{busName}),'%')
+      and A.role_name like CONCAT(CONCAT(#{busName}),'%')
     </if>
-    order by role_create_time desc
+    order by A.role_create_time desc
   </select>
 </mapper>

@@ -1166,4 +1166,4 @@
         </div>
     </div>
 </div>
-<script src="${ctx}/static/js/home/home.js"></script>
+<%--<script src="${ctx}/static/js/home/home.js"></script>--%>

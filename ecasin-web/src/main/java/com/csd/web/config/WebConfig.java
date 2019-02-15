@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.http.CacheControl;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -17,13 +16,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @desc:
@@ -37,12 +34,12 @@ import java.util.concurrent.TimeUnit;
         @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class)}, useDefaultFilters = false)
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/static/")
-                .setCacheControl(CacheControl.maxAge(1, TimeUnit.HOURS).cachePublic());
-    }
+    //@Override
+    //public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    //    registry.addResourceHandler("/static/**")
+    //            .addResourceLocations("/static/")
+    //            .setCacheControl(CacheControl.maxAge(1, TimeUnit.HOURS).cachePublic());
+    //}
 
 
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

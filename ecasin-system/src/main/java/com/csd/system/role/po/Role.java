@@ -1,6 +1,8 @@
 package com.csd.system.role.po;
 
-public class Role {
+import com.csd.common.po.BaseEntity;
+
+public class Role extends BaseEntity {
     /**角色ID*/
     private String roleId;
 

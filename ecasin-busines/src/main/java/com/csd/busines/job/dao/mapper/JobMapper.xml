@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.busines.job.dao.JobMapper">
+  <resultMap id="BaseResultMap" type="com.csd.busines.job.po.Job">
+    <id column="job_id" jdbcType="VARCHAR" property="jobId" />
+    <result column="job_org_id" jdbcType="VARCHAR" property="jobOrgId" />
+    <result column="job_dep_id" jdbcType="VARCHAR" property="jobDepId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_create_user_id" jdbcType="VARCHAR" property="jobCreateUserId" />
+    <result column="job_create_time" jdbcType="TIMESTAMP" property="jobCreateTime" />
+    <result column="job_update_time" jdbcType="TIMESTAMP" property="jobUpdateTime" />
+    <result column="job_update_user_id" jdbcType="VARCHAR" property="jobUpdateUserId" />
+    <result column="job_is_valid" jdbcType="VARCHAR" property="jobIsValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    job_id, job_org_id, job_dep_id, job_name, job_create_user_id,
+    DATE_FORMAT(job_create_time,'%Y-%m-%d %T') job_create_time,
+    DATE_FORMAT(job_update_time,'%Y-%m-%d %T') job_update_time,
+    job_update_user_id, job_is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_job
+    where job_id = #{jobId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_job
+    where job_id = #{jobId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.busines.job.po.Job">
+    insert into w_job (job_id, job_org_id, job_dep_id, 
+      job_name, job_create_user_id, job_create_time, 
+      job_update_time, job_update_user_id, job_is_valid
+      )
+    values (#{jobId,jdbcType=VARCHAR}, #{jobOrgId,jdbcType=VARCHAR}, #{jobDepId,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{jobCreateUserId,jdbcType=VARCHAR}, #{jobCreateTime,jdbcType=TIMESTAMP}, 
+      #{jobUpdateTime,jdbcType=TIMESTAMP}, #{jobUpdateUserId,jdbcType=VARCHAR}, #{jobIsValid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.busines.job.po.Job">
+    insert into w_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="jobOrgId != null">
+        job_org_id,
+      </if>
+      <if test="jobDepId != null">
+        job_dep_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobCreateUserId != null">
+        job_create_user_id,
+      </if>
+      <if test="jobCreateTime != null">
+        job_create_time,
+      </if>
+      <if test="jobUpdateTime != null">
+        job_update_time,
+      </if>
+      <if test="jobUpdateUserId != null">
+        job_update_user_id,
+      </if>
+      <if test="jobIsValid != null">
+        job_is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobOrgId != null">
+        #{jobOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDepId != null">
+        #{jobDepId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCreateUserId != null">
+        #{jobCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCreateTime != null">
+        #{jobCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobUpdateTime != null">
+        #{jobUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobUpdateUserId != null">
+        #{jobUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobIsValid != null">
+        #{jobIsValid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.busines.job.po.Job">
+    update w_job
+    <set>
+      <if test="jobOrgId != null">
+        job_org_id = #{jobOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDepId != null">
+        job_dep_id = #{jobDepId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCreateUserId != null">
+        job_create_user_id = #{jobCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCreateTime != null">
+        job_create_time = #{jobCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobUpdateTime != null">
+        job_update_time = #{jobUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobUpdateUserId != null">
+        job_update_user_id = #{jobUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobIsValid != null">
+        job_is_valid = #{jobIsValid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_id = #{jobId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.busines.job.po.Job">
+    update w_job
+    set job_org_id = #{jobOrgId,jdbcType=VARCHAR},
+      job_dep_id = #{jobDepId,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_create_user_id = #{jobCreateUserId,jdbcType=VARCHAR},
+      job_create_time = #{jobCreateTime,jdbcType=TIMESTAMP},
+      job_update_time = #{jobUpdateTime,jdbcType=TIMESTAMP},
+      job_update_user_id = #{jobUpdateUserId,jdbcType=VARCHAR},
+      job_is_valid = #{jobIsValid,jdbcType=VARCHAR}
+    where job_id = #{jobId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -23,13 +23,13 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiugaimima"></use>
                 </svg>
-            &nbsp;&nbsp;修改
+                &nbsp;&nbsp;修改
             </button>
             <button class="btn btn-light btn-sm delete" type="button">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shanchuqunchengyuan"></use>
                 </svg>
-            &nbsp;&nbsp;删除
+                &nbsp;&nbsp;删除
             </button>
             <div style="margin: 20px 0"></div>
 
@@ -38,4 +38,4 @@
         </div>
     </div>
 </div>
-<script src="${ctx}/static/js/system/menu/menu.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/system/role/role.js" type="text/javascript"></script>

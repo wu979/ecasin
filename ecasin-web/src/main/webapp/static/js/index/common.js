@@ -276,3 +276,31 @@ var pageControl = {
         return json1;
     }
 }
+
+
+var selectUtil = {
+    //赋值select
+    findSelect : function(layero,id,constantType) {
+        $.ajax({
+            url:ctx +  '/constant/findByList',
+            type:'post',
+            dataType:'json',
+            data:
+                {
+                    constantType:constantType
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    var constantList = data.data;
+                    var result = '';
+                    for(var i = 0; i< constantList.length; i++){
+                        result += "<option value='"+ constantList[i].constantId + " '>"+ constantList[i].contantsName +"</option>";
+                    }
+                    $(id,layero.find("iframe")[0].contentWindow.document).html(result);
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+    }
+}

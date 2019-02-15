@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.busines.ptJob.dao.PtJobMapper">
+  <resultMap id="BaseResultMap" type="com.csd.busines.ptJob.po.PtJob">
+    <id column="pt_id" jdbcType="VARCHAR" property="ptId" />
+    <result column="pt_org_id" jdbcType="VARCHAR" property="ptOrgId" />
+    <result column="pt_dep_id" jdbcType="VARCHAR" property="ptDepId" />
+    <result column="pt_job_id" jdbcType="VARCHAR" property="ptJobId" />
+    <result column="pt_user_id" jdbcType="VARCHAR" property="ptUserId" />
+    <result column="pt_job_type" jdbcType="VARCHAR" property="ptJobType" />
+    <result column="pt_create_user_id" jdbcType="VARCHAR" property="ptCreateUserId" />
+    <result column="pt_create_time" jdbcType="TIMESTAMP" property="ptCreateTime" />
+    <result column="pt_update_time" jdbcType="TIMESTAMP" property="ptUpdateTime" />
+    <result column="pt_update_user_id" jdbcType="VARCHAR" property="ptUpdateUserId" />
+    <result column="pt_is_valid" jdbcType="VARCHAR" property="ptIsValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pt_id, pt_org_id, pt_dep_id, pt_job_id, pt_user_id, pt_job_type, pt_create_user_id,
+    DATE_FORMAT(pt_create_time,'%Y-%m-%d %T') pt_create_time,
+    DATE_FORMAT(pt_update_time,'%Y-%m-%d %T') pt_update_time,
+    pt_update_user_id, pt_is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_pt_job
+    where pt_id = #{ptId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_pt_job
+    where pt_id = #{ptId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.busines.ptJob.po.PtJob">
+    insert into w_pt_job (pt_id, pt_org_id, pt_dep_id, 
+      pt_job_id, pt_user_id, pt_job_type, 
+      pt_create_user_id, pt_create_time, pt_update_time, 
+      pt_update_user_id, pt_is_valid)
+    values (#{ptId,jdbcType=VARCHAR}, #{ptOrgId,jdbcType=VARCHAR}, #{ptDepId,jdbcType=VARCHAR}, 
+      #{ptJobId,jdbcType=VARCHAR}, #{ptUserId,jdbcType=VARCHAR}, #{ptJobType,jdbcType=VARCHAR}, 
+      #{ptCreateUserId,jdbcType=VARCHAR}, #{ptCreateTime,jdbcType=TIMESTAMP}, #{ptUpdateTime,jdbcType=TIMESTAMP}, 
+      #{ptUpdateUserId,jdbcType=VARCHAR}, #{ptIsValid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.busines.ptJob.po.PtJob">
+    insert into w_pt_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ptId != null">
+        pt_id,
+      </if>
+      <if test="ptOrgId != null">
+        pt_org_id,
+      </if>
+      <if test="ptDepId != null">
+        pt_dep_id,
+      </if>
+      <if test="ptJobId != null">
+        pt_job_id,
+      </if>
+      <if test="ptUserId != null">
+        pt_user_id,
+      </if>
+      <if test="ptJobType != null">
+        pt_job_type,
+      </if>
+      <if test="ptCreateUserId != null">
+        pt_create_user_id,
+      </if>
+      <if test="ptCreateTime != null">
+        pt_create_time,
+      </if>
+      <if test="ptUpdateTime != null">
+        pt_update_time,
+      </if>
+      <if test="ptUpdateUserId != null">
+        pt_update_user_id,
+      </if>
+      <if test="ptIsValid != null">
+        pt_is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ptId != null">
+        #{ptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptOrgId != null">
+        #{ptOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptDepId != null">
+        #{ptDepId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptJobId != null">
+        #{ptJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptUserId != null">
+        #{ptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptJobType != null">
+        #{ptJobType,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCreateUserId != null">
+        #{ptCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCreateTime != null">
+        #{ptCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptUpdateTime != null">
+        #{ptUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptUpdateUserId != null">
+        #{ptUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptIsValid != null">
+        #{ptIsValid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.busines.ptJob.po.PtJob">
+    update w_pt_job
+    <set>
+      <if test="ptOrgId != null">
+        pt_org_id = #{ptOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptDepId != null">
+        pt_dep_id = #{ptDepId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptJobId != null">
+        pt_job_id = #{ptJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptUserId != null">
+        pt_user_id = #{ptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptJobType != null">
+        pt_job_type = #{ptJobType,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCreateUserId != null">
+        pt_create_user_id = #{ptCreateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptCreateTime != null">
+        pt_create_time = #{ptCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptUpdateTime != null">
+        pt_update_time = #{ptUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptUpdateUserId != null">
+        pt_update_user_id = #{ptUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ptIsValid != null">
+        pt_is_valid = #{ptIsValid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pt_id = #{ptId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.busines.ptJob.po.PtJob">
+    update w_pt_job
+    set pt_org_id = #{ptOrgId,jdbcType=VARCHAR},
+      pt_dep_id = #{ptDepId,jdbcType=VARCHAR},
+      pt_job_id = #{ptJobId,jdbcType=VARCHAR},
+      pt_user_id = #{ptUserId,jdbcType=VARCHAR},
+      pt_job_type = #{ptJobType,jdbcType=VARCHAR},
+      pt_create_user_id = #{ptCreateUserId,jdbcType=VARCHAR},
+      pt_create_time = #{ptCreateTime,jdbcType=TIMESTAMP},
+      pt_update_time = #{ptUpdateTime,jdbcType=TIMESTAMP},
+      pt_update_user_id = #{ptUpdateUserId,jdbcType=VARCHAR},
+      pt_is_valid = #{ptIsValid,jdbcType=VARCHAR}
+    where pt_id = #{ptId,jdbcType=VARCHAR}
+  </update>
+</mapper>

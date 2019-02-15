@@ -34,7 +34,11 @@ public class RoleService {
         if(!StringUtil.isEmpty(request.getOrgId())){
             parameter.put("orgId", request.getOrgId());
         }else {
-            parameter.put("orgId",user.getUserOrgId());
+            if(!StringUtil.isEmpty(user.getUserOrgId())){
+                parameter.put("orgId",user.getUserOrgId());
+            }else {
+                parameter.put("orgId",null);
+            }
         }
         PageList<Role> rolePage = roleMapper.findByPage(parameter, pageBounds);
         page.listToPage(page,rolePage);

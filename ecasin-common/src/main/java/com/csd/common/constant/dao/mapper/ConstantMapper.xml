@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csd.common.constant.dao.ConstantMapper">
+  <resultMap id="BaseResultMap" type="com.csd.common.constant.po.Constant">
+    <id column="constant_id" jdbcType="VARCHAR" property="constantId" />
+    <result column="constant_org_id" jdbcType="VARCHAR" property="constantOrgId" />
+    <result column="constant_type" jdbcType="VARCHAR" property="constantType" />
+    <result column="constant_type_name" jdbcType="VARCHAR" property="constantTypeName" />
+    <result column="contants_name" jdbcType="VARCHAR" property="contantsName" />
+    <result column="constant_value" jdbcType="VARCHAR" property="constantValue" />
+    <result column="contants_level" jdbcType="INTEGER" property="contantsLevel" />
+    <result column="contants_has_child" jdbcType="INTEGER" property="contantsHasChild" />
+    <result column="contants_order" jdbcType="INTEGER" property="contantsOrder" />
+    <result column="contants_parent_id" jdbcType="VARCHAR" property="contantsParentId" />
+    <result column="constant_is_valid" jdbcType="VARCHAR" property="constantIsValid" />
+    <result column="constant_create_userid" jdbcType="VARCHAR" property="constantCreateUserid" />
+    <result column="constant_create_username" jdbcType="VARCHAR" property="constantCreateUsername" />
+    <result column="constant_create_time" jdbcType="TIMESTAMP" property="constantCreateTime" />
+    <result column="constant_last_update_userid" jdbcType="VARCHAR" property="constantLastUpdateUserid" />
+    <result column="constant_last_update_username" jdbcType="VARCHAR" property="constantLastUpdateUsername" />
+    <result column="constant_last_update_time" jdbcType="TIMESTAMP" property="constantLastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    constant_id, constant_org_id, constant_type, constant_type_name, contants_name, constant_value, 
+    contants_level, contants_has_child, contants_order, contants_parent_id, constant_is_valid, 
+    constant_create_userid, constant_create_username,
+    DATE_FORMAT(constant_create_time,'%Y-%m-%d %T') constant_create_time,
+    constant_last_update_userid, constant_last_update_username,
+    DATE_FORMAT(constant_last_update_time,'%Y-%m-%d %T') constant_last_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from w_constant
+    where constant_id = #{constantId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from w_constant
+    where constant_id = #{constantId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.csd.common.constant.po.Constant">
+    insert into w_constant (constant_id, constant_org_id, constant_type, 
+      constant_type_name, contants_name, constant_value, 
+      contants_level, contants_has_child, contants_order, 
+      contants_parent_id, constant_is_valid, constant_create_userid, 
+      constant_create_username, constant_create_time, 
+      constant_last_update_userid, constant_last_update_username, 
+      constant_last_update_time)
+    values (#{constantId,jdbcType=VARCHAR}, #{constantOrgId,jdbcType=VARCHAR}, #{constantType,jdbcType=VARCHAR}, 
+      #{constantTypeName,jdbcType=VARCHAR}, #{contantsName,jdbcType=VARCHAR}, #{constantValue,jdbcType=VARCHAR}, 
+      #{contantsLevel,jdbcType=INTEGER}, #{contantsHasChild,jdbcType=INTEGER}, #{contantsOrder,jdbcType=INTEGER}, 
+      #{contantsParentId,jdbcType=VARCHAR}, #{constantIsValid,jdbcType=VARCHAR}, #{constantCreateUserid,jdbcType=VARCHAR}, 
+      #{constantCreateUsername,jdbcType=VARCHAR}, #{constantCreateTime,jdbcType=TIMESTAMP}, 
+      #{constantLastUpdateUserid,jdbcType=VARCHAR}, #{constantLastUpdateUsername,jdbcType=VARCHAR}, 
+      #{constantLastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.csd.common.constant.po.Constant">
+    insert into w_constant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="constantId != null">
+        constant_id,
+      </if>
+      <if test="constantOrgId != null">
+        constant_org_id,
+      </if>
+      <if test="constantType != null">
+        constant_type,
+      </if>
+      <if test="constantTypeName != null">
+        constant_type_name,
+      </if>
+      <if test="contantsName != null">
+        contants_name,
+      </if>
+      <if test="constantValue != null">
+        constant_value,
+      </if>
+      <if test="contantsLevel != null">
+        contants_level,
+      </if>
+      <if test="contantsHasChild != null">
+        contants_has_child,
+      </if>
+      <if test="contantsOrder != null">
+        contants_order,
+      </if>
+      <if test="contantsParentId != null">
+        contants_parent_id,
+      </if>
+      <if test="constantIsValid != null">
+        constant_is_valid,
+      </if>
+      <if test="constantCreateUserid != null">
+        constant_create_userid,
+      </if>
+      <if test="constantCreateUsername != null">
+        constant_create_username,
+      </if>
+      <if test="constantCreateTime != null">
+        constant_create_time,
+      </if>
+      <if test="constantLastUpdateUserid != null">
+        constant_last_update_userid,
+      </if>
+      <if test="constantLastUpdateUsername != null">
+        constant_last_update_username,
+      </if>
+      <if test="constantLastUpdateTime != null">
+        constant_last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="constantId != null">
+        #{constantId,jdbcType=VARCHAR},
+      </if>
+      <if test="constantOrgId != null">
+        #{constantOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="constantType != null">
+        #{constantType,jdbcType=VARCHAR},
+      </if>
+      <if test="constantTypeName != null">
+        #{constantTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="contantsName != null">
+        #{contantsName,jdbcType=VARCHAR},
+      </if>
+      <if test="constantValue != null">
+        #{constantValue,jdbcType=VARCHAR},
+      </if>
+      <if test="contantsLevel != null">
+        #{contantsLevel,jdbcType=INTEGER},
+      </if>
+      <if test="contantsHasChild != null">
+        #{contantsHasChild,jdbcType=INTEGER},
+      </if>
+      <if test="contantsOrder != null">
+        #{contantsOrder,jdbcType=INTEGER},
+      </if>
+      <if test="contantsParentId != null">
+        #{contantsParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="constantIsValid != null">
+        #{constantIsValid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateUserid != null">
+        #{constantCreateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateUsername != null">
+        #{constantCreateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateTime != null">
+        #{constantCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="constantLastUpdateUserid != null">
+        #{constantLastUpdateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantLastUpdateUsername != null">
+        #{constantLastUpdateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="constantLastUpdateTime != null">
+        #{constantLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.csd.common.constant.po.Constant">
+    update w_constant
+    <set>
+      <if test="constantOrgId != null">
+        constant_org_id = #{constantOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="constantType != null">
+        constant_type = #{constantType,jdbcType=VARCHAR},
+      </if>
+      <if test="constantTypeName != null">
+        constant_type_name = #{constantTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="contantsName != null">
+        contants_name = #{contantsName,jdbcType=VARCHAR},
+      </if>
+      <if test="constantValue != null">
+        constant_value = #{constantValue,jdbcType=VARCHAR},
+      </if>
+      <if test="contantsLevel != null">
+        contants_level = #{contantsLevel,jdbcType=INTEGER},
+      </if>
+      <if test="contantsHasChild != null">
+        contants_has_child = #{contantsHasChild,jdbcType=INTEGER},
+      </if>
+      <if test="contantsOrder != null">
+        contants_order = #{contantsOrder,jdbcType=INTEGER},
+      </if>
+      <if test="contantsParentId != null">
+        contants_parent_id = #{contantsParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="constantIsValid != null">
+        constant_is_valid = #{constantIsValid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateUserid != null">
+        constant_create_userid = #{constantCreateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateUsername != null">
+        constant_create_username = #{constantCreateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="constantCreateTime != null">
+        constant_create_time = #{constantCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="constantLastUpdateUserid != null">
+        constant_last_update_userid = #{constantLastUpdateUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="constantLastUpdateUsername != null">
+        constant_last_update_username = #{constantLastUpdateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="constantLastUpdateTime != null">
+        constant_last_update_time = #{constantLastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where constant_id = #{constantId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.csd.common.constant.po.Constant">
+    update w_constant
+    set constant_org_id = #{constantOrgId,jdbcType=VARCHAR},
+      constant_type = #{constantType,jdbcType=VARCHAR},
+      constant_type_name = #{constantTypeName,jdbcType=VARCHAR},
+      contants_name = #{contantsName,jdbcType=VARCHAR},
+      constant_value = #{constantValue,jdbcType=VARCHAR},
+      contants_level = #{contantsLevel,jdbcType=INTEGER},
+      contants_has_child = #{contantsHasChild,jdbcType=INTEGER},
+      contants_order = #{contantsOrder,jdbcType=INTEGER},
+      contants_parent_id = #{contantsParentId,jdbcType=VARCHAR},
+      constant_is_valid = #{constantIsValid,jdbcType=VARCHAR},
+      constant_create_userid = #{constantCreateUserid,jdbcType=VARCHAR},
+      constant_create_username = #{constantCreateUsername,jdbcType=VARCHAR},
+      constant_create_time = #{constantCreateTime,jdbcType=TIMESTAMP},
+      constant_last_update_userid = #{constantLastUpdateUserid,jdbcType=VARCHAR},
+      constant_last_update_username = #{constantLastUpdateUsername,jdbcType=VARCHAR},
+      constant_last_update_time = #{constantLastUpdateTime,jdbcType=TIMESTAMP}
+    where constant_id = #{constantId,jdbcType=VARCHAR}
+  </update>
+  <select id="findByList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_constant
+    where
+      constant_type = #{constantType}
+    and
+      constant_is_valid = '1'
+    and
+      contants_parent_id is not null
+    order by
+      contants_has_child desc,contants_level,contants_order asc
+  </select>
+</mapper>
