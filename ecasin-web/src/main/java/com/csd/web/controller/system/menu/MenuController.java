@@ -52,7 +52,7 @@ public class MenuController {
 
 
     /**
-     * 保存页面
+     * 修改页面
      * @return
      */
     @RequestMapping(value = "/updatePage" , method = RequestMethod.GET)
