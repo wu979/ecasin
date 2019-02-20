@@ -1,6 +1,8 @@
 package com.csd.busines.job.po;
 
-public class Job {
+import com.csd.common.service.EntityService;
+
+public class Job extends EntityService {
     /**职位ID*/
     private String jobId;
 

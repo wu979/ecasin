@@ -15,31 +15,12 @@
         <form id="form_save">
             <div class="form-group">
                 <div class="col-xs-4 col-sm-3">
-                    <label class="col-sm-12 control-label no-padding-right" >角色类型</label>
-                </div>
-                <div class="col-xs-8 col-sm-9">
-                    <select class="col-xs-12 col-sm-8" id="roleType" name="roleType"></select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-xs-4 col-sm-3">
                     <label class="col-sm-12 control-label no-padding-right">角色名称</label>
                 </div>
                 <div class="col-xs-8 col-sm-9">
                     <input type="text" class="col-xs-12 col-sm-8" name="roleName"/>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="col-xs-4 col-sm-3">
-                    <label class="col-sm-12 control-label no-padding-right" >角色标识码</label>
-                </div>
-                <div class="col-xs-8 col-sm-9">
-                    <input type="text" class="col-xs-12 col-sm-8" name="roleCode"/>
-                </div>
-            </div>
-
         </form>
     </div>
 </div>

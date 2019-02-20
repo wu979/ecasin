@@ -277,7 +277,7 @@ var pageControl = {
     }
 }
 
-
+//下拉框赋值
 var selectUtil = {
     //赋值select
     findSelect : function(layero,id,constantType) {

@@ -5,6 +5,7 @@ import com.csd.exception.application.ApplicationException;
 import com.csd.exception.result.Result;
 import com.csd.exception.result.ResultUtil;
 import com.csd.exception.status.BaseStatus;
+import com.csd.log.annotation.SystemControllerLog;
 import com.csd.system.user.entity.UserRequest;
 import com.csd.system.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/home" , method = RequestMethod.GET)
+    @SystemControllerLog(descrption = "登录成功" , actionType = "4")
     public String index(Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setAttribute("user",LoginUser.getLoginUser());

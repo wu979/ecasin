@@ -117,7 +117,6 @@ public class MenuService  extends DeleteService<Menu> {
      *
      * @return
      */
-    @SystemServiceLog(descrption = "查询菜单")
     public List findByPage() {
 
         List<Menu> resultList = new ArrayList<>();

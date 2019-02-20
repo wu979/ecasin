@@ -130,6 +130,8 @@ function save(rowData) {
             area: ['23%','53%'],
             title: '新增菜单',
             scrollbar: false,
+            anim: 1,
+            resize:false,
             zIndex: 1050,
             btn: ['保存','取消'],
             success: function(layero, index){
@@ -175,6 +177,8 @@ function update(rowData) {
                 area: ['23%','53%'],
                 title: '新增菜单',
                 scrollbar: false,
+                anim: 1,
+                resize:false,
                 zIndex: 1050,
                 btn: ['修改','取消'],
                 success: function(layero, index){

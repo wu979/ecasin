@@ -18,12 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.csd</groupId>
-            <artifactId>ecasin-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.csd</groupId>
-            <artifactId>ecasin-log</artifactId>
+            <artifactId>ecasin-system</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- 分页 -->

@@ -154,4 +154,38 @@
       job_type = #{jobType,jdbcType=VARCHAR}
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
+  <select id="findRoleByUnJobList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_job A
+    left join w_user_role B on B.relation_job_id = A.job_id
+    where
+      A.job_org_id = #{orgId}
+    and
+      A.job_type = #{jobType}
+    and
+      B.relation_role_id = #{roleId}
+    and
+      B.relation_is_valid = '1'
+    and
+      B.relation_job_id is null
+  </select>
+  <select id="findRoleByJobList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>,
+      C.company_name as entityOrgName,
+      D.company_name as entityDepName
+    from
+      w_job A
+    left join w_user_role B on B.relation_job_id = A.job_id
+    left join w_company C on C.company_id = A.job_org_id
+    left join w_company D on D.company_id = A.job_dep_id
+    where
+      B.relation_role_id = #{roleId}
+    and
+      B.relation_is_valid = '1'
+    and
+      B.relation_job_id is not null
+  </select>
 </mapper>

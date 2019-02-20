@@ -23,5 +23,9 @@ body .layui-layer .layui-layer-btn .layui-layer-btn1{
     background:#fff;
 }
 
-/* 多选框样式 */
-
+/* 树形样式 */
+.tree-div {
+    border: 1px solid #c5c5c5;
+    height: 79%;
+    overflow: auto;
+}

@@ -31,6 +31,18 @@
                 </svg>
                 &nbsp;&nbsp;删除
             </button>
+            <button class="btn btn-light btn-sm menu-authority" type="button" style="width: 105px;">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-caidan"></use>
+                </svg>
+                &nbsp;&nbsp;菜单授权
+            </button>
+            <button class="btn btn-light btn-sm job-authority" type="button" style="width: 105px;">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-jiaoseshouquan"></use>
+                </svg>
+                &nbsp;&nbsp;职位授权
+            </button>
             <div style="margin: 20px 0"></div>
 
             <table id="jqTable"></table>

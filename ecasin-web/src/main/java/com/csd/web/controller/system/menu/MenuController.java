@@ -79,7 +79,6 @@ public class MenuController {
      */
     @RequestMapping(value =  "/findByPage" ,method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(descrption = "查询菜单" , actionType = "4")
     public List<Menu> findByPage(){
         return menuService.findByPage();
     }

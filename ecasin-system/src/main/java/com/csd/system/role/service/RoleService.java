@@ -48,7 +48,6 @@ public class RoleService extends DeleteService<Role> {
      *
      * @return
      */
-    @SystemServiceLog(descrption = "查询角色")
     public PageVo<Role> findByPage(PageVo<Role> page, RoleRequest request){
         User user = LoginUser.getLoginUser();
         PageBounds pageBounds = page.pageToPageBounds(page);

@@ -414,7 +414,6 @@
 </div>
 <div>
     <%@ include file="/WEB-INF/common/commonJs.jsp"%>
-    <script src="${ctx}/static/js/home/index.js" type="text/javascript"></script>
     <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </div>
 </body>

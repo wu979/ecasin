@@ -1,6 +1,5 @@
 package com.csd.web.controller.busines.company;
 
-import com.csd.busines.company.po.Company;
 import com.csd.busines.company.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +33,7 @@ public class CompanyController {
     @RequestMapping(value = "/companyTree", method = RequestMethod.POST)
     @ResponseBody
     public List<?> getCompanyList() throws Exception {
-        List<Company> companyList = companyService.getCompanyList();
-        System.out.println(companyList.size());
-        return companyList;
+        return companyService.getCompanyList();
     }
 
 
