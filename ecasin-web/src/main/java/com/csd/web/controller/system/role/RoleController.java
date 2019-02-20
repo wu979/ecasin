@@ -95,10 +95,7 @@ public class RoleController {
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     @ResponseBody
     public PageVo<Role> findByPage(PageVo<Role> page, RoleRequest request){
-
-        PageVo<Role> byPage = roleService.findByPage(page, request);
-
-        return byPage;
+        return roleService.findByPage(page,request);
     }
 
 
