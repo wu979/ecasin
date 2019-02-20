@@ -33,7 +33,7 @@
             </button>
             <div style="margin: 20px 0"></div>
 
-            <table id="jqTable"></table>
+            <table id="jqTable" class="jqTable"></table>
             <div id="grid-pager" style="height: 50px;"></div>
         </div>
     </div>

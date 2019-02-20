@@ -107,18 +107,21 @@
 .ui-jqgrid-bdiv{
     overflow-x: hidden !important;
 }
-#jqTable tr{
-    border-color: #d0d0d0;
+.jqTable tr{
+    border-color: #d0d0d0 !important;
 }
 
-#jqTable .ui-widget-content{
+.jqTable .ui-widget-content{
     height: 40px !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th div{
     height: 40px !important;
 }
-.ui-jqgrid-btable .ui-widget-content.ui-state-highlight{
-    background-color: #20B2AA;
+.ui-jqgrid-btable .ui-widget-content .ui-state-highlight{
+    background-color: #20B2AA !important;
+}
+.modal-jqTable td{
+    font-size: 10px;
 }
 
 /* 菜单设置页面 树形样式设置 */

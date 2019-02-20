@@ -22,6 +22,9 @@ function loadPage(){
             {name:"roleUpdateTime",index:"roleUpdateTime",width:10,hidden:false,sortable: false},
             {name:"operation",index:"operation",width: 4, hidden: false,sortable: false},
         ],
+        viewrecords: true,
+        rowNum: 10,
+        rowList: [10, 20, 30],
         rownumbers: true,
         rownumWidth: 30,
         altRows: true,
@@ -86,28 +89,6 @@ function loadPage(){
                 recordIds.push(roleId);
                 del(recordIds);
             })
-
-            /**
-             * 点击菜单边框收缩菜单时，动态变化表格宽度
-             */
-            $('#sidebar-collapse').click (function(){
-                var winwidth=$('.main-content .col-xs-12').width(); // 当前窗口中，一行的宽度
-                $("#jqTable").setGridWidth(winwidth);
-                $('.ui-jqgrid-bdiv').css ('width',winwidth+1);
-            });
-            /**
-             * 设置宽度
-             */
-            $(window).resize(function () {
-                var winwidth = $('.page-content').width();
-                $("#jqTable").setGridWidth(winwidth-40);
-                $('.ui-jqgrid-bdiv').css('width', winwidth -40);
-            });
-            setTimeout(function () {
-                var winwidth = $('.page-content').width();
-                $("#jqTable").setGridWidth(winwidth-40);
-                $('.ui-jqgrid-bdiv').css('width', winwidth -40);
-            }, 0);
         }
     })
 }
@@ -184,8 +165,7 @@ function save() {
         zIndex: 1050,
         btn: ['保存','取消'],
         success: function(layero, index){
-            // var constantType = 'roleType';
-            // selectUtil.findSelect(layero,"#roleType",constantType);
+
         },
         yes: function (index, layero) {
             $.ajax({
@@ -228,8 +208,9 @@ function update(rowData) {
                 success: function(layero, index){
                     var roleName = rowData.roleName;
                     var roleId = rowData.roleId;
-                    $('#roleName',layero.find("iframe")[0].contentWindow.document).val(roleName);
-                    $('#roleId',layero.find("iframe")[0].contentWindow.document).val(roleId);
+                    var body = layer.getChildFrame('body', index);
+                    body.find("#roleName").val(roleName);
+                    body.find("#roleId").val(roleId);
                 },
                 yes: function (index, layero) {
                     $.ajax({
@@ -315,8 +296,10 @@ function menuAuthority(recordId) {
         zIndex: 1050,
         btn: ['完成'],
         success: function(layero, index){
-            $('#roleId',layero.find("iframe")[0].contentWindow.document).val(recordId);
-            showTree(layero,index);
+            var body = layer.getChildFrame('body', index);
+            body.find("#roleId").val(recordId);
+            var iframeWin = window[layero.find('iframe')[0]['name']];
+
         },
         yes: function (index, layero) {
             layer.close(index);
@@ -327,7 +310,7 @@ function jobAuthority(recordId,recordType) {
     layer.open({
         type: 2,
         content:ctx + '/role/jobPage',
-        area: ['50%','50%'],
+        area: ['75%','50%'],
         title: '菜单授权',
         scrollbar: true,
         anim: 1,
@@ -335,13 +318,13 @@ function jobAuthority(recordId,recordType) {
         zIndex: 1050,
         btn: ['完成'],
         success: function(layero, index){
-            $('#roleId',layero.find("iframe")[0].contentWindow.document).val(recordId);
-            $('#roleType',layero.find("iframe")[0].contentWindow.document).val(recordType);
-            showTree(layero,index);
-            // unSelectJob(layero,index,recordId,recordType);
+            var body = layer.getChildFrame('body', index);
+            body.find("#roleId").val(recordId);
+            body.find("#roleType").val(recordType);
             var iframeWin = window[layero.find('iframe')[0]['name']];
+            iframeWin.showTree();
+            iframeWin.unSelectJob();
             iframeWin.selectJob();
-            // selectJob(layero,index,recordId,recordType);
         },
         yes: function (index, layero) {
             layer.close(index);
@@ -349,7 +332,7 @@ function jobAuthority(recordId,recordType) {
     })
 }
 
-function showTree(layero,index) {
+function showTree() {
     var setting = {
         data: {
             simpleData: {enable: true, idKey: "id", pIdKey: "parent", rootPId: 0},
@@ -366,105 +349,143 @@ function showTree(layero,index) {
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
-            $.fn.zTree.init($("#contentTree",layero.find("iframe")[0].contentWindow.document), setting, data);
+            $.fn.zTree.init($("#contentTree"), setting, data);
             var treeObj = $.fn.zTree.getZTreeObj("contentTree");
             treeObj.expandAll(true);
         }
     });
     //单击事件
     function companyTreeCall(treeId, treeNode, clickFlag) {
-        // var depId = treeNode.id;
-        // var groupId = $('#groupId').val();
-        // var json = {
-        //     depId: depId,
-        //     groupId: groupId
-        // };
-        // jQuery("#flow-job-table").jqGrid('setGridParam', {postData: json}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
-        // jQuery("#flow_right_sub_table").jqGrid('setGridParam', {postData: json}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
+
     }
 }
-// function unSelectJob(layero,index,recordId,recordType){
-//     var jqTableUnSelect = $(layero).find("iframe").contents().find("#jqTable-unSelect");
-//     // var pager = body.find('#grid-pager-unSelect');
-//     jqTableUnSelect.jqGrid({
-//         url:ctx + "/job/findRoleByUnJobList",
-//         postData:{ roleId:recordId , jobType:recordType},
-//         datatype:'json',
-//         pager:$(layero).find("iframe").contents().find("#grid-pager-unSelect"),
-//         mtype:"POST",
-//         height:"79%",
-//         caption:"待选职位列表",
-//         colNames:
-//             [
-//                 "id",'',"公司名称","部门名称","角色名称"
-//             ],
-//         colModel : [
-//             {name:"jobId",index:"jobId",width:1,key:true,hidden:true,sortable: false},
-//             {name:"action", index: "action", width: 2, hidden: false,sortable: false},
-//             {name:"entityOrgName",index:"entityOrgName",width:5,hidden:false,sortable: false},
-//             {name:"entityDepName",index:"entityDepName",width:5,hidden:false,sortable: false},
-//             {name:"jobName",index:"jobName",width:5,hidden:false,sortable: false},
-//         ],
-//         rownumbers: true,
-//         rownumWidth: 30,
-//         altRows: true,
-//         autowidth: true,
-//         multiselect: false,
-//         multiboxonly: false,
-//         jsonReader: {
-//             root: "result",
-//             total: 'totalPages',
-//             page: 'page',
-//             records: 'records'
-//         },
-//         onSelectRow:function (id){
-//             // var all = $("#jqTable").jqGrid('getRowData', id);
-//             // var recordId = all.menuId;
-//             // var rowData = $("#groupManage-table").jqGrid("getRowData", ids[0]);
-//             // rowData = all;
-//         },
-//         loadComplete: function () {
-//             $('td').css({
-//                 'text-align': 'center'
-//             })
-//             $('th div').css({
-//                 'text-align': 'center'
-//             });
-//             var table = this;
-//             setTimeout(function () {
-//                 updatePagerIcons(table);
-//             }, 0);
-//             updatePagerIcons(table);
-//         },
-//         gridComplete:function (){
-//             var ids = jqTableUnSelect.jqGrid('getDataIDs');
-//             for (var i = 0; i < ids.length; i++) {
-//                 var cl = ids[i];
-//                 checkbox = "<label style=\"padding-left:2px;padding-top:3px\"><input name=\"grid-checkbox\" value=\""
-//                     + cl + "\"type=\"checkbox\" class=\"ace\"><span class=\"lbl\"></span></label>";
-//                 jqTableUnSelect.jqGrid('setRowData', ids[i], {action: checkbox});
-//             }
-//             /**
-//              * 点击菜单边框收缩菜单时，动态变化表格宽度
-//              */
-//             $('#sidebar-collapse').click (function(){
-//                 var winwidth=$('.main-content .col-xs-12').width(); // 当前窗口中，一行的宽度
-//                 $("#jqTable-unSelect").setGridWidth(winwidth);
-//                 $('.ui-jqgrid-bdiv').css('width',winwidth+1);
-//             });
-//             /**
-//              * 设置宽度
-//              */
-//             $(window).resize(function () {
-//                 var winwidth = $('.page-content').width();
-//                 $("#jqTable-unSelect").setGridWidth(winwidth-40);
-//                 $('.ui-jqgrid-bdiv').css('width', winwidth -40);
-//             });
-//             setTimeout(function () {
-//                 var winwidth = $('.page-content').width();
-//                 $("#jqTable-unSelect").setGridWidth(winwidth-40);
-//                 $('.ui-jqgrid-bdiv').css('width', winwidth -40);
-//             }, 0);
-//         }
-//     })
-// }
+function unSelectJob(){
+    var roleId = $("#roleId").val();
+    var roleType = $("#roleType").val();
+    jQuery("#jqTable-unSelect").jqGrid({
+        url:ctx + "/job/findRoleByUnJobList",
+        postData:{ roleId: roleId , jobType: roleType},
+        datatype:'json',
+        pager:'#grid-pager-unSelect',
+        mtype:"POST",
+        height:"63%",
+        caption:"待选职位列表",
+        colNames:
+            [
+                "id",'',"公司名称","部门名称","角色名称"
+            ],
+        colModel : [
+            {name:"jobId",index:"jobId",width:1,key:true,hidden:true,sortable: false},
+            {name:"action", index: "action", width: 2, hidden: false,sortable: false},
+            {name:"entityOrgName",index:"entityOrgName",width:5,hidden:false,sortable: false},
+            {name:"entityDepName",index:"entityDepName",width:5,hidden:false,sortable: false},
+            {name:"jobName",index:"jobName",width:5,hidden:false,sortable: false},
+        ],
+        viewrecords: true,
+        rownumbers: true,
+        rownumWidth: 30,
+        altRows: true,
+        autowidth: true,
+        multiselect: false,
+        multiboxonly: false,
+        jsonReader: {
+            root: "result",
+            total: 'totalPages',
+            page: 'page',
+            records: 'records'
+        },
+        loadComplete: function () {
+            $('td').css({
+                'text-align': 'center'
+            })
+            $('th div').css({
+                'text-align': 'center'
+            });
+            var table = this;
+            setTimeout(function () {
+                updatePagerIcons(table);
+            }, 0);
+            updatePagerIcons(table);
+        },
+        gridComplete:function (){
+            var ids = $("#jqTable-unSelect").jqGrid('getDataIDs');
+            for (var i = 0; i < ids.length; i++) {
+                var cl = ids[i];
+                checkbox = "<label style=\"padding-left:2px;padding-top:3px\"><input name=\"grid-checkbox\" value=\""
+                    + cl + "\"type=\"checkbox\" class=\"ace\"><span class=\"lbl\"></span></label>";
+                $("#jqTable-unSelect").jqGrid('setRowData', ids[i], {action: checkbox});
+            }
+        }
+    })
+}
+function selectJob(){
+
+    var roleId = $("#roleId").val();
+
+    jQuery("#jqTable-select").jqGrid({
+        url:ctx + "/job/findRoleByJobList",
+        postData:{ roleId: roleId },
+        datatype:'json',
+        pager:'#grid-pager-select',
+        mtype:"POST",
+        height:"63%",
+        caption:"已选职位列表",
+        colNames:
+            [
+                "id",'',"公司名称","部门名称","角色名称"
+            ],
+        colModel:
+            [
+                {name:"jobId",index:"jobId",width:1,key:true,hidden:true,sortable: false},
+                {name:"action", index: "action", width: 3, hidden: false,sortable: false},
+                {name:"entityOrgName",index:"entityOrgName",width:10,hidden:false,sortable: false},
+                {name:"entityDepName",index:"entityDepName",width:10,hidden:false,sortable: false},
+                {name:"jobName",index:"jobName",width:10,hidden:false,sortable: false},
+            ],
+        viewrecords: true,
+        rownumbers: true,
+        rownumWidth: 30,
+        altRows: true,
+        autowidth: true,
+        multiselect: false,
+        multiboxonly: false,
+        jsonReader: {
+            root: "result",
+            total: 'totalPages',
+            page: 'page',
+            records: 'records'
+        },
+        loadComplete: function () {
+            $('td').css({
+                'text-align': 'center'
+            })
+            $('th div').css({
+                'text-align': 'center'
+            });
+            var table = this;
+            setTimeout(function () {
+                updatePagerIcons(table);
+            }, 0);
+            updatePagerIcons(table);
+        },
+        gridComplete:function (){
+            var ids = $("#jqTable-select").jqGrid('getDataIDs');
+            for (var i = 0; i < ids.length; i++) {
+                var cl = ids[i];
+                checkbox = "<label style=\"padding-left:2px;padding-top:3px\"><input name=\"grid-checkbox\" value=\""
+                    + cl + "\"type=\"checkbox\" class=\"ace\"><span class=\"lbl\"></span></label>";
+                $("#jqTable-select").jqGrid('setRowData', ids[i], {action: checkbox});
+            }
+            $(window).resize(function () {
+                var winwidth = $('#jqTable-select').width();
+                $("#jqTable-select").setGridWidth(winwidth - 20);
+                $('#jqTable-select .ui-jqgrid-bdiv').css('width', winwidth - 10);
+            });
+            setTimeout(function () {
+                var winwidth = $('#jqTable-select').width();
+                $("#jqTable-select").setGridWidth(winwidth - 20);
+                $('#jqTable-select .ui-jqgrid-bdiv').css('width', winwidth - 10);
+            }, 0);
+        }
+    })
+}

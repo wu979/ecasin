@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<script src="${ctx}/static/js/system/role/role.js" type="text/javascript"></script>
 <!-- 头部 -->
 <div class="page-content" style="overflow: hidden;">
     <div class="row">
@@ -45,9 +46,10 @@
             </button>
             <div style="margin: 20px 0"></div>
 
-            <table id="jqTable"></table>
+            <table id="jqTable" class="jqTable"></table>
             <div id="grid-pager" style="height: 50px;"></div>
         </div>
     </div>
 </div>
-<script src="${ctx}/static/js/system/role/role.js" type="text/javascript"></script>
+
+<div id="model-one" class="modal" aria-hidden="true" data-backdrop='static'></div>

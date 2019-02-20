@@ -110,8 +110,6 @@ function loadPage(){
         }
     })
 }
-
-
 $('.save').on('click',function () {
     save(rowData);
 })
@@ -135,10 +133,9 @@ function save(rowData) {
             zIndex: 1050,
             btn: ['保存','取消'],
             success: function(layero, index){
-                var parentName = $('#parentName',layero.find("iframe")[0].contentWindow.document);
-                var menuPid = $('#menuPid',layero.find("iframe")[0].contentWindow.document);
-                parentName.val(rowData.menuName);
-                menuPid.val(rowData.menuId);
+                var body = layer.getChildFrame('body', index);
+                body.find("#parentName").val(rowData.menuName);
+                body.find("#menuPid").val(rowData.menuId);
             },
             yes: function (index, layero) {
                 $.ajax({
@@ -182,15 +179,16 @@ function update(rowData) {
                 zIndex: 1050,
                 btn: ['修改','取消'],
                 success: function(layero, index){
+                    var body = layer.getChildFrame('body', index);
                     var parentName;
                     if(rowData.menuLevel == 1){
                         parentName = "所有菜单";
-                        $('#parentName',layero.find("iframe")[0].contentWindow.document).val(parentName);
-                        $('#menuPid',layero.find("iframe")[0].contentWindow.document).val(rowData.menuId);
-                        $('#menuName',layero.find("iframe")[0].contentWindow.document).val(rowData.menuName);
-                        $('#menuCode',layero.find("iframe")[0].contentWindow.document).val(rowData.menuCode);
-                        $('#menuUrl',layero.find("iframe")[0].contentWindow.document).val(rowData.menuUrl);
-                        $('#menuOrder',layero.find("iframe")[0].contentWindow.document).val(rowData.menuOrder);
+                        body.find("#parentName").val(parentName);
+                        body.find("#menuPid").val(rowData.menuId);
+                        body.find("#menuName").val(rowData.menuName);
+                        body.find("#menuCode").val(rowData.menuCode);
+                        body.find("#menuUrl").val(rowData.menuUrl);
+                        body.find("#menuOrder").val(rowData.menuOrder);
                     }else {
                         $.ajax({
                             url: ctx + '/menu/findParentNameById',
@@ -200,12 +198,12 @@ function update(rowData) {
                             success:function (data) {
                                 if(data.status == 0){
                                     parentName = data.data.menuName;
-                                    $('#parentName',layero.find("iframe")[0].contentWindow.document).val(parentName);
-                                    $('#menuPid',layero.find("iframe")[0].contentWindow.document).val(rowData.menuId);
-                                    $('#menuName',layero.find("iframe")[0].contentWindow.document).val(rowData.menuName);
-                                    $('#menuCode',layero.find("iframe")[0].contentWindow.document).val(rowData.menuCode);
-                                    $('#menuUrl',layero.find("iframe")[0].contentWindow.document).val(rowData.menuUrl);
-                                    $('#menuOrder',layero.find("iframe")[0].contentWindow.document).val(rowData.menuOrder);
+                                    body.find("#parentName").val(parentName);
+                                    body.find("#menuPid").val(rowData.menuId);
+                                    body.find("#menuName").val(rowData.menuName);
+                                    body.find("#menuCode").val(rowData.menuCode);
+                                    body.find("#menuUrl").val(rowData.menuUrl);
+                                    body.find("#menuOrder").val(rowData.menuOrder);
                                 }else {
                                     layer.close(index);
                                     layer.msg(data.message);
