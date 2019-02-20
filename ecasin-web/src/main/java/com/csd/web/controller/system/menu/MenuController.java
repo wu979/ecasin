@@ -133,4 +133,14 @@ public class MenuController {
         return ResultUtil.success(rsult);
     }
 
+
+    /**
+     * 角色授权--菜单列表
+     * @return
+     */
+    @RequestMapping(value =  "/findRoleByMenuList" ,method = RequestMethod.POST)
+    @ResponseBody
+    public List<Menu> findRoleByMenuList(String roleId){
+        return menuService.findByPage();
+    }
 }

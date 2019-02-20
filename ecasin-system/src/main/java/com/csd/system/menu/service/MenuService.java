@@ -54,6 +54,7 @@ public class MenuService  extends DeleteService<Menu> {
         return treeList;
     }
 
+
     public List<Tree> getAllByParentId(String menuPid) {
 
         List<Tree> treeList = new ArrayList<>();
@@ -98,6 +99,7 @@ public class MenuService  extends DeleteService<Menu> {
         return treeList;
     }
 
+
     public List<Tree> getMenuSunByUserId(String menuPid, List<Menu> sunList) {
         List<Tree> childList = new ArrayList<>();
         for (Menu menu : sunList) {
@@ -118,12 +120,9 @@ public class MenuService  extends DeleteService<Menu> {
      * @return
      */
     public List findByPage() {
-
         List<Menu> resultList = new ArrayList<>();
 
-
         List<Menu> parentMenuList = menuMapper.findParentMenuByAdmin();
-
         List<Menu> sunMenuList = menuMapper.findSunMenuByAdmin();
 
         List<Menu> newParentMenuList = new ArrayList(){{
@@ -153,6 +152,7 @@ public class MenuService  extends DeleteService<Menu> {
 
         return resultList;
     }
+
 
     public List<Menu> findSunMenuByAdmin(List<Menu> resultList, String pid, List<Menu> sunMenuList) {
         for (Menu menu : sunMenuList) {
@@ -201,6 +201,7 @@ public class MenuService  extends DeleteService<Menu> {
             }
         }
     }
+
 
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
     @SystemServiceLog(descrption = "修改菜单")
@@ -252,5 +253,20 @@ public class MenuService  extends DeleteService<Menu> {
 
     public Menu findParentNameById(String recordId){
         return menuMapper.findParentNameById(recordId);
+    }
+
+
+    public List<Menu> findRoleByMenuList(String roleId){
+
+        return null;
+    }
+
+    public List findByMenuList(String jobId) {
+        Map<String,Object> map = new HashMap<>();
+        if(!StringUtil.isEmpty(jobId)){
+            map.put("jobId",jobId);
+        }
+
+        return null;
     }
 }

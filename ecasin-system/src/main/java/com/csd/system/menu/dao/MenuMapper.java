@@ -65,4 +65,10 @@ public interface MenuMapper {
 
 
     int updateParentById(Map<String,Object> map);
+
+
+    List<Menu> findRoleByParentList(Map<String,Object> map);
+
+
+    List<Menu> findRoleBySunList(Map<String,Object> map);
 }

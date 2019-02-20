@@ -410,4 +410,10 @@
   <update id="updateParentById" parameterType="java.util.Map">
     update w_menu set menu_has_child = #{hasChild} , menu_update_time = #{time} , menu_update_user_id = #{userId} where menu_id = #{recordId}
   </update>
+  <select id="findRoleByParentList" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+  </select>
+  <select id="findRoleBySunList" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+  </select>
 </mapper>
