@@ -1,21 +1,27 @@
+selectLoad();
 loadPage();
+/* 分页 */
 function loadPage(){
     jQuery("#jqTable").jqGrid({
         url:ctx + "/role/findByPage",
         datatype:'json',
+        page: pageControl.getPage(),
+        rowNum: pageControl.getRowNum(),
+        postData:pageControl.getJson(),
         pager:"#grid-pager",
         mtype:"POST",
         height:"100%",
         caption:"角色列表",
         colNames:
             [
-                "id",'',"角色类型","角色类型","角色名称","角色标识码","创建时间","修改时间","操作"
+                "id",'',"角色类型","角色类型","类型值","角色名称","角色标识码","创建时间","修改时间","操作"
             ],
         colModel : [
             {name:"roleId",index:"roleId",width:1,key:true,hidden:true,sortable: false},
             {name:"action", index: "action", width: 2, hidden: false,sortable: false},
             {name:"roleType",index:"roleType",width:12,hidden:true,sortable: false},
-            {name:"contantsName",index:"contantsName",width:12,hidden:false,sortable: false},
+            {name:"entityConstantName",index:"entityConstantName",width:12,hidden:false,sortable: false},
+            {name:"entityConstantValue",index:"entityConstantValue",width:12,hidden:true,sortable: false},
             {name:"roleName",index:"roleName",width:5,hidden:false,sortable: false},
             {name:"roleCode",index:"roleCode",width:10,hidden:false,sortable: false},
             {name:"roleCreateTime",index:"roleCreateTime",width:10,hidden:false,sortable: false},
@@ -23,7 +29,6 @@ function loadPage(){
             {name:"operation",index:"operation",width: 4, hidden: false,sortable: false},
         ],
         viewrecords: true,
-        rowNum: 10,
         rowList: [10, 20, 30],
         rownumbers: true,
         rownumWidth: 30,
@@ -34,16 +39,18 @@ function loadPage(){
         jsonReader: {
             root: "result",
             total: 'totalPages',
-            page: 'page',
+            page: 'currPage',
             records: 'records'
         },
         onSelectRow:function (id){
             var all = $("#jqTable").jqGrid('getRowData', id);
-            // var recordId = all.menuId;
-            // var rowData = $("#groupManage-table").jqGrid("getRowData", ids[0]);
             rowData = all;
         },
         loadComplete: function () {
+            //设置当前页码和行数
+            pageControl.setPage('#jqTable');
+            pageControl.setSearch();
+
             $('td').css({
                 'text-align': 'center'
             })
@@ -66,12 +73,12 @@ function loadPage(){
 
                 var all = $("#jqTable").jqGrid('getRowData', cl);
                 operation =
-                    "<button class='btn btn-light btn-sm page-button-update' data-record=\""+ all.roleId +"\">" +
+                    "<button class='btn btn-light btn-sm page-button-update' data-record=\""+ all.roleId +"\" title=\"修改\">" +
                     "<svg class='icon' aria-hidden='true'>"+
                     "<use xlink:href='#icon-xiugai4'></use>"+
                     "</svg>"+
                     "</button>" +
-                    "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.roleId +"\">" +
+                    "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.roleId +"\" title=\"删除\">" +
                     "<svg class='icon' aria-hidden='true'>"+
                     "<use xlink:href='#icon-shanchu3'></use>"+
                     "</svg>"+
@@ -88,29 +95,79 @@ function loadPage(){
                 var roleId = $(this).attr('data-record');
                 recordIds.push(roleId);
                 del(recordIds);
-            })
+            });
         }
     })
 }
-
+/* 下拉框 */
+function selectLoad(){
+    selectUtil.findSelect("#optionSelect","roleType");
+}
+/* 条件查询 */
+$('#select').on('click',function () {
+    var json =
+        {
+            startTime: $("#startTime").val(),
+            endTime: $("#endTime").val(),
+            optionSelect: $("#optionSelect").val()
+        };
+    jQuery("#jqTable").jqGrid('setGridParam', { postData: json }).jqGrid('setGridParam', { 'page': 1 }).trigger("reloadGrid");
+    pageControl.getSearch(json);
+})
+/* 条件查询全部 */
+$('#selectAll').on('click',function () {
+    var json =
+        {
+            startTime: '',
+            endTime: '',
+            optionSelect: ''
+        };
+    jQuery("#jqTable").jqGrid('setGridParam', { postData: json }).jqGrid('setGridParam', { 'page': 1 }).trigger("reloadGrid");
+    $("#startTime").val('');
+    $("#endTime").val('');
+    $("#optionSelect").val('');
+    pageControl.getSearch(json);
+})
+/* 添加按钮 */
 $('.save').on('click',function () {
     save();
 })
+/* 更新按钮 */
 $('.update').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
+    var recordType = [];
     for (var i = 0; i < ids.length; i++) {
         var rowData = $("#jqTable").jqGrid('getRowData', ids[i]);
         recordIds.push(rowData.roleId);
+        recordType.push(rowData.entityConstantValue);
     }
     if(recordIds.length > 1){
         layer.msg("最多只能选择一条数据");
     }else {
-        var ids = CommUtils.getJqgridSelected("jqTable");
-        var rowData = $("#jqTable").jqGrid("getRowData", ids[0]);
-        update(rowData);
+        $.ajax({
+            url: ctx + '/role/checkRoleType',
+            type: 'post',
+            dataType: 'json',
+            data:
+                {
+                    roleType:recordType[0],
+                    type:'3'
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    var ids = CommUtils.getJqgridSelected("jqTable");
+                    var rowData = $("#jqTable").jqGrid("getRowData", ids[0]);
+                    update(rowData);
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+
     }
 })
+/* 删除按钮 */
 $('.delete').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
@@ -120,21 +177,41 @@ $('.delete').on('click',function () {
     }
     del(recordIds);
 })
+/* 菜单授权按钮 */
 $('.menu-authority').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
+    var recordType = [];
     for (var i = 0; i < ids.length; i++) {
         var rowData = $("#jqTable").jqGrid('getRowData', ids[i]);
         recordIds.push(rowData.roleId);
+        recordType.push(rowData.entityConstantValue);
     }
     if(recordIds.length > 1){
         layer.msg("最多只能选择一条数据");
     }else if(recordIds.length < 1){
         layer.msg("请至少选择一条数据");
     }else {
-        menuAuthority(recordIds[0]);
+        $.ajax({
+            url: ctx + '/role/checkRoleType',
+            type: 'post',
+            dataType: 'json',
+            data:
+                {
+                    roleType:recordType[0],
+                    type:'1'
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    menuAuthority(recordIds[0]);
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
     }
 })
+/* 职位授权按钮 */
 $('.job-authority').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
@@ -149,9 +226,26 @@ $('.job-authority').on('click',function () {
     }else if(recordIds.length < 1){
         layer.msg("请至少选择一条数据");
     }else {
-        jobAuthority(recordIds[0],recordType[0]);
+        $.ajax({
+            url: ctx + '/role/checkRoleType',
+            type: 'post',
+            dataType: 'json',
+            data:
+                {
+                    roleType:recordType[0],
+                    type:'2'
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    jobAuthority(recordIds[0],recordType[0]);
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
     }
 })
+/* 调用方法 */
 function save() {
     layer.open({
         id: 'save-click',
@@ -191,49 +285,45 @@ function save() {
 }
 function update(rowData) {
     if(rowData != null || rowData != ''){
-        if(rowData.roleType == 0){
-            layer.msg("该条数据不能进行操作");
-        }else {
-            layer.open({
-                id: 'update-click',
-                type:2,
-                content:ctx + '/role/updatePage',
-                area: ['22%','32%'],
-                title: '新增菜单',
-                scrollbar: false,
-                anim: 1,
-                resize:false,
-                zIndex: 1050,
-                btn: ['修改','取消'],
-                success: function(layero, index){
-                    var roleName = rowData.roleName;
-                    var roleId = rowData.roleId;
-                    var body = layer.getChildFrame('body', index);
-                    body.find("#roleName").val(roleName);
-                    body.find("#roleId").val(roleId);
-                },
-                yes: function (index, layero) {
-                    $.ajax({
-                        url: ctx + '/role/update',
-                        type: 'post',
-                        dataType: 'json',
-                        data: $('#form_update',layero.find("iframe")[0].contentWindow.document).serialize(),
-                        success:function (data) {
-                            if(data.status == 0){
-                                layer.close(index);
-                                layer.msg('修改成功');
-                                jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
-                            }else {
-                                layer.msg(data.message);
-                            }
+        layer.open({
+            id: 'update-click',
+            type:2,
+            content:ctx + '/role/updatePage',
+            area: ['22%','32%'],
+            title: '新增菜单',
+            scrollbar: false,
+            anim: 1,
+            resize:false,
+            zIndex: 1050,
+            btn: ['修改','取消'],
+            success: function(layero, index){
+                var roleName = rowData.roleName;
+                var roleId = rowData.roleId;
+                var body = layer.getChildFrame('body', index);
+                body.find("#roleName").val(roleName);
+                body.find("#roleId").val(roleId);
+            },
+            yes: function (index, layero) {
+                $.ajax({
+                    url: ctx + '/role/update',
+                    type: 'post',
+                    dataType: 'json',
+                    data: $('#form_update',layero.find("iframe")[0].contentWindow.document).serialize(),
+                    success:function (data) {
+                        if(data.status == 0){
+                            layer.close(index);
+                            layer.msg('修改成功');
+                            jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
+                        }else {
+                            layer.msg(data.message);
                         }
-                    })
-                },
-                btn2: function(index){
-                    layer.close(index);
-                },
-            })
-        }
+                    }
+                })
+            },
+            btn2: function(index){
+                layer.close(index);
+            },
+        })
     }else {
         layer.msg("请选择至少一条数据");
     }
@@ -285,10 +375,9 @@ function forCheck(roleId) {
 }
 function menuAuthority(recordId) {
     layer.open({
-        id: 'save-click',
         type:2,
         content:ctx + '/role/menuPage',
-        area: ['50%','50%'],
+        area: ['30%','65%'],
         title: '菜单授权',
         scrollbar: true,
         anim: 1,
@@ -299,7 +388,8 @@ function menuAuthority(recordId) {
             var body = layer.getChildFrame('body', index);
             body.find("#roleId").val(recordId);
             var iframeWin = window[layero.find('iframe')[0]['name']];
-
+            iframeWin.showMenu();
+            layer.iframeAuto(index);
         },
         yes: function (index, layero) {
             layer.close(index);
@@ -331,7 +421,6 @@ function jobAuthority(recordId,recordType) {
         }
     })
 }
-
 function showTree() {
     var setting = {
         data: {
@@ -485,6 +574,118 @@ function selectJob(){
                 var winwidth = $('#jqTable-select').width();
                 $("#jqTable-select").setGridWidth(winwidth - 20);
                 $('#jqTable-select .ui-jqgrid-bdiv').css('width', winwidth - 10);
+            }, 0);
+        }
+    })
+}
+function showMenu() {
+    var roleId = $("#roleId").val();
+    jQuery("#jqTable-menu").jqGrid({
+        treeGrid:true,
+        treeGridModel:"adjacency",
+        ExpandColumn:"menuName",
+        ExpandColClick:false,
+        autoScroll:false,
+        treeIcons:{plus:'fa fa-plus',minus:'fa fa-minus'},
+        autowidth:true,
+        jsonReader:{
+            repeatitems:false
+        },
+        url:ctx + "/menu/findRoleByMenuList",
+        datatype:'json',
+        postData:{ roleId: roleId},
+        pager:false,
+        mtype:"POST",
+        height:'100%',
+        caption:"菜单列表",
+        colNames:
+            [
+                "id", "菜单名称", "菜单顺序", "菜单编码", "菜单URL", "上级菜单", "是否有子级", "层级","是否已授权" ,"操作"
+            ],
+        colModel : [
+            {name:"menuId",index:"menuId",width:1,key:true,hidden:true,sortable: false},
+            {name:"menuName",index:"menuName",width:20,hidden:false,sortable: false},
+            {name:"menuOrder",index:"menuOrder",width:5,hidden:true,sortable: false},
+            {name:"menuCode",index:"menuCode",width:10,hidden:true,sortable: false},
+            {name:"menuUrl",index:"menuUrl",width:10,hidden:true,sortable: false},
+            {name:"menuPid",index:"menuPid",width:1,hidden:true,sortable: false},
+            {name:"hasChild",index:"hasChild",width:1,hidden:true,sortable: false},
+            {name:"menuLevel",index:"menuLevel",width:1,hidden:true,sortable: false},
+            {name:"menuIsNull",index:"menuIsNull",width:1,hidden:true,sortable: false},
+            {name:"operation",index:"operation",width: 3, hidden: false,sortable: false},
+        ],
+        treeReader: {
+            level_field: "menuLevel",
+            parent_id_field: "menuPid",
+            leaf_field: "hasChild",
+            expanded_field: "expanded",
+        },
+
+        onSelectRow:function (id){
+            var all = $("#jqTable-menu").jqGrid('getRowData', id);
+            // var recordId = all.menuId;
+            // var rowData = $("#groupManage-table").jqGrid("getRowData", ids[0]);
+            rowData = all;
+        },
+        gridComplete:function (){
+            var ids = jQuery("#jqTable-menu").jqGrid('getDataIDs');
+            for (var i = 0; i < ids.length; i++) {
+                var cl = ids[i];
+                var all = $("#jqTable-menu").jqGrid('getRowData', cl);
+                if(all.menuIsNull == null || all.menuIsNull == ''){
+                    operation =
+                        "<button class='btn btn-light btn-sm page-button-save' data-record=\""+ all.menuId +"\">" +
+                        "<svg class='icon' aria-hidden='true'>"+
+                        "<use xlink:href='#icon-cuo'></use>"+
+                        "</svg>"+
+                        "</button>"
+                    jQuery("#jqTable-menu").jqGrid('setRowData', ids[i], { operation: operation });
+                }else {
+                    operation =
+                        "<button class='btn btn-light btn-sm page-button-save' data-record=\""+ all.menuId +"\">" +
+                        "<svg class='icon' aria-hidden='true'>"+
+                        "<use xlink:href='#icon-dui'></use>"+
+                        "</svg>"+
+                        "</button>"
+                    jQuery("#jqTable-menu").jqGrid('setRowData', ids[i], { operation: operation });
+                }
+            }
+            $('#jqTable-menu').on('click','.page-button-save',function () {
+                var menuId = $(this).attr('data-record');
+                var row = forCheck(menuId);
+                save(row);
+            })
+            $('#jqTable-menu').on('click','.page-button-update',function () {
+                var menuId = $(this).attr('data-record');
+                var row = forCheck(menuId);
+                update(row);
+            })
+            $('#jqTable-menu').on('click','.page-button-delete',function () {
+                var menuId = $(this).attr('data-record');
+                var row = forCheck(menuId);
+                del(row);
+            })
+
+            /**
+             * 点击菜单边框收缩菜单时，动态变化表格宽度
+             */
+            $('#sidebar-collapse').click (function(){
+                var winwidth = $('.page-content .col-xs-12').width(); // 当前窗口中，一行的宽度
+                $("#jqTable-menu").setGridWidth(winwidth);
+                $('.ui-jqgrid-bdiv').css('width',winwidth);
+            });
+            /**
+             * 设置宽度
+             */
+            $(window).resize(function () {
+                var winwidth = $('.page-content').width();
+                $("#jqTable-menu").setGridWidth(winwidth);
+                $('.ui-jqgrid-bdiv').css('width', winwidth);
+            });
+            setTimeout(function () {
+                var winwidth = $('.page-content').width();
+                $("#jqTable-menu").setGridWidth(winwidth);
+                $('.ui-jqgrid-bdiv').css('width', winwidth);
             }, 0);
         }
     })

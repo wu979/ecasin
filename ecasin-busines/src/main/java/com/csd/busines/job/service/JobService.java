@@ -6,6 +6,7 @@ import com.csd.busines.job.request.JobRequest;
 import com.csd.common.page.PageVo;
 import com.csd.common.service.MapParaService;
 import com.csd.system.role.dao.RoleMapper;
+import com.csd.system.role.po.Role;
 import com.csd.utils.StringUtil;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
@@ -33,6 +34,7 @@ public class JobService {
 
 
     public PageVo<Job> findRoleByUnJobList(PageVo<Job> page, JobRequest request) {
+        Role role = roleMapper.selectByPrimaryKey(request.getRoleId());
         PageBounds pageBounds = page.pageToPageBounds(page);
         Map<String,Object> map = MapParaService.getParameter(request);
         if(!StringUtil.isEmpty(request.getRoleId())){
@@ -41,6 +43,7 @@ public class JobService {
         if(!StringUtil.isEmpty(request.getJobType())){
             map.put("jobType",request.getJobType());
         }
+        map.put("orgId",role.getRoleOrgId());
         PageList<Job> unSelectJobList = jobMapper.findRoleByUnJobList(map, pageBounds);
         page.listToPage(page,unSelectJobList);
         return page;

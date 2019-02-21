@@ -330,4 +330,19 @@
     and
       B.pt_is_valid = '1'
   </select>
+  <select id="findUserByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>,B.pt_job_id as ptJobId
+    from
+      w_user A
+    left join w_pt_job B on A.user_id = B.pt_user_id
+    where
+      B.pt_user_id = #{userId,jdbcType=VARCHAR}
+    and
+      A.user_is_valid = '1'
+    and
+      B.pt_job_type = '1'
+    and
+      B.pt_is_valid = '1'
+  </select>
 </mapper>

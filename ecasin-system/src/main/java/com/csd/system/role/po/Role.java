@@ -1,11 +1,12 @@
 package com.csd.system.role.po;
 
-import com.csd.common.po.BaseEntity;
+import com.csd.common.service.EntityService;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 
-public class Role extends BaseEntity {
+public class Role extends EntityService {
+
     /**角色ID*/
     private String roleId;
 

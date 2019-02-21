@@ -411,9 +411,65 @@
     update w_menu set menu_has_child = #{hasChild} , menu_update_time = #{time} , menu_update_user_id = #{userId} where menu_id = #{recordId}
   </update>
   <select id="findRoleByParentList" parameterType="java.util.Map" resultMap="BaseResultMap">
-
+    select
+      DISTINCT A.*,
+	  ifnull(D.relation_menu_id,null) as menuIsNull
+    from
+      w_menu A
+    left join w_role_menu B on B.relation_menu_id = A.menu_id
+    left join w_user_role C on C.relation_role_id = B.relation_role_id
+    left join (
+        select
+            re.relation_menu_id
+        from
+            w_role_menu re
+        where
+            re.relation_is_valid = '1'
+        and
+            re.relation_role_id = #{roleId}
+    )D on D.relation_menu_id = A.menu_id
+    where
+      C.relation_job_id = #{jobId}
+    and
+      C.relation_is_valid = '1'
+    and
+      B.relation_is_valid = '1'
+    and
+      A.menu_is_valid = '1'
+    and
+      A.menu_level = '1'
+    order by
+      A.menu_order asc
   </select>
   <select id="findRoleBySunList" parameterType="java.util.Map" resultMap="BaseResultMap">
-
+    select
+      DISTINCT A.*,
+	  ifnull(D.relation_menu_id,null) as menuIsNull
+    from
+      w_menu A
+    left join w_role_menu B on B.relation_menu_id = A.menu_id
+    left join w_user_role C on C.relation_role_id = B.relation_role_id
+    left join (
+        select
+            re.relation_menu_id
+        from
+            w_role_menu re
+        where
+            re.relation_is_valid = '1'
+        and
+            re.relation_role_id = #{roleId}
+    )D on D.relation_menu_id = A.menu_id
+    where
+      C.relation_job_id = #{jobId}
+    and
+      C.relation_is_valid = '1'
+    and
+      B.relation_is_valid = '1'
+    and
+      A.menu_is_valid = '1'
+    and
+      A.menu_pid is not null
+    order by
+      A.menu_level asc ,A.menu_order asc
   </select>
 </mapper>

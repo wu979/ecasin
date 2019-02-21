@@ -87,6 +87,20 @@ public class RoleController {
 
 
     /**
+     * 授权页面-判断类型
+     * @param roleType  角色类型
+     * @param type  1menuPage 2jobPage
+     * @return
+     */
+    @RequestMapping("/checkRoleType")
+    @ResponseBody
+    public Result checkRoleType(String roleType,String type){
+        roleService.checkRoleType(roleType,type);
+        return ResultUtil.success();
+    }
+
+
+    /**
      * 角色列表
      * @param page
      * @param request

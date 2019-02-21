@@ -21,8 +21,11 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from w_role
+    <include refid="Base_Column_List" />,
+    B.contants_name AS entityConstantName,
+    B.constant_value AS entityConstantValue
+    from w_role A
+    left join w_constant B on B.constant_id = A.role_type
     where role_id = #{roleId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -154,10 +157,13 @@
   </update>
   <select id="getRoleListByJobId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-      <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List" />,
+      C.contants_name AS entityConstantName,
+      C.constant_value AS entityConstantValue
     from
       w_role A
     left join w_user_role B on A.role_id = B.relation_role_id
+    left join w_constant C on C.constant_id = A.role_type
     where
       A.role_is_valid = '1'
     and
@@ -167,11 +173,12 @@
   </select>
   <select id="findByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-      <include refid="Base_Column_List"/>,
-      B.contants_name AS contantsName
+    <include refid="Base_Column_List" />,
+    B.contants_name AS entityConstantName,
+    B.constant_value AS entityConstantValue
     from
       w_role A
-    left join w_constant B on A.role_type = B.constant_id
+    left join w_constant B on B.constant_id = A.role_type
     where
       A.role_is_valid = '1'
     <if test="orgId != null and orgId != ''">

@@ -141,6 +141,10 @@ public class MenuController {
     @RequestMapping(value =  "/findRoleByMenuList" ,method = RequestMethod.POST)
     @ResponseBody
     public List<Menu> findRoleByMenuList(String roleId){
-        return menuService.findByPage();
+        List<Menu> roleByMenuList = menuService.findRoleByMenuList(roleId);
+        System.out.println(roleByMenuList.size());
+        return roleByMenuList;
     }
+
+
 }

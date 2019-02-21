@@ -78,6 +78,7 @@ public class RoleService extends DeleteService<Role> {
         String days = DateUtil.getDays();
         String date = DateUtil.timeStamp();
         role.setRoleId(UUIDUtil.getUUID());
+        role.setRoleOrgId(user.getUserOrgId());
         role.setRoleCreateUserId(user.getUserId());
         role.setRoleCreateTime(DateUtil.getTime());
         role.setRoleIsValid(ConstantUtil.CODE_ONE);
@@ -87,18 +88,13 @@ public class RoleService extends DeleteService<Role> {
         switch (user.getUserType()){
             case ConstantUtil.CODE_ZERO:
                 map.put("constantValue",ConstantUtil.CODE_TWO);
-                byConstant = constantMapper.findByConstant(map);
-
-                role.setRoleType(byConstant.getConstantId());
                 break;
             default:
                 map.put("constantValue",ConstantUtil.CODE_THREE);
-                byConstant = constantMapper.findByConstant(map);
-                role.setRoleOrgId(user.getUserOrgId());
-                role.setRoleType(byConstant.getConstantId());
                 break;
         }
-
+        byConstant = constantMapper.findByConstant(map);
+        role.setRoleType(byConstant.getConstantId());
         roleMapper.insertSelective(role);
     }
 
@@ -129,11 +125,30 @@ public class RoleService extends DeleteService<Role> {
         String constantValue = constantMapper.findValueById(role.getRoleType());
         if(constantValue.equals(ConstantUtil.CODE_ONE)){
             throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_DELETE.getCode(),BaseStatus.ROLE_ADMIN_NOT_DELETE.getMessage());
+        }else if(constantValue.equals(ConstantUtil.CODE_TWO)){
+            if(role.getRoleCode().equals("ROLE_PING")){
+                throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+            }
         }
         role.setRoleUpdateUserId(LoginUser.getLoginUserId());
         role.setRoleUpdateTime(DateUtil.getTime());
         role.setRoleIsValid(ConstantUtil.CODE_ZERO);
         result = roleMapper.updateByPrimaryKeySelective(role);
         return result;
+    }
+
+    public void checkRoleType(String roleType,String type){
+        if(roleType.equals(ConstantUtil.CODE_ONE)){
+            throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_DELETE.getCode(),BaseStatus.ROLE_ADMIN_NOT_DELETE.getMessage());
+        }else {
+            if(roleType.equals(ConstantUtil.CODE_TWO)){
+                if(type.equals(ConstantUtil.CODE_TWO)){
+                    throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+                }
+                if(type.equals(ConstantUtil.CODE_THREE)){
+                    throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+                }
+            }
+        }
     }
 }

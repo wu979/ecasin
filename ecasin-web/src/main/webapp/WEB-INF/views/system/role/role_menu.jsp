@@ -12,13 +12,10 @@
 <!-- 头部 -->
 <div class="page-content" style="overflow: hidden;">
     <input type="hidden" class="col-xs-12 col-sm-8" readonly id="roleId"/>
-    <div class="modal-body">
-        <div class="form-group">
-            <!-- xs 最小屏幕  md 中等屏幕  lg 大屏幕 -->
-            <div class="col-xs-3 col-md-2 col-lg-2 tree-div">
-                <ul id="contentTree" class="ztree">
-                </ul>
-            </div>
+    <div class="row">
+        <!-- 第一层绿色 -->
+        <div class="col-xs-12">
+            <table id="jqTable-menu" class="jqTable modal-jqTable"></table>
         </div>
     </div>
 </div>

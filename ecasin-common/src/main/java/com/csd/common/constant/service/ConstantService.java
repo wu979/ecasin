@@ -29,4 +29,7 @@ public class ConstantService {
     }
 
 
+    public String findValueById(String constantId){
+        return constantMapper.findValueById(constantId);
+    }
 }

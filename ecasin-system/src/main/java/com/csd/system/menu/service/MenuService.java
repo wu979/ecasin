@@ -9,6 +9,7 @@ import com.csd.security.securityEntity.User;
 import com.csd.system.menu.dao.MenuMapper;
 import com.csd.system.menu.po.Menu;
 import com.csd.system.menu.po.Tree;
+import com.csd.system.user.dao.UserMapper;
 import com.csd.utils.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,6 +33,9 @@ public class MenuService  extends DeleteService<Menu> {
     @Resource
     private MenuMapper menuMapper;
 
+
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * sql 无限次查询
@@ -257,16 +261,47 @@ public class MenuService  extends DeleteService<Menu> {
 
 
     public List<Menu> findRoleByMenuList(String roleId){
-
-        return null;
-    }
-
-    public List findByMenuList(String jobId) {
+        List<Menu> resultList = new ArrayList<>();
+        com.csd.system.user.po.User user = userMapper.findUserByUserId(LoginUser.getLoginUserId());
         Map<String,Object> map = new HashMap<>();
-        if(!StringUtil.isEmpty(jobId)){
-            map.put("jobId",jobId);
+        if(!StringUtil.isEmpty(user.getPtJobId())){
+            map.put("jobId",user.getPtJobId());
+        }
+        if(!StringUtil.isEmpty(roleId)){
+            map.put("roleId",roleId);
+        }
+        List<Menu> parentMenuList = menuMapper.findRoleByParentList(map);
+
+        List<Menu> sunMenuList = menuMapper.findRoleBySunList(map);
+
+        String  str = null;
+        if(parentMenuList.size() > 0 || sunMenuList.size() > 0){
+            str = "root_parent";
+        }
+        List<Menu> newParentMenuList = new ArrayList(){};
+        newParentMenuList.add(new Menu("root_parent","所有菜单","","false",0,"1",str));
+
+        for (Menu menu : parentMenuList) {
+            if (!menu.getMenuName().equals("首页")) {
+                menu.setMenuPid("root_parent");
+                menu.setHasChild(menu.getMenuHasChild() == 0 ? "true" : "false");
+                newParentMenuList.add(menu);
+            }
         }
 
-        return null;
+        for (Menu parentManu : newParentMenuList) {
+            resultList.add(parentManu);
+            for (Menu sunMenu : sunMenuList) {
+                if (parentManu.getMenuId().equals(sunMenu.getMenuPid())) {
+                    sunMenu.setHasChild(sunMenu.getMenuHasChild() == 0 ? "true" : "false");
+                    resultList.add(sunMenu);
+                    if (sunMenu.getMenuHasChild() == Integer.valueOf(ConstantUtil.CODE_ONE)) {
+                        resultList = findSunMenuByAdmin(resultList, sunMenu.getMenuId(), sunMenuList);
+                    }
+                }
+
+            }
+        }
+        return resultList;
     }
 }

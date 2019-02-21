@@ -65,6 +65,10 @@ public class Menu {
     /***/
     private List<Menu> children = null;
 
+    /**连查-- 赋值判断有没有授权*/
+    private String menuIsNull;
+
+
     public String getMenuId() {
         return menuId;
     }
@@ -201,6 +205,14 @@ public class Menu {
         this.expanded = expanded;
     }
 
+    public String getMenuIsNull() {
+        return menuIsNull;
+    }
+
+    public void setMenuIsNull(String menuIsNull) {
+        this.menuIsNull = menuIsNull;
+    }
+
     public Menu(){}
 
     public Menu(String menuId, String menuName, String menuCode ,String hasChild, Integer menuLevel, String menuIsValid) {
@@ -210,5 +222,15 @@ public class Menu {
         this.hasChild = hasChild;
         this.menuLevel = menuLevel;
         this.menuIsValid = menuIsValid;
+    }
+
+    public Menu(String menuId, String menuName, String menuCode ,String hasChild, Integer menuLevel, String menuIsValid,String menuIsNull) {
+        this.menuId = menuId;
+        this.menuName = menuName;
+        this.menuCode = menuCode;
+        this.hasChild = hasChild;
+        this.menuLevel = menuLevel;
+        this.menuIsValid = menuIsValid;
+        this.menuIsNull = menuIsNull;
     }
 }

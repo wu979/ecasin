@@ -21,6 +21,15 @@ public class EntityService {
     private String entityJobName;
 
 
+    /**常量对应名称*/
+    private String entityConstantName;
+
+
+    /**常量对应值*/
+    private String entityConstantValue;
+
+
+
     public String getEntityOrgName() {
         return entityOrgName;
     }
@@ -43,5 +52,21 @@ public class EntityService {
 
     public void setEntityJobName(String entityJobName) {
         this.entityJobName = entityJobName;
+    }
+
+    public String getEntityConstantName() {
+        return entityConstantName;
+    }
+
+    public void setEntityConstantName(String entityConstantName) {
+        this.entityConstantName = entityConstantName;
+    }
+
+    public String getEntityConstantValue() {
+        return entityConstantValue;
+    }
+
+    public void setEntityConstantValue(String entityConstantValue) {
+        this.entityConstantValue = entityConstantValue;
     }
 }
