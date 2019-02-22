@@ -618,7 +618,7 @@ function showMenu() {
         },
         url:ctx + "/menu/findRoleByMenuList",
         datatype:'json',
-        postData:{ roleId: roleId},
+        postData:{ roleId: roleId },
         pager:false,
         mtype:"POST",
         height:'100%',
@@ -787,8 +787,52 @@ function deleteJob(roleId,jobIds,roleType) {
     })
 }
 function saveMenu(menuId) {
-
+    if(menuId != null){
+        var roleId = $("#roleId").val();
+        $.ajax({
+            url:ctx + '/role/addMenu',
+            type:'post',
+            dataType:'json',
+            data:
+                {
+                    menuId : menuId,
+                    roleId : roleId,
+                    roleType : '1' //没用,就是过一下验证类
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    console.log("ok")
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+    }else {
+        layer.msg("数据错误,请重试");
+    }
 }
 function deleteMenu(menuId) {
-
+    if(menuId != null){
+        var roleId = $("#roleId").val();
+        $.ajax({
+            url:ctx + '/role/deleteMenu',
+            type:'post',
+            dataType:'json',
+            data:
+                {
+                    menuId : menuId,
+                    roleId : roleId,
+                    roleType : '2' //没用,就是过一下验证类
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    console.log("ok")
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+    }else {
+        layer.msg("数据错误,请重试");
+    }
 }

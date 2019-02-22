@@ -93,7 +93,7 @@ public class RoleController {
      * @param type  1menuPage 2jobPage
      * @return
      */
-    @RequestMapping("/checkRoleType")
+    @RequestMapping(value = "/checkRoleType" , method = RequestMethod.POST)
     @ResponseBody
     public Result checkRoleType(String roleType,String type){
         roleService.checkRoleType(roleType,type);
@@ -169,7 +169,7 @@ public class RoleController {
      * 授权添加职位
      * @return
      */
-    @RequestMapping("/addJob")
+    @RequestMapping(value = "/addJob" , method = RequestMethod.POST)
     @ResponseBody
     public Result addJob(@Valid RoleRequest request,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -184,13 +184,37 @@ public class RoleController {
      * 授权添加职位
      * @return
      */
-    @RequestMapping("/deleteJob")
+    @RequestMapping(value = "/deleteJob" , method = RequestMethod.POST)
     @ResponseBody
     public Result deleteJob(@Valid RoleRequest request,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
         }
         roleService.createJob(request,ConstantUtil.CODE_TWO);
+        return ResultUtil.success();
+    }
+
+
+    /**
+     * 授权添加菜单
+     * @return
+     */
+    @RequestMapping(value = "/addMenu" , method = RequestMethod.POST)
+    @ResponseBody
+    public Result addMenu(@Valid RoleRequest request,BindingResult bindingResult){
+        roleService.addMenu(request);
+        return ResultUtil.success();
+    }
+
+
+    /**
+     * 授权删除菜单
+     * @return
+     */
+    @RequestMapping(value = "/deleteMenu" , method = RequestMethod.POST)
+    @ResponseBody
+    public Result deleteMenu(@Valid RoleRequest request,BindingResult bindingResult){
+        roleService.deleteMenu(request);
         return ResultUtil.success();
     }
 }

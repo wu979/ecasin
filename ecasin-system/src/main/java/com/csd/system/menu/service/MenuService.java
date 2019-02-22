@@ -43,6 +43,11 @@ public class MenuService  extends DeleteService<Menu> {
     private RoleMenuMapper roleMenuMapper;
 
 
+    public List<Menu> findRoleByAllList(Map<String,Object> map){
+        return menuMapper.findRoleByAllList(map);
+    }
+
+
     /**
      * sql 无限次查询
      *

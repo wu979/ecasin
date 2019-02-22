@@ -72,4 +72,6 @@ public interface MenuMapper {
 
     List<Menu> findRoleBySunList(Map<String,Object> map);
 
+
+    List<Menu> findRoleByAllList(Map<String,Object> map);
 }

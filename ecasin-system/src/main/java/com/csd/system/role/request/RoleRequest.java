@@ -15,10 +15,15 @@ public class RoleRequest extends RequestService {
     private String roleId;
 
 
-    private String[] jobIds;
-
     @NotBlank(message = "参数错误,请重试")
     private String roleType;
+
+
+    @NotBlank(message = "参数错误,请重试")
+    private String menuId;
+
+
+    private String[] jobIds;
 
     public String getRoleId() {
         return roleId;
@@ -42,5 +47,13 @@ public class RoleRequest extends RequestService {
 
     public void setRoleType(String roleType) {
         this.roleType = roleType;
+    }
+
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 }

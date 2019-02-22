@@ -10,9 +10,12 @@ import com.csd.exception.application.ApplicationException;
 import com.csd.exception.status.BaseStatus;
 import com.csd.log.annotation.SystemServiceLog;
 import com.csd.security.securityEntity.User;
+import com.csd.system.menu.po.Menu;
+import com.csd.system.menu.service.MenuService;
 import com.csd.system.role.dao.RoleMapper;
 import com.csd.system.role.po.Role;
 import com.csd.system.role.request.RoleRequest;
+import com.csd.system.user.dao.UserMapper;
 import com.csd.system.userRole.UserRoleService;
 import com.csd.utils.ConstantUtil;
 import com.csd.utils.DateUtil;
@@ -26,7 +29,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +51,12 @@ public class RoleService extends DeleteService<Role> {
 
     @Autowired
     private UserRoleService userRoleService;
+
+    @Autowired
+    private MenuService menuService;
+
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 角色页面列表
@@ -157,7 +168,7 @@ public class RoleService extends DeleteService<Role> {
     }
 
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
-    public Map<String,Object> createJob(RoleRequest request,String type){
+    public void createJob(RoleRequest request,String type){
         Map<String,Object> map = new HashMap<>();
         Role role = roleMapper.selectByPrimaryKey(request.getRoleId());
         Constant constant = constantMapper.selectByPrimaryKey(request.getRoleType());
@@ -180,7 +191,62 @@ public class RoleService extends DeleteService<Role> {
         }else {
             userRoleService.deleteJob(map);
         }
-        return map;
     }
 
+    @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
+    public void addMenu(RoleRequest request){
+        List<String> menuIdList = new ArrayList<>();
+        List<Menu> menuAll = this.getAllList(request);
+        if(request.getMenuId().equals("root_parent")){
+            for(Menu menu : menuAll){
+                if(menu.getMenuIsNull() == null){
+                    menuIdList.add(menu.getMenuId());
+                }
+            }
+        }else {
+            List<String> menuParentList = this.findMenuParentByRecursion(menuAll,request.getMenuId());
+        }
+
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("roleId",request.getRoleId());
+        map.put("menuIdList",menuIdList);
+
+    }
+
+    @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
+    public void deleteMenu(RoleRequest request){
+        List<Menu> menuAll = this.getAllList(request);
+    }
+
+
+    //递归循环,根据父级ID 找到父级没有标记的
+    public List<String> findMenuParentByRecursion(List<Menu> menuAll,String menuId){
+        List<String> menuIdList = new ArrayList<>();
+        for(Menu menu : menuAll){
+            if(menu.getMenuId().equals(menuId)){
+                if(menu.getMenuPid() != null){
+                    String parentId = menu.getMenuPid();
+                    if(menu.getMenuIsNull() == null){
+                        menuIdList.add(parentId);
+                        findMenuParentByRecursion(menuAll,parentId);
+                    }
+                }
+            }
+        }
+        return menuIdList;
+    }
+
+
+    public List<Menu> getAllList(RoleRequest request){
+        com.csd.system.user.po.User user = userMapper.findUserByUserId(LoginUser.getLoginUserId());
+        Map<String,Object> map = new HashMap<>();
+        if(!StringUtil.isEmpty(user.getPtJobId())){
+            map.put("jobId",user.getPtJobId());
+        }
+        if(!StringUtil.isEmpty(request.getRoleId())){
+            map.put("roleId",request.getRoleId());
+        }
+        return menuService.findRoleByAllList(map);
+    }
 }
