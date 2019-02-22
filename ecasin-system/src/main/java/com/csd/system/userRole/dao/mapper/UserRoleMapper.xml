@@ -37,4 +37,21 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertJob" parameterType="java.util.Map">
+    insert into w_user_role (relation_role_id, relation_job_id, relation_is_valid)
+    values
+    <foreach collection="jobIds" item="jobId" index="index" separator=",">
+      (#{roleId,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, #{isValid,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="deleteJob" parameterType="java.util.Map">
+    delete from w_user_role
+    where
+      relation_role_id = #{roleId}
+    and
+      relation_job_id in
+    <foreach collection="jobIds" item="jobId" index="index" open="(" close=")" separator=",">
+      #{jobId}
+    </foreach>
+  </insert>
 </mapper>

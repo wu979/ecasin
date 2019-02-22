@@ -13,12 +13,14 @@ import com.csd.security.securityEntity.User;
 import com.csd.system.role.dao.RoleMapper;
 import com.csd.system.role.po.Role;
 import com.csd.system.role.request.RoleRequest;
+import com.csd.system.userRole.UserRoleService;
 import com.csd.utils.ConstantUtil;
 import com.csd.utils.DateUtil;
 import com.csd.utils.StringUtil;
 import com.csd.utils.UUIDUtil;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +44,8 @@ public class RoleService extends DeleteService<Role> {
     @Resource
     private ConstantMapper constantMapper;
 
+    @Autowired
+    private UserRoleService userRoleService;
 
     /**
      * 角色页面列表
@@ -151,4 +155,32 @@ public class RoleService extends DeleteService<Role> {
             }
         }
     }
+
+    @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
+    public Map<String,Object> createJob(RoleRequest request,String type){
+        Map<String,Object> map = new HashMap<>();
+        Role role = roleMapper.selectByPrimaryKey(request.getRoleId());
+        Constant constant = constantMapper.selectByPrimaryKey(request.getRoleType());
+        if(constant.getConstantValue().equals(ConstantUtil.CODE_ONE)){
+            throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_DELETE.getCode(),BaseStatus.ROLE_ADMIN_NOT_DELETE.getMessage());
+        }
+        if(constant.getConstantValue().equals(ConstantUtil.CODE_ONE)){
+            if(role.getRoleCode().equals("ROLE_PING")){
+                throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+            }
+        }
+        if(request.getJobIds().length < Integer.valueOf(ConstantUtil.CODE_ONE)){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),BaseStatus.PARAMETER.getMessage());
+        }
+        map.put("roleId",request.getRoleId());
+        map.put("jobIds",request.getJobIds());
+        map.put("isValid",ConstantUtil.CODE_ONE);
+        if(type.equals(ConstantUtil.CODE_ONE)){
+            userRoleService.insertJob(map);
+        }else {
+            userRoleService.deleteJob(map);
+        }
+        return map;
+    }
+
 }

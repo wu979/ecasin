@@ -6,6 +6,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,18 +17,50 @@ import java.util.List;
  */
 public class PageVo<T> {
 
+    public static final String ASC       = "asc";
+    public static final String DESC      = "desc";
     protected int              page      = 1;                 // 页码
     protected int              rows      = 10;                // 每页显示数量
     protected String           sidx      = null;              // 排序字段
     protected String           sord      = null;              // 排序规则
     protected long             total     = -1L;               // 总页数
     protected long             records   = -1L;               // 总记录数
+
     protected boolean          autoCount = true;
     protected List<T> result    = new ArrayList<T>();
-    public static final String ASC       = "asc";
-    public static final String DESC      = "desc";
+    protected int status = 1;
+    protected String message = "Success";
+    protected HashMap<String,Object> noteMap;
 
-    public PageVo() {}
+
+
+    public HashMap<String, Object> getNoteMap() {
+        return noteMap;
+    }
+
+    public void setNoteMap(HashMap<String, Object> noteMap) {
+        this.noteMap = noteMap;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public PageVo()
+    {
+    }
 
     public PageVo(int rows)
     {

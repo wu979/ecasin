@@ -30,6 +30,9 @@ public class RequestService {
     /** 名称模糊 */
     private String busName;
 
+    /** 下拉框 */
+    private String selectOption;
+
 
     public String getStartTime() {
         return startTime;
@@ -85,5 +88,13 @@ public class RequestService {
 
     public void setBusName(String busName) {
         this.busName = busName;
+    }
+
+    public String getSelectOption() {
+        return selectOption;
+    }
+
+    public void setSelectOption(String selectOption) {
+        this.selectOption = selectOption;
     }
 }

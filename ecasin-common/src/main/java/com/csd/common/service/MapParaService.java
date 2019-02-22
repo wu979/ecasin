@@ -39,6 +39,9 @@ public class MapParaService {
         if(!StringUtil.isEmpty(request.getDepId())){
             map.put("depId", request.getDepId());
         }
+        if(!StringUtil.isEmpty(request.getSelectOption())){
+            map.put("selectOption", request.getSelectOption());
+        }
         return map;
     }
 

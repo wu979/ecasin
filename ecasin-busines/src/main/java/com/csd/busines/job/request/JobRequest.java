@@ -17,6 +17,7 @@ public class JobRequest extends RequestService {
     private String jobType;
 
 
+
     public String getRoleId() {
         return roleId;
     }
@@ -32,4 +33,5 @@ public class JobRequest extends RequestService {
     public void setJobType(String jobType) {
         this.jobType = jobType;
     }
+
 }

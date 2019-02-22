@@ -19,7 +19,6 @@
 <script src="${ctx}/static/assets/js/zTreeStyle/jquery.ztree.exhide.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/assets/js/jqGrid/i18n/grid.locale-cn.js" type="text/javascript"></script>
 <script src="${ctx}/static/assets/js/jqGrid/jquery.jqGrid.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/assets/js/jqGrid/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="${ctx}/static/assets/css/jqgrid/jquery-ui.js" type="text/javascript"></script>
 
 <script src="${ctx}/static/assets/layer/layer.js" type="text/javascript"></script>

@@ -37,4 +37,14 @@
       </if>
     </trim>
   </insert>
+  <select id="findCheckMenu" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select
+      count(1)
+    from
+      w_role_menu
+    where
+      relation_role_id = #{roleId}
+    and
+      relation_is_valid = '1'
+  </select>
 </mapper>

@@ -9,6 +9,7 @@ import com.csd.security.securityEntity.User;
 import com.csd.system.menu.dao.MenuMapper;
 import com.csd.system.menu.po.Menu;
 import com.csd.system.menu.po.Tree;
+import com.csd.system.roleMenu.dao.RoleMenuMapper;
 import com.csd.system.user.dao.UserMapper;
 import com.csd.utils.*;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,11 @@ public class MenuService  extends DeleteService<Menu> {
 
     @Resource
     private UserMapper userMapper;
+
+
+    @Resource
+    private RoleMenuMapper roleMenuMapper;
+
 
     /**
      * sql 无限次查询
@@ -274,19 +280,19 @@ public class MenuService  extends DeleteService<Menu> {
 
         List<Menu> sunMenuList = menuMapper.findRoleBySunList(map);
 
+        int checkMenu = roleMenuMapper.findCheckMenu(map);
+
         String  str = null;
-        if(parentMenuList.size() > 0 || sunMenuList.size() > 0){
+        if(checkMenu > 0){
             str = "root_parent";
         }
         List<Menu> newParentMenuList = new ArrayList(){};
         newParentMenuList.add(new Menu("root_parent","所有菜单","","false",0,"1",str));
 
         for (Menu menu : parentMenuList) {
-            if (!menu.getMenuName().equals("首页")) {
-                menu.setMenuPid("root_parent");
-                menu.setHasChild(menu.getMenuHasChild() == 0 ? "true" : "false");
-                newParentMenuList.add(menu);
-            }
+            menu.setMenuPid("root_parent");
+            menu.setHasChild(menu.getMenuHasChild() == 0 ? "true" : "false");
+            newParentMenuList.add(menu);
         }
 
         for (Menu parentManu : newParentMenuList) {

@@ -69,19 +69,19 @@
                 </div>
                 <!-- 职位未选列表 -->
                 <div class="col-sm-8 col-md-8 col-lg-8" style="height: 70%">
-                    <table id="jqTable-unSelect" class="jqTable"></table>
+                    <table id="jqTable-unSelect" class="jqTable modal-jqTable"></table>
                     <div id="grid-pager-unSelect" style="height: 50px;"></div>
                 </div>
                 <!-- 图标 -->
                 <div class="col-sm-1 col-md-1 col-lg-1">
                     <div style="padding-top: 105px;">
-                        <button class='btn btn-light btn-sm page-button-update' title="添加">
+                        <button class='btn btn-light btn-sm page-button-save' title="添加" id="page-button-save">
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-youjiantou"></use>
                             </svg>
                         </button>
                         <br>
-                        <button class='btn btn-light btn-sm page-button-update' title="移除">
+                        <button class='btn btn-light btn-sm page-button-delete' title="移除" id="page-button-delete">
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-zuojiantou"></use>
                             </svg>

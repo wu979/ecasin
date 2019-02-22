@@ -207,19 +207,18 @@ var pageControl = {
     getRowNum: function () {
         var pagesNums = 10;
 
-        if (sessionStorage.getItem('pages')) {
-            pagesNums = Number(sessionStorage.getItem('pages'));
+        if (sessionStorage.getItem('rowNum')) {
+            pagesNums = Number(sessionStorage.getItem('rowNum'));
         }
-        // console.log(pagesNums);
         return pagesNums;
     },
     //将当前表格页码和条数放入地址栏
     setPage: function (id) {
 
         var page = $(id).jqGrid('getGridParam', 'page');
-        var pages = $(id).jqGrid('getGridParam', 'rowNum');
+        var rowNum = $(id).jqGrid('getGridParam', 'rowNum');
         sessionStorage.setItem('page', page);
-        sessionStorage.setItem('pages', pages);
+        sessionStorage.setItem('rowNum', rowNum);
 
     },
     //获取页面搜索内容，放入session；

@@ -193,6 +193,9 @@
     <if test="busName != null and busName != ''">
       and A.role_name like CONCAT(CONCAT(#{busName}),'%')
     </if>
+    <if test="selectOption != null and selectOption !=''">
+      and A.role_type = #{selectOption}
+    </if>
     order by A.role_create_time desc
   </select>
 </mapper>

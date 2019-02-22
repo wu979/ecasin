@@ -10,6 +10,7 @@ import com.csd.log.annotation.SystemControllerLog;
 import com.csd.system.role.po.Role;
 import com.csd.system.role.request.RoleRequest;
 import com.csd.system.role.service.RoleService;
+import com.csd.utils.ConstantUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -109,7 +110,8 @@ public class RoleController {
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     @ResponseBody
     public PageVo<Role> findByPage(PageVo<Role> page, RoleRequest request){
-        return roleService.findByPage(page,request);
+        PageVo<Role> byPage = roleService.findByPage(page, request);
+        return byPage;
     }
 
 
@@ -160,5 +162,35 @@ public class RoleController {
     public Result delete(String[] ids) throws Exception {
         String rsult = roleService.commonDeleteEntity(ids);
         return ResultUtil.success(rsult);
+    }
+
+
+    /**
+     * 授权添加职位
+     * @return
+     */
+    @RequestMapping("/addJob")
+    @ResponseBody
+    public Result addJob(@Valid RoleRequest request,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
+        }
+        roleService.createJob(request, ConstantUtil.CODE_ONE);
+        return ResultUtil.success();
+    }
+
+
+    /**
+     * 授权添加职位
+     * @return
+     */
+    @RequestMapping("/deleteJob")
+    @ResponseBody
+    public Result deleteJob(@Valid RoleRequest request,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
+        }
+        roleService.createJob(request,ConstantUtil.CODE_TWO);
+        return ResultUtil.success();
     }
 }
