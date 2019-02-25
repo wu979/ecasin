@@ -13,4 +13,10 @@ public interface RoleMenuMapper {
 
 
     int findCheckMenu(Map<String,Object> map);
+
+
+    void insertListByRoleId(Map<String,Object> map);
+
+
+    void deleteListByRoleId(Map<String,Object> map);
 }

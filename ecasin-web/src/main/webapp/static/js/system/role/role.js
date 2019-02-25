@@ -671,13 +671,15 @@ function showMenu() {
                     jQuery("#jqTable-menu").jqGrid('setRowData', ids[i], { operation: operation });
                 }
             }
-            $('#jqTable-menu').on('click','.page-button-save',function () {
+            $('#jqTable-menu .page-button-save').click(function () {
                 var menuId = $(this).attr('data-record');
-                saveMenu(menuId);
+                var row = forCheckMenu(menuId);
+                saveMenu(row);
             })
-            $('#jqTable-menu').on('click','.page-button-delete',function () {
+            $('#jqTable-menu .page-button-delete').click(function () {
                 var menuId = $(this).attr('data-record');
-                deleteMenu(menuId);
+                var row = forCheckMenu(menuId);
+                deleteMenu(row);
             })
 
             /**
@@ -786,7 +788,9 @@ function deleteJob(roleId,jobIds,roleType) {
         }
     })
 }
-function saveMenu(menuId) {
+function saveMenu(row) {
+    var menuId = row.menuId;
+    var pId = row.menuPid;
     if(menuId != null){
         var roleId = $("#roleId").val();
         $.ajax({
@@ -797,11 +801,12 @@ function saveMenu(menuId) {
                 {
                     menuId : menuId,
                     roleId : roleId,
+                    menuPid : pId,
                     roleType : '1' //没用,就是过一下验证类
                 },
             success:function (data) {
                 if(data.status == 0){
-                    console.log("ok")
+                    $("#jqTable-menu").trigger("reloadGrid");
                 }else {
                     layer.msg(data.message);
                 }
@@ -811,7 +816,9 @@ function saveMenu(menuId) {
         layer.msg("数据错误,请重试");
     }
 }
-function deleteMenu(menuId) {
+function deleteMenu(row) {
+    var menuId = row.menuId;
+    var pId = row.menuPid;
     if(menuId != null){
         var roleId = $("#roleId").val();
         $.ajax({
@@ -822,11 +829,12 @@ function deleteMenu(menuId) {
                 {
                     menuId : menuId,
                     roleId : roleId,
+                    menuPid : pId,
                     roleType : '2' //没用,就是过一下验证类
                 },
             success:function (data) {
                 if(data.status == 0){
-                    console.log("ok")
+                    $("#jqTable-menu").trigger("reloadGrid");
                 }else {
                     layer.msg(data.message);
                 }
@@ -835,4 +843,16 @@ function deleteMenu(menuId) {
     }else {
         layer.msg("数据错误,请重试");
     }
+}
+function forCheckMenu(menuId) {
+    var row;
+    var ids = jQuery("#jqTable-menu").jqGrid('getDataIDs');
+    for (var i = 0; i < ids.length; i++) {
+        var cl = ids[i];
+        var all = $("#jqTable-menu").jqGrid('getRowData', cl);
+        if(all.menuId == menuId){
+            row = all;
+        }
+    }
+    return row;
 }

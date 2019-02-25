@@ -202,7 +202,10 @@ public class RoleController {
     @RequestMapping(value = "/addMenu" , method = RequestMethod.POST)
     @ResponseBody
     public Result addMenu(@Valid RoleRequest request,BindingResult bindingResult){
-        roleService.addMenu(request);
+        if(bindingResult.hasErrors()){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
+        }
+        roleService.createMenu(request,ConstantUtil.CODE_ONE);
         return ResultUtil.success();
     }
 
@@ -214,7 +217,10 @@ public class RoleController {
     @RequestMapping(value = "/deleteMenu" , method = RequestMethod.POST)
     @ResponseBody
     public Result deleteMenu(@Valid RoleRequest request,BindingResult bindingResult){
-        roleService.deleteMenu(request);
+        if(bindingResult.hasErrors()){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
+        }
+        roleService.createMenu(request,ConstantUtil.CODE_TWO);
         return ResultUtil.success();
     }
 }

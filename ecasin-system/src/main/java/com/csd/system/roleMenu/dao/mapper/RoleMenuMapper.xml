@@ -47,4 +47,21 @@
     and
       relation_is_valid = '1'
   </select>
+  <insert id="insertListByRoleId" parameterType="java.util.Map">
+    insert into w_role_menu (relation_menu_id, relation_role_id, relation_is_valid)
+    values
+    <foreach collection="menuIdList" item="menuId" index="index" separator=",">
+      (#{menuId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{isValid,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <update id="deleteListByRoleId" parameterType="java.util.Map">
+    update w_role_menu set relation_is_valid = #{isValid}
+    where
+    relation_role_id = #{roleId}
+    and
+    relation_menu_id in
+    <foreach collection="menuIdList" item="menuId" index="index" open="(" close=")" separator=",">
+      #{menuId}
+    </foreach>
+  </update>
 </mapper>

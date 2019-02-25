@@ -44,8 +44,8 @@
       (#{roleId,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, #{isValid,jdbcType=VARCHAR})
     </foreach>
   </insert>
-  <insert id="deleteJob" parameterType="java.util.Map">
-    delete from w_user_role
+  <update id="deleteJob" parameterType="java.util.Map">
+    update  w_user_role set relation_is_valid = #{isValid}
     where
       relation_role_id = #{roleId}
     and
@@ -53,5 +53,5 @@
     <foreach collection="jobIds" item="jobId" index="index" open="(" close=")" separator=",">
       #{jobId}
     </foreach>
-  </insert>
+  </update>
 </mapper>

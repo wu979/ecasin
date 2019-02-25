@@ -23,6 +23,9 @@ public class RoleRequest extends RequestService {
     private String menuId;
 
 
+    private String menuPid;
+
+
     private String[] jobIds;
 
     public String getRoleId() {
@@ -56,4 +59,13 @@ public class RoleRequest extends RequestService {
     public void setMenuId(String menuId) {
         this.menuId = menuId;
     }
+
+    public String getMenuPid() {
+        return menuPid;
+    }
+
+    public void setMenuPid(String menuPid) {
+        this.menuPid = menuPid;
+    }
 }
+
