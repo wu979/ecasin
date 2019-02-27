@@ -129,10 +129,11 @@
     margin-right: 10px;
 }
 .tree-minus{
-    background-image: url("../../images/jiahao.png") !important;
+
+    background-image: url("../../images/jianhao.png") !important;
+    background-size: 80% 100% !important;
 }
 
 .tree-plus{
-    background-image: url("../../images/jianhao.png") !important;
-    background-size: 80% 100% !important;
+    background-image: url("../../images/jiahao.png") !important;
 }
