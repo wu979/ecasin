@@ -183,12 +183,6 @@ function update(rowData) {
                     var parentName;
                     if(rowData.menuLevel == 1){
                         parentName = "所有菜单";
-                        body.find("#parentName").val(parentName);
-                        body.find("#menuPid").val(rowData.menuId);
-                        body.find("#menuName").val(rowData.menuName);
-                        body.find("#menuCode").val(rowData.menuCode);
-                        body.find("#menuUrl").val(rowData.menuUrl);
-                        body.find("#menuOrder").val(rowData.menuOrder);
                     }else {
                         $.ajax({
                             url: ctx + '/menu/findParentNameById',
@@ -198,12 +192,6 @@ function update(rowData) {
                             success:function (data) {
                                 if(data.status == 0){
                                     parentName = data.data.menuName;
-                                    body.find("#parentName").val(parentName);
-                                    body.find("#menuPid").val(rowData.menuId);
-                                    body.find("#menuName").val(rowData.menuName);
-                                    body.find("#menuCode").val(rowData.menuCode);
-                                    body.find("#menuUrl").val(rowData.menuUrl);
-                                    body.find("#menuOrder").val(rowData.menuOrder);
                                 }else {
                                     layer.close(index);
                                     layer.msg(data.message);
@@ -211,7 +199,13 @@ function update(rowData) {
                             }
                         })
                     }
-
+                    body.find("#parentName").val(parentName);
+                    body.find("#menuId").val(rowData.menuId);
+                    body.find("#menuPid").val(rowData.menuPid);
+                    body.find("#menuName").val(rowData.menuName);
+                    body.find("#menuCode").val(rowData.menuCode);
+                    body.find("#menuUrl").val(rowData.menuUrl);
+                    body.find("#menuOrder").val(rowData.menuOrder);
                 },
                 yes: function (index, layero) {
                     $.ajax({

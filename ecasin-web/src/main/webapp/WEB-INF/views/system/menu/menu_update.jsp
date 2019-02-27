@@ -13,6 +13,7 @@
     <div class="page-content" style="overflow: hidden;">
         <div class="modal-body">
             <form id="form_update">
+                <input type="hidden" class="col-xs-12 col-sm-8" readonly="readonly" id="menuId" name="menuId"/>
                 <input type="hidden" class="col-xs-12 col-sm-8" readonly="readonly" id="menuPid" name="menuPid"/>
                 <div class="form-group">
                     <div class="col-xs-4 col-sm-3">

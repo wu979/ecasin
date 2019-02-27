@@ -789,34 +789,43 @@ function deleteJob(roleId,jobIds,roleType) {
     })
 }
 function saveMenu(row) {
-    var menuId = row.menuId;
-    var pId = row.menuPid;
-    if(menuId != null){
-        var roleId = $("#roleId").val();
-        $.ajax({
-            url:ctx + '/role/addMenu',
-            type:'post',
-            dataType:'json',
-            data:
-                {
-                    menuId : menuId,
-                    roleId : roleId,
-                    menuPid : pId,
-                    roleType : '1' //没用,就是过一下验证类
+        var index;
+        var menuId = row.menuId;
+        var pId = row.menuPid;
+        if(menuId != null){
+            var roleId = $("#roleId").val();
+            $.ajax({
+                url:ctx + '/role/addMenu',
+                type:'post',
+                dataType:'json',
+                data:
+                    {
+                        menuId : menuId,
+                        roleId : roleId,
+                        menuPid : pId,
+                        roleType : '1' //没用,就是过一下验证类
+                    },
+                beforeSend: function (request) {
+                    index = layer.load(2);
                 },
-            success:function (data) {
-                if(data.status == 0){
-                    $("#jqTable-menu").trigger("reloadGrid");
-                }else {
-                    layer.msg(data.message);
+                success:function (data) {
+                    if(data.status == 0){
+                        setTimeout(function () {
+                            layer.close(index);
+                            $("#jqTable-menu").trigger("reloadGrid");
+                        },1000);
+                    }else {
+                        layer.msg(data.message);
+                    }
                 }
-            }
-        })
-    }else {
-        layer.msg("数据错误,请重试");
-    }
+            })
+        }else {
+            layer.msg("数据错误,请重试");
+        }
+
 }
 function deleteMenu(row) {
+    var index;
     var menuId = row.menuId;
     var pId = row.menuPid;
     if(menuId != null){
@@ -832,9 +841,15 @@ function deleteMenu(row) {
                     menuPid : pId,
                     roleType : '2' //没用,就是过一下验证类
                 },
+            beforeSend: function (request) {
+                index = layer.load(2);
+            },
             success:function (data) {
                 if(data.status == 0){
-                    $("#jqTable-menu").trigger("reloadGrid");
+                    setTimeout(function () {
+                        layer.close(index);
+                        $("#jqTable-menu").trigger("reloadGrid");
+                    },1000);
                 }else {
                     layer.msg(data.message);
                 }

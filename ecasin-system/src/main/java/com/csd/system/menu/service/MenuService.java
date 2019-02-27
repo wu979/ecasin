@@ -134,7 +134,7 @@ public class MenuService  extends DeleteService<Menu> {
      *
      * @return
      */
-    public List findByPage() {
+    public List  findByPage() {
         List<Menu> resultList = new ArrayList<>();
 
         List<Menu> parentMenuList = menuMapper.findParentMenuByAdmin();
@@ -221,15 +221,20 @@ public class MenuService  extends DeleteService<Menu> {
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
     @SystemServiceLog(descrption = "修改菜单")
     public void update(Menu menu) throws ApplicationException {
+        Menu menuById = menuMapper.selectByPrimaryKey(menu.getMenuId());
         Menu menuByName = menuMapper.findMenuByName(menu.getMenuName());
         if(!StringUtil.isObjectEmpty(menuByName)){
-            if(!menu.getMenuId().equals(menuByName.getMenuId())){
+            if(!menuById.getMenuId().equals(menuByName.getMenuId())){
                 throw new ApplicationException(BaseStatus.MENU_NAME_EXIST.getCode(),BaseStatus.MENU_NAME_EXIST.getMessage());
             }
         }
-        menu.setMenuUpdateUserId(LoginUser.getLoginUserId());
-        menu.setMenuUpdateTime(DateUtil.getTime());
-        menuMapper.updateByPrimaryKeySelective(menu);
+        menuById.setMenuName(menu.getMenuName());
+        menuById.setMenuCode(menu.getMenuCode());
+        menuById.setMenuOrder(menu.getMenuOrder());
+        menuById.setMenuUrl(menu.getMenuUrl());
+        menuById.setMenuUpdateUserId(LoginUser.getLoginUserId());
+        menuById.setMenuUpdateTime(DateUtil.getTime());
+        menuMapper.updateByPrimaryKeySelective(menuById);
     }
 
 
