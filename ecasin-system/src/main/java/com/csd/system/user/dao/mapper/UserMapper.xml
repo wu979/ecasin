@@ -345,4 +345,20 @@
     and
       B.pt_is_valid = '1'
   </select>
+  <select id="findByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from
+      w_user
+    where
+      user_org_id = #{orgId}
+    and
+      user_type = #{userType}
+    <if test="busName != null and busName != ''">
+      and user_name like CONCAT(CONCAT(#{busName}),'%')
+    </if>
+    <if test="selectOption != null and selectOption != ''">
+      and user_is_active = #{selectOption}
+    </if>
+  </select>
 </mapper>

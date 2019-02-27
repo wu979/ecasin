@@ -14,47 +14,6 @@
     <input type="hidden" class="col-xs-12 col-sm-8" readonly id="roleId"/>
     <input type="hidden" class="col-xs-12 col-sm-8" readonly id="roleType"/>
     <div class="modal-body">
-        <%--<div class="col-sm-12 col-md-12 col-lg-12">--%>
-            <%--<div class="col-sm-3 col-md-3 col-lg-3">--%>
-                <%--<div class="col-sm-10 col-md-10 col-lg-10">--%>
-                    <%--<div class="widget-box">--%>
-                        <%--<div class="widget-body tree-div">--%>
-                            <%--<div class="widget-main padding-8">--%>
-                                <%--<div id="contentTree" class="ztree"></div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-sm-2 col-md-2 col-lg-2">--%>
-                    <%--<div style="padding-top: 105px;">--%>
-                        <%--<button class='btn btn-light btn-sm page-button-update'>--%>
-                            <%--<svg class="icon" aria-hidden="true">--%>
-                                <%--<use xlink:href="#icon-youjiantou"></use>--%>
-                            <%--</svg>--%>
-                        <%--</button>--%>
-                        <%--<br>--%>
-                        <%--<button class='btn btn-light btn-sm page-button-update'>--%>
-                            <%--<svg class="icon" aria-hidden="true">--%>
-                                <%--<use xlink:href="#icon-zuojiantou"></use>--%>
-                            <%--</svg>--%>
-                        <%--</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="col-sm-9 col-md-9 col-lg-9">--%>
-                <%--<!-- 职位未选列表 -->--%>
-                <%--<div class="col-sm-6 col-md-6 col-lg-6" style="height: 70%">--%>
-                    <%--<table id="jqTable-unSelect" class="jqTable"></table>--%>
-                    <%--<div id="grid-pager-unSelect" style="height: 50px;"></div>--%>
-                <%--</div>--%>
-                <%--<!-- 职位已选列表 -->--%>
-                <%--<div class="col-sm-5 col-md-5 col-lg-5" style="height: 70%">--%>
-                    <%--<table id="jqTable-select" class="jqTable"></table>--%>
-                    <%--<div id="grid-pager-select" style="height: 50px;"></div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="col-sm-7 col-md-7 col-lg-7">
                 <!-- 树形 -->

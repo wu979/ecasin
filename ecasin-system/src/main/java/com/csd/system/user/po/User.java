@@ -1,5 +1,6 @@
 package com.csd.system.user.po;
 
+import com.csd.common.service.EntityService;
 import com.csd.system.role.po.Role;
 
 import java.util.List;

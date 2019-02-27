@@ -1,6 +1,10 @@
 package com.csd.system.user.dao;
 
 import com.csd.system.user.po.User;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+
+import java.util.Map;
 
 public interface UserMapper {
     
@@ -29,4 +33,7 @@ public interface UserMapper {
 
 
     User findUserByUserId(String userId);
+
+
+    PageList<User> findByPage(Map<String,Object> map, PageBounds pageBounds);
 }

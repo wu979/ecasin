@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
- * @desc:
+ * @desc:登录-注册
  * @author: wsw
  * @email: 18683789594@163.com
  * @date: 2019/1/28 15:37.

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * @desc:
+ * @desc:常量
  * @author: wsw
  * @email: 18683789594@163.com
  * @date: 2019/2/14 15:30.
