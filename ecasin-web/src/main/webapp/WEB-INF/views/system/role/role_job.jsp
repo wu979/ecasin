@@ -59,7 +59,4 @@
 <div>
     <%@ include file="/WEB-INF/common/commonJs.jsp"%>
     <script src="${ctx}/static/js/system/role/role.js"></script>
-    <script>
-
-    </script>
 </div>
