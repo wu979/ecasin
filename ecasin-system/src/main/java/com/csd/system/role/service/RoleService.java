@@ -14,6 +14,7 @@ import com.csd.system.menu.po.Menu;
 import com.csd.system.menu.service.MenuService;
 import com.csd.system.role.dao.RoleMapper;
 import com.csd.system.role.po.Role;
+import com.csd.system.role.request.JobRequest;
 import com.csd.system.role.request.RoleRequest;
 import com.csd.system.roleMenu.service.RoleMenuService;
 import com.csd.system.user.dao.UserMapper;
@@ -119,12 +120,8 @@ public class RoleService extends DeleteService<Role> {
     @SystemServiceLog(descrption = "修改角色")
     public void update(Role role){
         User user = LoginUser.getLoginUser();
-        if(!user.getUserType().equals(ConstantUtil.CODE_ZERO) && !user.getUserType().equals(ConstantUtil.CODE_ONE)){
-            throw new ApplicationException(BaseStatus.EXCAPTION.getCode(),BaseStatus.EXCAPTION.getMessage());
-        }
         role.setRoleUpdateUserId(user.getUserId());
         role.setRoleUpdateTime(DateUtil.getTime());
-
         roleMapper.updateByPrimaryKeySelective(role);
     }
 
@@ -154,16 +151,15 @@ public class RoleService extends DeleteService<Role> {
     }
 
 
-    public void checkRoleType(String roleType,String type){
+    public void checkRoleType(String roleType,String type,String roleCode){
         if(roleType.equals(ConstantUtil.CODE_ONE)){
             throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_DELETE.getCode(),BaseStatus.ROLE_ADMIN_NOT_DELETE.getMessage());
         }else {
             if(roleType.equals(ConstantUtil.CODE_TWO)){
-                if(type.equals(ConstantUtil.CODE_TWO)){
-                    throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
-                }
-                if(type.equals(ConstantUtil.CODE_THREE)){
-                    throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+                if(type.equals(ConstantUtil.CODE_TWO) || type.equals(ConstantUtil.CODE_THREE)){
+                    if(roleCode.equals("ROLE_PING")){
+                        throw new ApplicationException(BaseStatus.ROLE_ADMIN_NOT_CREATE.getCode(),BaseStatus.ROLE_ADMIN_NOT_CREATE.getMessage());
+                    }
                 }
             }
         }
@@ -171,7 +167,7 @@ public class RoleService extends DeleteService<Role> {
 
 
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
-    public void createJob(RoleRequest request,String type){
+    public void createJob(JobRequest request, String type){
         Map<String,Object> map = new HashMap<>();
         Role role = roleMapper.selectByPrimaryKey(request.getRoleId());
         Constant constant = constantMapper.selectByPrimaryKey(request.getRoleType());
@@ -188,10 +184,11 @@ public class RoleService extends DeleteService<Role> {
         }
         map.put("roleId",request.getRoleId());
         map.put("jobIds",request.getJobIds());
-        map.put("isValid",ConstantUtil.CODE_ONE);
         if(type.equals(ConstantUtil.CODE_ONE)){
+            map.put("isValid",ConstantUtil.CODE_ONE);
             userRoleService.insertJob(map);
         }else {
+            map.put("isValid",ConstantUtil.CODE_ZERO);
             userRoleService.deleteJob(map);
         }
     }

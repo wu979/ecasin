@@ -146,10 +146,12 @@ $('.update').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
     var recordType = [];
+    var recordCode = [];
     for (var i = 0; i < ids.length; i++) {
         var rowData = $("#jqTable").jqGrid('getRowData', ids[i]);
         recordIds.push(rowData.roleId);
         recordType.push(rowData.entityConstantValue);
+        recordCode.push(rowData.roleCode);
     }
     if(recordIds.length > 1){
         layer.msg("最多只能选择一条数据");
@@ -163,6 +165,7 @@ $('.update').on('click',function () {
             data:
                 {
                     roleType:recordType[0],
+                    roleCode:recordCode[0],
                     type:'3'
                 },
             success:function (data) {
@@ -175,7 +178,6 @@ $('.update').on('click',function () {
                 }
             }
         })
-
     }
 })
 /* 删除按钮 */
@@ -193,10 +195,12 @@ $('.menu-authority').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
     var recordType = [];
+    var recordCode = [];
     for (var i = 0; i < ids.length; i++) {
         var rowData = $("#jqTable").jqGrid('getRowData', ids[i]);
         recordIds.push(rowData.roleId);
         recordType.push(rowData.entityConstantValue);
+        recordCode.push(rowData.roleCode);
     }
     if(recordIds.length > 1){
         layer.msg("最多只能选择一条数据");
@@ -210,6 +214,7 @@ $('.menu-authority').on('click',function () {
             data:
                 {
                     roleType:recordType[0],
+                    roleCode:recordCode[0],
                     type:'1'
                 },
             success:function (data) {
@@ -227,10 +232,14 @@ $('.job-authority').on('click',function () {
     var ids = CommUtils.getJqgridSelected("jqTable");
     var recordIds = [];
     var recordType = [];
+    var recordCode = [];
+    var roleType = [];
     for (var i = 0; i < ids.length; i++) {
         var rowData = $("#jqTable").jqGrid('getRowData', ids[i]);
         recordIds.push(rowData.roleId);
-        recordType.push(rowData.roleType);
+        recordType.push(rowData.entityConstantValue);
+        recordCode.push(rowData.roleCode);
+        roleType.push(rowData.roleType);
     }
     if(recordIds.length > 1){
         layer.msg("最多只能选择一条数据");
@@ -244,11 +253,12 @@ $('.job-authority').on('click',function () {
             data:
                 {
                     roleType:recordType[0],
+                    roleCode:recordCode[0],
                     type:'2'
                 },
             success:function (data) {
                 if(data.status == 0){
-                    jobAuthority(recordIds[0],recordType[0]);
+                    jobAuthority(recordIds[0],roleType[0]);
                 }else {
                     layer.msg(data.message);
                 }
@@ -258,6 +268,7 @@ $('.job-authority').on('click',function () {
 })
 /* 调用方法 */
 function save() {
+    var layerLoad;
     layer.open({
         id: 'save-click',
         type:2,
@@ -278,12 +289,17 @@ function save() {
                 type: 'post',
                 dataType: 'json',
                 data: $('#form_save',layero.find("iframe")[0].contentWindow.document).serialize(),
+                beforeSend: function (request) {
+                    layerLoad = layer.load(2);
+                },
                 success:function (data) {
                     if(data.status == 0){
-                        layer.close(index);
-                        layer.msg('保存成功');
-                        // jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
-                        $("#jqTable").trigger("reloadGrid");
+                        setTimeout(function () {
+                            layer.close(layerLoad);
+                            layer.close(index);
+                            layer.msg('保存成功');
+                            $("#jqTable").trigger("reloadGrid");
+                        },500);
                     }else {
                         layer.msg(data.message);
                     }
@@ -297,6 +313,7 @@ function save() {
 }
 function update(rowData) {
     if(rowData != null || rowData != ''){
+        var layerLoad;
         layer.open({
             id: 'update-click',
             type:2,
@@ -321,12 +338,17 @@ function update(rowData) {
                     type: 'post',
                     dataType: 'json',
                     data: $('#form_update',layero.find("iframe")[0].contentWindow.document).serialize(),
+                    beforeSend: function (request) {
+                        layerLoad = layer.load(2);
+                    },
                     success:function (data) {
                         if(data.status == 0){
-                            layer.close(index);
-                            layer.msg('修改成功');
-                            // jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': pageControl.getPage()}).trigger("reloadGrid");
-                            $("#jqTable").trigger("reloadGrid");
+                            setTimeout(function () {
+                                layer.close(layerLoad);
+                                layer.close(index);
+                                layer.msg('修改成功');
+                                $("#jqTable").trigger("reloadGrid");
+                            },500);
                         }else {
                             layer.msg(data.message);
                         }
@@ -361,7 +383,7 @@ function del(recordIds) {
                     if (data.status == 0) {
                         layer.close();
                         layer.msg(data.data);
-                        jQuery("#jqTable").trigger("reloadGrid");
+                        $("#jqTable").trigger("reloadGrid");
                     } else {
                         layer.msg(data.message);
                     }
@@ -735,6 +757,7 @@ function createJob(type) {
     }
 }
 function addJob(roleId,jobIds,roleType) {
+    var layerLoad;
     $.ajax({
         url: ctx + '/role/addJob',
         type: 'post',
@@ -746,6 +769,9 @@ function addJob(roleId,jobIds,roleType) {
                 jobIds: jobIds,
                 roleType: roleType
             },
+        beforeSend: function (request) {
+            layerLoad = layer.load(2);
+        },
         success: function (data) {
             var json =
                 {
@@ -753,8 +779,13 @@ function addJob(roleId,jobIds,roleType) {
                     roleType: $("#roleType").val()
                 }
             if (data.status == 0) {
-                jQuery("#jqTable-unSelect").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
-                jQuery("#jqTable-select").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                setTimeout(function () {
+                    layer.close(layerLoad);
+                    $("#jqTable-unSelect").trigger("reloadGrid");
+                    $("#jqTable-select").trigger("reloadGrid");
+                    // jQuery("#jqTable-unSelect").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                    // jQuery("#jqTable-select").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                },1000);
             } else {
                 layer.msg(data.message);
             }
@@ -762,6 +793,7 @@ function addJob(roleId,jobIds,roleType) {
     })
 }
 function deleteJob(roleId,jobIds,roleType) {
+    var layerLoad;
     $.ajax({
         url: ctx + '/role/deleteJob',
         type: 'post',
@@ -773,6 +805,9 @@ function deleteJob(roleId,jobIds,roleType) {
                 jobIds: jobIds,
                 roleType: roleType
             },
+        beforeSend: function (request) {
+            layerLoad = layer.load(2);
+        },
         success: function (data) {
             var json =
                 {
@@ -780,8 +815,13 @@ function deleteJob(roleId,jobIds,roleType) {
                     roleType: $("#roleType").val()
                 }
             if (data.status == 0) {
-                jQuery("#jqTable-unSelect").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
-                jQuery("#jqTable-select").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                setTimeout(function () {
+                    layer.close(layerLoad);
+                    $("#jqTable-unSelect").trigger("reloadGrid");
+                    $("#jqTable-select").trigger("reloadGrid");
+                    // jQuery("#jqTable-unSelect").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                    // jQuery("#jqTable-select").jqGrid('setGridParam', {postData: json}).trigger("reloadGrid");
+                },1000);
             } else {
                 layer.msg(data.message);
             }
@@ -789,7 +829,7 @@ function deleteJob(roleId,jobIds,roleType) {
     })
 }
 function saveMenu(row) {
-        var index;
+        var layerLoad;
         var menuId = row.menuId;
         var pId = row.menuPid;
         if(menuId != null){
@@ -806,12 +846,12 @@ function saveMenu(row) {
                         roleType : '1' //没用,就是过一下验证类
                     },
                 beforeSend: function (request) {
-                    index = layer.load(2);
+                    layerLoad = layer.load(2);
                 },
                 success:function (data) {
                     if(data.status == 0){
                         setTimeout(function () {
-                            layer.close(index);
+                            layer.close(layerLoad);
                             $("#jqTable-menu").trigger("reloadGrid");
                         },1000);
                     }else {
@@ -825,7 +865,7 @@ function saveMenu(row) {
 
 }
 function deleteMenu(row) {
-    var index;
+    var layerLoad;
     var menuId = row.menuId;
     var pId = row.menuPid;
     if(menuId != null){
@@ -842,12 +882,12 @@ function deleteMenu(row) {
                     roleType : '2' //没用,就是过一下验证类
                 },
             beforeSend: function (request) {
-                index = layer.load(2);
+                layerLoad = layer.load(2);
             },
             success:function (data) {
                 if(data.status == 0){
                     setTimeout(function () {
-                        layer.close(index);
+                        layer.close(layerLoad);
                         $("#jqTable-menu").trigger("reloadGrid");
                     },1000);
                 }else {

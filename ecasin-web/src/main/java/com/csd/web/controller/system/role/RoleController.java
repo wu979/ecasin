@@ -8,6 +8,7 @@ import com.csd.exception.result.ResultUtil;
 import com.csd.exception.status.BaseStatus;
 import com.csd.log.annotation.SystemControllerLog;
 import com.csd.system.role.po.Role;
+import com.csd.system.role.request.JobRequest;
 import com.csd.system.role.request.RoleRequest;
 import com.csd.system.role.service.RoleService;
 import com.csd.utils.ConstantUtil;
@@ -95,8 +96,8 @@ public class RoleController {
      */
     @RequestMapping(value = "/checkRoleType" , method = RequestMethod.POST)
     @ResponseBody
-    public Result checkRoleType(String roleType,String type){
-        roleService.checkRoleType(roleType,type);
+    public Result checkRoleType(String roleType,String type,String roleCode){
+        roleService.checkRoleType(roleType,type,roleCode);
         return ResultUtil.success();
     }
 
@@ -171,7 +172,7 @@ public class RoleController {
      */
     @RequestMapping(value = "/addJob" , method = RequestMethod.POST)
     @ResponseBody
-    public Result addJob(@Valid RoleRequest request,BindingResult bindingResult){
+    public Result addJob(@Valid JobRequest request, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
         }
@@ -181,12 +182,12 @@ public class RoleController {
 
 
     /**
-     * 授权添加职位
+     * 授权删除职位
      * @return
      */
     @RequestMapping(value = "/deleteJob" , method = RequestMethod.POST)
     @ResponseBody
-    public Result deleteJob(@Valid RoleRequest request,BindingResult bindingResult){
+    public Result deleteJob(@Valid JobRequest request,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new ApplicationException(BaseStatus.PARAMETER.getCode(),bindingResult.getFieldError().getDefaultMessage());
         }
