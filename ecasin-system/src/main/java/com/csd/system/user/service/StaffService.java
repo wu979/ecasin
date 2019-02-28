@@ -35,10 +35,17 @@ public class StaffService {
         if(!StringUtil.isEmpty(request.getBusName())){
             parameter.put("busName",request.getBusName());
         }
-        if(!StringUtil.isEmpty(request.getSelectOption())){
-            parameter.put("selectOption",request.getSelectOption());
+        if(!StringUtil.isEmpty(request.getActive())){
+            parameter.put("active",request.getActive());
         }
-        parameter.put("orgId",user.getUserOrgId());
+        if(!StringUtil.isEmpty(request.getState())){
+            parameter.put("state",request.getState());
+        }
+        if(!StringUtil.isEmpty(request.getDepId())){
+            parameter.put("orgId",request.getDepId());
+        }else {
+            parameter.put("orgId",user.getUserOrgId());
+        }
         parameter.put("userType", ConstantUtil.CODE_THREE);
         PageList<User> findByPage = userMapper.findByPage(parameter, pageBounds);
         page.listToPage(page,findByPage);

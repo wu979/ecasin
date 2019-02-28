@@ -26,7 +26,9 @@ public enum BaseStatus {
     MENU_NAME_EXIST(1008,"菜案名称已存在,请重新输入"),
     MENU_DELETE_HASCHILD(1009,"如需操作该菜单,请先删除子菜单"),
     ROLE_ADMIN_NOT_DELETE(1010,"超级管理员不能进行操作"),
-    ROLE_ADMIN_NOT_CREATE(1011,"默认平台管理员不能进行操作")
+    ROLE_ADMIN_NOT_CREATE(1011,"默认平台管理员不能进行操作"),
+    MENU_CODE_START_ERROR(1012,"菜单标识码必须以MENU_开头"),
+    MENU_URL_START_ERROR(1013,"菜单路径必须以/开头"),
     ;
 
     private int code;

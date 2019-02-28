@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date: 2019/2/27 16:40.
  */
 @Controller
-@RequestMapping("/staff")
+@RequestMapping("/archives")
 public class StaffController {
 
 

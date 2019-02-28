@@ -10,5 +10,27 @@ import com.csd.common.service.RequestService;
  */
 public class StaffRequest extends RequestService {
 
+    /**是否激活*/
+    private String active;
 
+
+    /**人员状态*/
+    private String state;
+
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }

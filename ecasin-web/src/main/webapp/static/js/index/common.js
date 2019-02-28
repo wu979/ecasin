@@ -326,4 +326,28 @@ var selectUtil = {
             }
         })
     },
+    //弹窗赋值select
+    findSelectByValue : function(id,constantType) {
+        $.ajax({
+            url:ctx +  '/constant/findByList',
+            type:'post',
+            dataType:'json',
+            data:
+                {
+                    constantType:constantType
+                },
+            success:function (data) {
+                if(data.status == 0){
+                    var constantList = data.data;
+                    var result = '';
+                    for(var i = 0; i< constantList.length; i++){
+                        result += "<option value='"+ constantList[i].constantValue + " '>"+ constantList[i].contantsName +"</option>";
+                    }
+                    $(id).append(result);
+                }else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+    },
 }

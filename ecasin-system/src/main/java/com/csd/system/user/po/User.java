@@ -5,7 +5,7 @@ import com.csd.system.role.po.Role;
 
 import java.util.List;
 
-public class User {
+public class User extends EntityService {
     /**用户主键*/
     private String userId;
 
@@ -77,6 +77,9 @@ public class User {
 
     /**联查用户主职位*/
     private String ptJobId;
+
+    /**联查超级管理员角色*/
+    private String roleId;
 
     /**赋值用户角色*/
     private List<Role> roleList = null;
@@ -279,5 +282,13 @@ public class User {
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }

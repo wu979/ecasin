@@ -10,6 +10,7 @@ import com.csd.system.menu.dao.MenuMapper;
 import com.csd.system.menu.po.Menu;
 import com.csd.system.menu.po.Tree;
 import com.csd.system.roleMenu.dao.RoleMenuMapper;
+import com.csd.system.roleMenu.po.RoleMenu;
 import com.csd.system.user.dao.UserMapper;
 import com.csd.utils.*;
 import org.springframework.stereotype.Service;
@@ -186,6 +187,12 @@ public class MenuService  extends DeleteService<Menu> {
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
     @SystemServiceLog(descrption = "新增菜单")
     public void save(Menu menu) throws ApplicationException {
+        if(!menu.getMenuCode().startsWith("MENU_")){
+            throw new ApplicationException(BaseStatus.MENU_CODE_START_ERROR.getCode(),BaseStatus.MENU_CODE_START_ERROR.getMessage());
+        }
+        if(!menu.getMenuUrl().startsWith("/")){
+            throw new ApplicationException(BaseStatus.MENU_URL_START_ERROR.getCode(),BaseStatus.MENU_URL_START_ERROR.getMessage());
+        }
         Menu menuByName = menuMapper.findMenuByName(menu.getMenuName());
         if(!StringUtil.isObjectEmpty(menuByName)){
             throw new ApplicationException(BaseStatus.MENU_NAME_EXIST.getCode(),BaseStatus.MENU_NAME_EXIST.getMessage());
@@ -214,6 +221,14 @@ public class MenuService  extends DeleteService<Menu> {
                 map.put("hasChild",ConstantUtil.CODE_ONE);
                 menuMapper.updateParentById(map);
             }
+            com.csd.system.user.po.User superManage = userMapper.findBySuperManage();
+            String roleId = superManage.getRoleId();
+            String menuId = menu.getMenuId();
+            RoleMenu roleMenu = new RoleMenu();
+            roleMenu.setRelationMenuId(menuId);
+            roleMenu.setRelationRoleId(roleId);
+            roleMenu.setRelationIsValid(ConstantUtil.CODE_ONE);
+            roleMenuMapper.insert(roleMenu);
         }
     }
 
@@ -221,6 +236,12 @@ public class MenuService  extends DeleteService<Menu> {
     @Transactional( propagation = Propagation.REQUIRED , rollbackFor = {Exception.class, ApplicationException.class} )
     @SystemServiceLog(descrption = "修改菜单")
     public void update(Menu menu) throws ApplicationException {
+        if(!menu.getMenuCode().startsWith("MENU_")){
+            throw new ApplicationException(BaseStatus.MENU_CODE_START_ERROR.getCode(),BaseStatus.MENU_CODE_START_ERROR.getMessage());
+        }
+        if(!menu.getMenuUrl().startsWith("/")){
+            throw new ApplicationException(BaseStatus.MENU_URL_START_ERROR.getCode(),BaseStatus.MENU_URL_START_ERROR.getMessage());
+        }
         Menu menuById = menuMapper.selectByPrimaryKey(menu.getMenuId());
         Menu menuByName = menuMapper.findMenuByName(menu.getMenuName());
         if(!StringUtil.isObjectEmpty(menuByName)){

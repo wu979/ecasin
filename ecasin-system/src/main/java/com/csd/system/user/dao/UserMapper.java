@@ -36,4 +36,7 @@ public interface UserMapper {
 
 
     PageList<User> findByPage(Map<String,Object> map, PageBounds pageBounds);
+
+
+    User findBySuperManage();
 }

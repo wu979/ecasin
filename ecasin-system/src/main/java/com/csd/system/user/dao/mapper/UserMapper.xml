@@ -347,18 +347,37 @@
   </select>
   <select id="findByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-      <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List"/>,
+      Y.company_name as entityOrgName,
+      Z.company_name as entityDepName
     from
-      w_user
+      w_user A
+    left join w_company Y on Y.company_id = A.user_org_id
+    left join w_company Z on Z.company_id = A.user_dep_id
     where
-      user_org_id = #{orgId}
+      (A.user_dep_id = #{orgId} or A.user_dep_id like CONCAT(CONCAT(#{orgId}),'.%'))
     and
-      user_type = #{userType}
+      A.user_type = #{userType}
     <if test="busName != null and busName != ''">
-      and user_name like CONCAT(CONCAT(#{busName}),'%')
+      and A.user_name like CONCAT(CONCAT(#{busName}),'%')
     </if>
-    <if test="selectOption != null and selectOption != ''">
-      and user_is_active = #{selectOption}
+    <if test="active != null and active != ''">
+      and A.user_is_active = #{active}
     </if>
+    <if test="state != null and state != ''">
+      and A.user_state = #{state}
+    </if>
+    order by A.user_create_time desc
+  </select>
+  <select id="findBySuperManage" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>,
+      C.relation_role_id AS roleId
+    from
+      w_user A
+    left join w_pt_job B on A.user_id = B.pt_user_id
+    left join w_user_role C on B.pt_id = C.relation_job_id
+    where
+      A.user_type = '0'
   </select>
 </mapper>

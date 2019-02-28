@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 
 public class Menu {
@@ -20,7 +19,6 @@ public class Menu {
 
     /**菜单标识码*/
     @NotBlank(message = "菜单标识码必须填写")
-    @Pattern(regexp="^[MENU_]+[A-Z]+$",message="菜单标识码必须以MENU_开头")
     private String menuCode;
 
     /**菜单路径*/
