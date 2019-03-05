@@ -41,4 +41,20 @@ public class CompanyService {
         options.setRootText("所有目录");
         return TreeUtil.getListForJqgridTree(options);
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Company> getCompanyListByNotAll() throws Exception {
+        User user = LoginUser.getLoginUser();
+        List<Company> companyList = companyMapper.findListByOrgId(user.getUserOrgId());
+        TreeOptions options = new TreeOptions(companyList);
+        options.setId("companyId");
+        options.setText("companyName");
+        options.setNodeLevel("companyLevel");
+        options.setHasChild("companyHasChild");
+        options.setParentId("companyParentId");
+        options.setOrgType("undefined");
+        options.setShowRoot(false);
+        options.setOpenAll(false);
+        return TreeUtil.getListForJqgridTree(options);
+    }
 }

@@ -37,4 +37,15 @@ public class CompanyController {
     }
 
 
+    /**
+     * 公司架构
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/companyTreeByNotAll", method = RequestMethod.POST)
+    @ResponseBody
+    public List<?> getCompanyListByNotAll() throws Exception {
+        return companyService.getCompanyListByNotAll();
+    }
 }
