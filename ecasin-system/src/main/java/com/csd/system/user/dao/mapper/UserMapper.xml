@@ -376,8 +376,10 @@
     from
       w_user A
     left join w_pt_job B on A.user_id = B.pt_user_id
-    left join w_user_role C on B.pt_id = C.relation_job_id
+    left join w_user_role C on B.pt_job_id = C.relation_job_id
     where
       A.user_type = '0'
+    and
+      B.pt_job_type = '1'
   </select>
 </mapper>

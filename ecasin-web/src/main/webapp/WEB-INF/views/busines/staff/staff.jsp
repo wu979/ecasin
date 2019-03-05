@@ -26,7 +26,7 @@
             <div>
                 <form>
                     <div class="row">
-                        <div class="col-sm-7 col-md-7 col-lg-4">
+                        <div class="col-sm-7 col-md-7 col-lg-3">
                             <div class="input-group">
                                 <div class="col-sm-4 col-md-4 col-lg-4" style="padding-left: unset">
                                     <input type="text" class="form-control" id="busName" placeholder="名称模糊查询">
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-5 col-md-5 col-lg-8 form-select">
+                        <div class="col-sm-5 col-md-5 col-lg-9 form-select">
                             <button type="button" id="select" class="btn btn-light btn-sm">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-sousuo"></use>

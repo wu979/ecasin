@@ -13,7 +13,7 @@ var setting = {
 };
 //公司架构树形
 $.ajax({
-    url: ctx + "/company/companyTree",
+    url: ctx + "/company/companyTreeByNotAll",
     type: 'POST',
     dataType: 'JSON',
     success: function (data) {
@@ -25,9 +25,6 @@ $.ajax({
 //单击事件
 function companyTreeCall(treeId, treeNode, clickFlag) {
     var depId = treeNode.id;
-    if(depId == 'root_999'){
-        depId = '';
-    }
     var json = {
         depId: depId
     };

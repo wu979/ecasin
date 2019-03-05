@@ -147,6 +147,8 @@ function save(rowData) {
                         if(data.status == 0){
                             layer.close(index);
                             layer.msg('保存成功');
+                            $("#navMenu").empty();
+                            loadMenu.getTreeList();
                             jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
                         }else {
                             layer.msg(data.message);
@@ -172,7 +174,7 @@ function update(rowData) {
                 type:2,
                 content:ctx + '/menu/updatePage',
                 area: ['23%','53%'],
-                title: '新增菜单',
+                title: '修改菜单',
                 scrollbar: false,
                 anim: 1,
                 resize:false,
@@ -183,6 +185,13 @@ function update(rowData) {
                     var parentName;
                     if(rowData.menuLevel == 1){
                         parentName = "所有菜单";
+                        body.find("#parentName").val(parentName);
+                        body.find("#menuId").val(rowData.menuId);
+                        body.find("#menuPid").val(rowData.menuPid);
+                        body.find("#menuName").val(rowData.menuName);
+                        body.find("#menuCode").val(rowData.menuCode);
+                        body.find("#menuUrl").val(rowData.menuUrl);
+                        body.find("#menuOrder").val(rowData.menuOrder);
                     }else {
                         $.ajax({
                             url: ctx + '/menu/findParentNameById',
@@ -192,6 +201,13 @@ function update(rowData) {
                             success:function (data) {
                                 if(data.status == 0){
                                     parentName = data.data.menuName;
+                                    body.find("#parentName").val(parentName);
+                                    body.find("#menuId").val(rowData.menuId);
+                                    body.find("#menuPid").val(rowData.menuPid);
+                                    body.find("#menuName").val(rowData.menuName);
+                                    body.find("#menuCode").val(rowData.menuCode);
+                                    body.find("#menuUrl").val(rowData.menuUrl);
+                                    body.find("#menuOrder").val(rowData.menuOrder);
                                 }else {
                                     layer.close(index);
                                     layer.msg(data.message);
@@ -199,13 +215,6 @@ function update(rowData) {
                             }
                         })
                     }
-                    body.find("#parentName").val(parentName);
-                    body.find("#menuId").val(rowData.menuId);
-                    body.find("#menuPid").val(rowData.menuPid);
-                    body.find("#menuName").val(rowData.menuName);
-                    body.find("#menuCode").val(rowData.menuCode);
-                    body.find("#menuUrl").val(rowData.menuUrl);
-                    body.find("#menuOrder").val(rowData.menuOrder);
                 },
                 yes: function (index, layero) {
                     $.ajax({
@@ -217,6 +226,8 @@ function update(rowData) {
                             if(data.status == 0){
                                 layer.close(index);
                                 layer.msg('修改成功');
+                                $("#navMenu").empty();
+                                loadMenu.getTreeList();
                                 jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
                             }else {
                                 layer.msg(data.message);
@@ -254,6 +265,8 @@ function del(rowData) {
                         if (data.status == 0) {
                             layer.close();
                             layer.msg(data.data);
+                            $("#navMenu").empty();
+                            loadMenu.getTreeList();
                             jQuery("#jqTable").jqGrid('setGridParam', {postData: ''}).jqGrid('setGridParam', {'page': 1}).trigger("reloadGrid");
                         } else {
                             layer.msg(data.message);
