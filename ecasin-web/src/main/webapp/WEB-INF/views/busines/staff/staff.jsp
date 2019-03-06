@@ -68,31 +68,19 @@
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-tianjia"></use>
                         </svg>
-                        &nbsp;&nbsp;新增
+                        &nbsp;&nbsp;激活确认
                     </button>
                     <button class="btn btn-light btn-sm update" type="button">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-xiugaimima"></use>
                         </svg>
-                        &nbsp;&nbsp;修改
+                        &nbsp;&nbsp;冻结
                     </button>
                     <button class="btn btn-light btn-sm delete" type="button">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-shanchuqunchengyuan"></use>
                         </svg>
-                        &nbsp;&nbsp;删除
-                    </button>
-                    <button class="btn btn-light btn-sm menu-authority" type="button" style="width: 105px;">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-caidan"></use>
-                        </svg>
-                        &nbsp;&nbsp;菜单授权
-                    </button>
-                    <button class="btn btn-light btn-sm job-authority" type="button" style="width: 105px;">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-jiaoseshouquan"></use>
-                        </svg>
-                        &nbsp;&nbsp;职位授权
+                        &nbsp;&nbsp;解除冻结
                     </button>
                     <div style="margin: 20px 0"></div>
 
