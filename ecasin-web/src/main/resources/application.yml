@@ -12,10 +12,11 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       filters: stat
-      driver-class-name: com.mysql.jdbc.Driver
+#      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
       username: root
-      password: Erp#2017
+      password: 123456
       #配置初始化大小/最小/最大
       initial-size: 1
       min-idle: 1
