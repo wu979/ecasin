@@ -66,21 +66,15 @@
                 <div class="col-xs-12 form-bnt">
                     <button class="btn btn-light btn-sm save" type="button">
                         <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-tianjia"></use>
+                            <use xlink:href="#icon-xiugaimima"></use>
                         </svg>
-                        &nbsp;&nbsp;激活确认
+                        &nbsp;&nbsp;新增
                     </button>
                     <button class="btn btn-light btn-sm update" type="button">
                         <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-xiugaimima"></use>
-                        </svg>
-                        &nbsp;&nbsp;冻结
-                    </button>
-                    <button class="btn btn-light btn-sm delete" type="button">
-                        <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-shanchuqunchengyuan"></use>
                         </svg>
-                        &nbsp;&nbsp;解除冻结
+                        &nbsp;&nbsp;修改
                     </button>
                     <div style="margin: 20px 0"></div>
 

@@ -39,4 +39,7 @@ public interface UserMapper {
 
 
     User findBySuperManage();
+
+
+    int updateActive(Map<String,Object> map);
 }

@@ -2,6 +2,8 @@ package com.csd.system.user.service;
 
 import com.csd.common.loginUser.LoginUser;
 import com.csd.common.page.PageVo;
+import com.csd.exception.application.ApplicationException;
+import com.csd.exception.status.BaseStatus;
 import com.csd.system.user.dao.UserMapper;
 import com.csd.system.user.entity.StaffRequest;
 import com.csd.system.user.po.User;
@@ -50,5 +52,16 @@ public class StaffService {
         PageList<User> findByPage = userMapper.findByPage(parameter, pageBounds);
         page.listToPage(page,findByPage);
         return page;
+    }
+
+
+    public void updateUserType(StaffRequest request){
+        if(StringUtil.isEmpty(request.getActiveType()) || StringUtil.isEmpty(request.getUserId())){
+            throw new ApplicationException(BaseStatus.PARAMETER.getCode(),BaseStatus.PARAMETER.getMessage());
+        }
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("activeType",request.getActiveType());
+        parameter.put("userId",request.getUserId());
+        userMapper.updateActive(parameter);
     }
 }

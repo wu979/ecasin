@@ -76,12 +76,12 @@ function loadPage(){
 
                 var all = $("#jqTable").jqGrid('getRowData', cl);
                 operation =
-                    "<button class='btn btn-light btn-sm page-button-update' data-record=\""+ all.roleId +"\" title=\"修改\">" +
+                    "<button class='btn btn-light btn-sm page-button page-button-update' data-record=\""+ all.roleId +"\" title=\"修改\">" +
                     "<svg class='icon' aria-hidden='true'>"+
                     "<use xlink:href='#icon-xiugai4'></use>"+
                     "</svg>"+
                     "</button>" +
-                    "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.roleId +"\" title=\"删除\">" +
+                    "<button class='btn btn-light btn-sm page-button page-button-delete' data-record=\""+ all.roleId +"\" title=\"删除\">" +
                     "<svg class='icon' aria-hidden='true'>"+
                     "<use xlink:href='#icon-shanchu3'></use>"+
                     "</svg>"+
@@ -382,7 +382,7 @@ function del(recordIds) {
                 success: function (data) {
                     if (data.status == 0) {
                         layer.close();
-                        layer.msg(data.data);
+                        layer.msg(data.message);
                         $("#jqTable").trigger("reloadGrid");
                     } else {
                         layer.msg(data.message);
@@ -677,7 +677,7 @@ function showMenu() {
                 var all = $("#jqTable-menu").jqGrid('getRowData', cl);
                 if(all.menuIsNull == null || all.menuIsNull == ''){
                     operation =
-                        "<button class='btn btn-light btn-sm page-button-save' data-record=\""+ all.menuId +"\">" +
+                        "<button class='btn btn-light btn-sm page-button page-button-save' data-record=\""+ all.menuId +"\">" +
                         "<svg class='icon' aria-hidden='true'>"+
                         "<use xlink:href='#icon-cuo'></use>"+
                         "</svg>"+
@@ -685,7 +685,7 @@ function showMenu() {
                     jQuery("#jqTable-menu").jqGrid('setRowData', ids[i], { operation: operation });
                 }else {
                     operation =
-                        "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.menuId +"\">" +
+                        "<button class='btn btn-light btn-sm page-button page-button-delete' data-record=\""+ all.menuId +"\">" +
                         "<svg class='icon' aria-hidden='true'>"+
                         "<use xlink:href='#icon-dui'></use>"+
                         "</svg>"+

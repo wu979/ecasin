@@ -18,6 +18,10 @@ public class StaffRequest extends RequestService {
     private String state;
 
 
+    /** 1确认激活2冻结3恢复*/
+    private String activeType;
+
+
     public String getActive() {
         return active;
     }
@@ -32,5 +36,13 @@ public class StaffRequest extends RequestService {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getActiveType() {
+        return activeType;
+    }
+
+    public void setActiveType(String activeType) {
+        this.activeType = activeType;
     }
 }

@@ -105,31 +105,45 @@ function loadPage(){
                     + cl + "\"type=\"checkbox\" class=\"ace\"><span class=\"lbl\"></span></label>";
                 jQuery("#jqTable").jqGrid('setRowData', ids[i], {action: checkbox});
 
-                // var all = $("#jqTable").jqGrid('getRowData', cl);
-                // operation =
-                //     "<button class='btn btn-light btn-sm page-button-update' data-record=\""+ all.roleId +"\" title=\"修改\">" +
-                //     "<svg class='icon' aria-hidden='true'>"+
-                //     "<use xlink:href='#icon-xiugai4'></use>"+
-                //     "</svg>"+
-                //     "</button>" +
-                //     "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.roleId +"\" title=\"删除\">" +
-                //     "<svg class='icon' aria-hidden='true'>"+
-                //     "<use xlink:href='#icon-shanchu3'></use>"+
-                //     "</svg>"+
-                //     "</button>"
-                // jQuery("#jqTable").jqGrid('setRowData', ids[i], { operation: operation });
+                var all = $("#jqTable").jqGrid('getRowData', cl);
+                var operation = '';
+                var userIsActive = all.userIsActive;
+                switch (userIsActive) {
+                    case "激活待确认":
+                        operation =
+                            "<button class='btn btn-light btn-sm page-button page-button-ok' data-record=\""+ all.userId +"\" data-type='3' title=\"确认\">" +
+                            "<svg class='icon' aria-hidden='true'>"+
+                            "<use xlink:href='#icon-querengou'></use>"+
+                            "</svg>"+
+                            "</button>";
+                        break;
+                    case "已激活":
+                        operation =
+                            "<button class='btn btn-light btn-sm page-button page-button-frozen' data-record=\""+ all.userId +"\" data-type='4' title=\"冻结\">" +
+                            "<svg class='icon' aria-hidden='true'>"+
+                            "<use xlink:href='#icon-suo1'></use>"+
+                            "</svg>"+
+                            "</button>";
+                        break;
+                    case "冻结":
+                        operation =
+                            "<button class='btn btn-light btn-sm page-button page-button-recovery' data-record=\""+ all.userId +"\" data-type='3' title=\"恢复\">" +
+                            "<svg class='icon' aria-hidden='true'>"+
+                            "<use xlink:href='#icon-jiesuo2'></use>"+
+                            "</svg>"+
+                            "</button>";
+                        break;
+                    default:
+                        operation = ''
+                        break;
+                }
+                jQuery("#jqTable").jqGrid('setRowData', ids[i], { operation: operation });
             }
-            // $('#jqTable').on('click','.page-button-update',function () {
-            //     var roleId = $(this).attr('data-record');
-            //     var row = forCheck(roleId);
-            //     update(row);
-            // })
-            // $('#jqTable').on('click','.page-button-delete',function () {
-            //     var recordIds = [];
-            //     var roleId = $(this).attr('data-record');
-            //     recordIds.push(roleId);
-            //     del(recordIds);
-            // });
+            $('#jqTable').on('click','.page-button',function () {
+                var userId = $(this).attr('data-record');
+                var clickType = $(this).attr('data-type');
+                updateUserType(userId,clickType);
+            })
         }
     })
 }
@@ -184,4 +198,88 @@ function selectActiveLoad(){
 /* 下拉框 */
 function selectStateLoad(){
     selectUtil.findSelectByValue("#state","userState");
+}
+/* 更新员工激活类型 */
+function updateUserType(userId,clickType) {
+    layer.confirm('确认进行此操作？', {
+        btn: ['确认','取消'],
+        title: "提示",
+        anim: 1
+    }, function() {
+        $.ajax({
+            url: ctx + '/archives/updateUserType',
+            type: 'post',
+            dataType: 'json',
+            data:
+                {
+                    userId: userId,
+                    activeType: clickType
+                },
+            success: function (data) {
+                if (data.status == 0) {
+                    layer.close();
+                    layer.msg(data.message);
+                    $("#jqTable").trigger("reloadGrid");
+                } else {
+                    layer.msg(data.message);
+                }
+            }
+        })
+    }, function () {
+        //点击取消事件
+    });
+}
+/* 新增员工 */
+$('.save').on('click',function () {
+    save();
+})
+/* 修改员工 */
+$('.update').on('click',function () {
+    update();
+})
+function save() {
+    layer.open({
+        id: 'save-click',
+        type:2,
+        content:ctx + '/archives/savePage',
+        area: ['50%','60%'],
+        title: '新增员工',
+        scrollbar: true,
+        anim: 1,
+        resize:false,
+        zIndex: 1050,
+        btn: ['保存','取消'],
+        success: function(layero, index){
+
+        },
+        yes: function (index, layero) {
+            $.ajax({
+                url: ctx + '/role/save',
+                type: 'post',
+                dataType: 'json',
+                data: $('#form_save',layero.find("iframe")[0].contentWindow.document).serialize(),
+                beforeSend: function (request) {
+                    layerLoad = layer.load(2);
+                },
+                success:function (data) {
+                    if(data.status == 0){
+                        setTimeout(function () {
+                            layer.close(layerLoad);
+                            layer.close(index);
+                            layer.msg('保存成功');
+                            $("#jqTable").trigger("reloadGrid");
+                        },500);
+                    }else {
+                        layer.msg(data.message);
+                    }
+                }
+            })
+        },
+        btn2: function(index){
+            layer.close(index);
+        },
+    })
+}
+function update() {
+
 }

@@ -382,4 +382,7 @@
     and
       B.pt_job_type = '1'
   </select>
+  <update id="updateActive" parameterType="java.util.Map">
+    update w_user set user_is_active = #{activeType} where user_id = #{userId}
+  </update>
 </mapper>

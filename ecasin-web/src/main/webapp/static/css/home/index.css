@@ -61,9 +61,7 @@
     right: 3px;
 }
 /* 设置分页 修改和删除  按钮样式 */
-.page-button-save,
-.page-button-update,
-.page-button-delete{
+.page-button {
     background-color: transparent !important;
     border: transparent !important;
     width: 40px !important;
@@ -72,32 +70,24 @@
     border-radius: 50%;
 }
 /* 鼠标点击 */
-.page-button-save:focus,
-.page-button-update:focus,
-.page-button-delete:focus{
+.page-button:focus {
     background-color: transparent !important;
     border: transparent !important;
     outline: none;
 }
 /* 鼠标移入 */
-.page-button-save:hover,
-.page-button-update:hover,
-.page-button-delete:hover{
+.page-button:hover {
     background-color: transparent !important;
     border: transparent !important;
     outline: none;
 }
 /* 鼠标移入svg放大 */
-.page-button-save svg:hover,
-.page-button-update svg:hover,
-.page-button-delete svg:hover {
+.page-button svg:hover {
     width: 28px;
     height: 28px;
 }
 /* icon大小 */
-.page-button-save svg,
-.page-button-update svg ,
-.page-button-delete svg {
+.page-button svg {
     width: 15px;
     height: 15px;
 }

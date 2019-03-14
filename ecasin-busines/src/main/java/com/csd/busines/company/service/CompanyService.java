@@ -29,13 +29,7 @@ public class CompanyService {
         User user = LoginUser.getLoginUser();
         List<Company> companyList = companyMapper.findListByOrgId(user.getUserOrgId());
         TreeOptions options = new TreeOptions(companyList);
-        options.setId("companyId");
-        options.setText("companyName");
-        options.setNodeLevel("companyLevel");
-        options.setHasChild("companyHasChild");
-        options.setParentId("companyParentId");
-        options.setOrgType("undefined");
-        //options.setExtendedFields(new String[]{"publicCatalogType", "publicCatalogHasChild"});
+        assignmentTreeOptions(options);
         options.setShowRoot(true);
         options.setOpenAll(true);
         options.setRootText("所有目录");
@@ -47,14 +41,21 @@ public class CompanyService {
         User user = LoginUser.getLoginUser();
         List<Company> companyList = companyMapper.findListByOrgId(user.getUserOrgId());
         TreeOptions options = new TreeOptions(companyList);
+        assignmentTreeOptions(options);
+        options.setShowRoot(false);
+        options.setOpenAll(false);
+        return TreeUtil.getListForJqgridTree(options);
+    }
+
+
+    public void assignmentTreeOptions(TreeOptions options){
+        //添加额外参数
+        //options.setExtendedFields(new String[]{"publicCatalogType", "publicCatalogHasChild"});
         options.setId("companyId");
         options.setText("companyName");
         options.setNodeLevel("companyLevel");
         options.setHasChild("companyHasChild");
         options.setParentId("companyParentId");
         options.setOrgType("undefined");
-        options.setShowRoot(false);
-        options.setOpenAll(false);
-        return TreeUtil.getListForJqgridTree(options);
     }
 }

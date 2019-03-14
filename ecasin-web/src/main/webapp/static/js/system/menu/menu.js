@@ -53,17 +53,17 @@ function loadPage(){
                 var cl = ids[i];
                 var all = $("#jqTable").jqGrid('getRowData', cl);
                 operation =
-                    "<button class='btn btn-light btn-sm page-button-save' data-record=\""+ all.menuId +"\" title=\"添加\">" +
+                    "<button class='btn btn-light btn-sm page-button page-button-save' data-record=\""+ all.menuId +"\" title=\"添加\">" +
                         "<svg class='icon' aria-hidden='true'>"+
                             "<use xlink:href='#icon-hangadd'></use>"+
                         "</svg>"+
                     "</button>" +
-                    "<button class='btn btn-light btn-sm page-button-update' data-record=\""+ all.menuId +"\" title=\"修改\">" +
+                    "<button class='btn btn-light btn-sm page-button page-button-update' data-record=\""+ all.menuId +"\" title=\"修改\">" +
                         "<svg class='icon' aria-hidden='true'>"+
                             "<use xlink:href='#icon-xiugai4'></use>"+
                         "</svg>"+
                     "</button>" +
-                    "<button class='btn btn-light btn-sm page-button-delete' data-record=\""+ all.menuId +"\" title=\"删除\">" +
+                    "<button class='btn btn-light btn-sm page-button page-button-delete' data-record=\""+ all.menuId +"\" title=\"删除\">" +
                         "<svg class='icon' aria-hidden='true'>"+
                             "<use xlink:href='#icon-shanchu3'></use>"+
                         "</svg>"+

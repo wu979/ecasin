@@ -209,7 +209,7 @@
     where
       company_is_valid = '1'
     and
-      company_id LIKE CONCAT(CONCAT(#{companyId,jdbcType=VARCHAR}),'%')
+      (company_id = #{companyId,jdbcType=VARCHAR} or  company_id LIKE CONCAT(CONCAT(#{companyId,jdbcType=VARCHAR}),'.%'))
     order by
       company_has_child,company_level desc
   </select>
