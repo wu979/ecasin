@@ -58,8 +58,7 @@ public class PageVo<T> {
         this.message = message;
     }
 
-    public PageVo()
-    {
+    public PageVo() {
     }
 
     public PageVo(int rows)
@@ -72,16 +71,14 @@ public class PageVo<T> {
         return this.page;
     }
 
-    public void setPage(int page)
-    {
+    public void setPage(int page) {
         this.page = page;
 
         if (page < 1)
             this.page = 1;
     }
 
-    public PageVo<T> page(int thePage)
-    {
+    public PageVo<T> page(int thePage) {
         setPage(thePage);
         return this;
     }
@@ -91,16 +88,14 @@ public class PageVo<T> {
         return this.rows;
     }
 
-    public void setRows(int rows)
-    {
+    public void setRows(int rows) {
         this.rows = rows;
 
         if (rows < 1)
             this.rows = 1;
     }
 
-    public PageVo<T> rows(int theRows)
-    {
+    public PageVo<T> rows(int theRows) {
         setRows(theRows);
         return this;
     }
@@ -120,8 +115,7 @@ public class PageVo<T> {
         this.sidx = sidx;
     }
 
-    public PageVo<T> sidx(String theSidx)
-    {
+    public PageVo<T> sidx(String theSidx) {
         setSidx(theSidx);
         return this;
     }
@@ -131,8 +125,7 @@ public class PageVo<T> {
         return this.sord;
     }
 
-    public void setSord(String sord)
-    {
+    public void setSord(String sord) {
         if (StringUtils.hasLength(sord))
         {
             String[] Sords = sord.split(",");
@@ -147,8 +140,7 @@ public class PageVo<T> {
         }
     }
 
-    public PageVo<T> sord(String theSord)
-    {
+    public PageVo<T> sord(String theSord) {
         setSord(theSord);
         return this;
     }
@@ -168,8 +160,7 @@ public class PageVo<T> {
         this.autoCount = autoCount;
     }
 
-    public PageVo<T> autoCount(boolean theAutoCount)
-    {
+    public PageVo<T> autoCount(boolean theAutoCount) {
         setAutoCount(theAutoCount);
         return this;
     }
@@ -204,8 +195,7 @@ public class PageVo<T> {
         this.records = records;
     }
 
-    public long getTotalPages()
-    {
+    public long getTotalPages() {
         if (this.records < 0L)
         {
             return -1L;
@@ -224,8 +214,7 @@ public class PageVo<T> {
         return this.page + 1 <= getTotalPages();
     }
 
-    public int getNextPage()
-    {
+    public int getNextPage() {
         if (isHasNext())
         {
             return this.page + 1;
@@ -238,8 +227,7 @@ public class PageVo<T> {
         return this.page - 1 >= 1;
     }
 
-    public int getPrePage()
-    {
+    public int getPrePage() {
         if (isHasPre())
         {
             return this.page - 1;
@@ -247,8 +235,7 @@ public class PageVo<T> {
         return this.page;
     }
 
-    public PageBounds pageToPageBounds(PageVo<T> page)
-    {
+    public PageBounds pageToPageBounds(PageVo<T> page) {
         PageBounds pageBounds = new PageBounds(this.page, this.rows);
         ;
         if (0 < page.getPage() && 0 < page.getRows())
@@ -272,8 +259,7 @@ public class PageVo<T> {
         return pageBounds;
     }
 
-    public PageVo<T> listToPage(PageVo<T> page, PageList<T> list)
-    {
+    public PageVo<T> listToPage(PageVo<T> page, PageList<T> list) {
         if (null != list && null != list.getPaginator())
         {
             page.setRecords(list.getPaginator().getTotalCount());
