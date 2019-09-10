@@ -1,7 +1,6 @@
-package com.csd.security.securityInterceptor;//package com.sly.security.config;
+//package com.csd.security.securityInterceptor;
 //
-//import com.sly.admin.MD5Util;
-//import com.sly.security.service.SecurityService;
+//import com.csd.security.util.MD5Util;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //
 ///**
@@ -12,19 +11,12 @@ package com.csd.security.securityInterceptor;//package com.sly.security.config;
 // */
 //public class SecurityPasswordEncoder implements PasswordEncoder {
 //
-//    private SecurityService securityService;
-//
-//    public SecurityPasswordEncoder(){
-//    }
-//
-//    public SecurityPasswordEncoder(SecurityService securityService){
-//        this.securityService = securityService;
-//    }
+//    String salt = "2323";
+//    String userTel = "18694967833";
 //
 //    @Override
 //    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-//        String userTel = securityService.getUserTel();
-//        String salt = securityService.getSalt();
+//
 //        String encode = MD5Util.encode(userTel + rawPassword.toString());
 //        rawPassword = salt + encode;
 //        return encodedPassword.equals(MD5Util.encodeSalt((String)rawPassword));
