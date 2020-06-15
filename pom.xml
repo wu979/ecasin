@@ -62,7 +62,7 @@
         <commons-net.version>3.6</commons-net.version>
 
         <spring.content.varsion>4.1.3.RELEASE</spring.content.varsion>
-        <spring.security.version>4.0.3.RELEASE</spring.security.version>
+        <spring.security.version>4.2.17.RELEASE</spring.security.version>
 
         <mybatis.plus.version>2.1.6</mybatis.plus.version>
         <velocity.version>1.7</velocity.version>
